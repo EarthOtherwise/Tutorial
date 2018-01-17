@@ -1,2 +1,3 @@
+git config --global core.autocrlf false
 # Auto detect text files and perform LF normalization
 * text=auto
