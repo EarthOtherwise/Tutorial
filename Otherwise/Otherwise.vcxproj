@@ -150,8 +150,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="LogoState.h" />
     <ClInclude Include="Otherwise.h" />
     <ClInclude Include="OtherwiseErrorHandler.h" />
     <ClInclude Include="Window.h" />
@@ -159,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="LogoState.cpp" />
     <ClCompile Include="OtherwiseErrorHandler.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

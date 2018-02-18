@@ -43,7 +43,7 @@ namespace Otherwise
 	void throwError(std::string errorWord, std::string errorString)
 	{
 		std::string debugString = "Dubug";
-		if (debugString == ReadInitFileLine(2))
+		if (debugString == readInitFileLine(2))
 		{
 			throwConsoleError(errorString);
 		}
