@@ -1,6 +1,6 @@
 #pragma once
 #include<unordered_map>
-#include "OtherwiseErrorHandler.h"
+#include "ErrHandler.h"
 #include<SDL/SDL.h>
 
 

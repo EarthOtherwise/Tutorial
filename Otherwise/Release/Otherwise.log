@@ -1,0 +1,16 @@
+﻿  ImageLoad.cpp
+ImageLoad.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+ImageLoad.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+  InitFileReadWrite.cpp
+  InputHandler.cpp
+  LogoState.cpp
+  ErrHandler.cpp
+  MultiSprite.cpp
+  PicoPNG.cpp
+  SimpleShader.cpp
+  Square.cpp
+  Triangle.cpp
+  Window.cpp
+glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+  Otherwise.vcxproj -> C:\Tutorial\Release\Otherwise.lib

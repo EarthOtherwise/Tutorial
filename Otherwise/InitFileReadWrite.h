@@ -1,7 +1,7 @@
 #pragma once
 #include<string>
 #include<vector>
-#include "OtherwiseErrorHandler.h"
+#include "ErrHandler.h"
 #include <fstream>
 
 namespace Otherwise

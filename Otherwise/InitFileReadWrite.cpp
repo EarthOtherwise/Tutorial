@@ -2,7 +2,7 @@
 
 namespace Otherwise
 {
-
+	//Do not use regular throwError as it created an infinite recursion.
 	std::vector<std::string> Otherwise::readInitFile()
 	{
 		std::vector<std::string> returnVector;
@@ -17,14 +17,14 @@ namespace Otherwise
 		}
 		else
 		{
-			Otherwise::throwError("Initialization", "The initialization file is missing or corrupt.");
+			Otherwise::throwFileError("Initialization", "The initialization file is missing or corrupt.");
 		}
 		return returnVector;
 	}
 
 	std::string Otherwise::readInitFileLine(unsigned int lineNumber)
 	{
-		std::string returnString;
+		std::string returnString = "";
 		std::ifstream initFile("Init.txt");
 		if (initFile.is_open())
 		{
@@ -35,7 +35,8 @@ namespace Otherwise
 		}
 		else
 		{
-			Otherwise::throwError("Initialization", "The initialization file is missing or corrupt.");
+
+			Otherwise::throwFileError("Initialization", "The initialization file is missing or corrupt.");
 		}
 
 		return returnString;
@@ -54,7 +55,7 @@ namespace Otherwise
 		}
 		else
 		{
-			Otherwise::throwError("Initialization", "The initialization file could not be created.");
+			Otherwise::throwFileError("Initialization", "The initialization file could not be created.");
 		}
 	}
 
@@ -81,7 +82,7 @@ namespace Otherwise
 		}
 		else
 		{
-			Otherwise::throwError("Initialization", "The initialization file is missing or corrupt.");
+			Otherwise::throwFileError("Initialization", "The initialization file is missing or corrupt.");
 		}
 
 		writeInitFile(tempFile);

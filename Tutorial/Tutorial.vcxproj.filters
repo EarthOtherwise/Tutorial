@@ -19,4 +19,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleVert.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SimpleFrag.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TextureVert.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TextureFrag.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
