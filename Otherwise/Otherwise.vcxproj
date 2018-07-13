@@ -89,7 +89,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Debug/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -126,7 +126,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Release/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,6 +150,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cameras.h" />
     <ClInclude Include="ImageLoad.h" />
     <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
@@ -160,11 +161,13 @@
     <ClInclude Include="ErrHandler.h" />
     <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="SimpleShader.h" />
+    <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cameras.cpp" />
     <ClCompile Include="ImageLoad.cpp" />
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -173,6 +176,7 @@
     <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />
+    <ClCompile Include="SpriteFont.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Window.cpp" />

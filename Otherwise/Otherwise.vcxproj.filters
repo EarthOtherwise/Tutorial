@@ -57,6 +57,12 @@
     <ClInclude Include="MultiSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cameras.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InitFileReadWrite.cpp">
@@ -90,6 +96,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MultiSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteFont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

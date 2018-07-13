@@ -1,9 +1,9 @@
 ﻿  main.cpp
      Creating library C:\Tutorial\Release\Tutorial.lib and object C:\Tutorial\Release\Tutorial.exp
   Generating code
-  2 of 1084 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  27 of 1218 functions ( 2.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    30 functions had inline decision re-evaluated but remain unchanged
+    22 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Tutorial.vcxproj -> C:\Tutorial\Release\Tutorial.exe
   Tutorial.vcxproj -> C:\Tutorial\Release\Tutorial.pdb (Full PDB)

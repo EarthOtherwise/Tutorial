@@ -1,6 +1,7 @@
 #pragma once
 #include"GL/glew.h"
 #include<vector>
+#include"glm/glm.hpp"
 
 namespace Otherwise
 {
@@ -16,11 +17,12 @@ namespace Otherwise
 	struct Vertex
 	{
 		Vertex() {}
-		Vertex(float x, float y, float u, float v, ColourRGBA8 colour) 
-		: mX(x), mY(y), mU(u), mV(v), mColour(colour) {}
+		Vertex(float x, float y, float z, float u, float v, ColourRGBA8 colour) 
+		: mX(x), mY(y), mZ(z), mU(u), mV(v), mColour(colour) {}
 
 		float mX = 0.0f;
 		float mY = 0.0f;
+		float mZ = 0.0f;
 		float mU = 0.0f;
 		float mV = 0.0f;
 
@@ -67,6 +69,7 @@ namespace Otherwise
 		{
 			mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 		}
+		void addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour);
 
 		void prepareBatches();
 

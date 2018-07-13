@@ -30,7 +30,7 @@ namespace Otherwise
 		glBindBuffer(GL_ARRAY_BUFFER, mVbo);
 
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mX));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mX));
 
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mU));
@@ -45,6 +45,16 @@ namespace Otherwise
 	{
 		mSprites.clear();
 		mSpriteBatches.clear();
+	}
+
+	void MultiSprite::addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour)
+	{
+		Vertex bottomLeft(destRect.x, destRect.y, depth, uvRect.x, uvRect.y, colour);
+		Vertex bottomRight(destRect.x + destRect.z, destRect.y, depth, uvRect.x + uvRect.z, uvRect.y, colour);
+		Vertex topLeft(destRect.x, destRect.y + destRect.w, depth, uvRect.x, uvRect.y + uvRect.w, colour);
+		Vertex topRight(destRect.x + destRect.z, destRect.y + destRect.w, depth, uvRect.x + uvRect.z, uvRect.y + uvRect.w, colour);
+
+		mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 	}
 
 	void MultiSprite::prepareBatches()
@@ -83,7 +93,7 @@ namespace Otherwise
 		{
 			if (mSortingSprites[currentSprite]->mTextureID != mSortingSprites[currentSprite - 1]->mTextureID)
 			{
-				mSpriteBatches.emplace_back(currentOffset, 6, mSortingSprites[0]->mTextureID);
+				mSpriteBatches.emplace_back(currentOffset, 6, mSortingSprites[currentSprite]->mTextureID);
 			}
 			else
 			{

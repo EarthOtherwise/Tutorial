@@ -1,5 +1,6 @@
 c:\tutorial\otherwise\debug\otherwise.pdb
 c:\tutorial\otherwise\debug\otherwise.idb
+c:\tutorial\otherwise\debug\cameras.obj
 c:\tutorial\otherwise\debug\imageload.obj
 c:\tutorial\otherwise\debug\initfilereadwrite.obj
 c:\tutorial\otherwise\debug\inputhandler.obj
@@ -8,6 +9,7 @@ c:\tutorial\otherwise\debug\errhandler.obj
 c:\tutorial\otherwise\debug\multisprite.obj
 c:\tutorial\otherwise\debug\picopng.obj
 c:\tutorial\otherwise\debug\simpleshader.obj
+c:\tutorial\otherwise\debug\spritefont.obj
 c:\tutorial\otherwise\debug\square.obj
 c:\tutorial\otherwise\debug\triangle.obj
 c:\tutorial\otherwise\debug\window.obj
