@@ -4,6 +4,7 @@
   SpriteFont.cpp
   SimpleShader.cpp
   PicoPNG.cpp
+  OCube.cpp
   MultiSprite.cpp
   ErrHandler.cpp
   LogoState.cpp

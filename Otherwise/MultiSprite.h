@@ -17,14 +17,17 @@ namespace Otherwise
 	struct Vertex
 	{
 		Vertex() {}
-		Vertex(float x, float y, float z, float u, float v, ColourRGBA8 colour) 
-		: mX(x), mY(y), mZ(z), mU(u), mV(v), mColour(colour) {}
+		Vertex(float x, float y, float z, float u, float v, float normalX, float normalY, float normalZ, ColourRGBA8 colour)
+			: mX(x), mY(y), mZ(z), mU(u), mV(v), mNormalX(normalX), mNormalY(normalY), mNormalZ(normalZ), mColour(colour) {}
 
 		float mX = 0.0f;
 		float mY = 0.0f;
 		float mZ = 0.0f;
 		float mU = 0.0f;
 		float mV = 0.0f;
+		float mNormalX = 0.0f;
+		float mNormalY = 0.0f;
+		float mNormalZ = 0.0f;
 
 		ColourRGBA8 mColour;
 	};

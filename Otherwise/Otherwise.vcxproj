@@ -157,10 +157,13 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LogoState.h" />
     <ClInclude Include="MultiSprite.h" />
+    <ClInclude Include="OCube.h" />
     <ClInclude Include="Otherwise.h" />
     <ClInclude Include="ErrHandler.h" />
     <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="SimpleShader.h" />
+    <ClInclude Include="SpatialEntity.h" />
+    <ClInclude Include="SpatialSceneGraphOct.h" />
     <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
@@ -174,8 +177,11 @@
     <ClCompile Include="LogoState.cpp" />
     <ClCompile Include="ErrHandler.cpp" />
     <ClCompile Include="MultiSprite.cpp" />
+    <ClCompile Include="OCube.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />
+    <ClCompile Include="SpatialEntity.cpp" />
+    <ClCompile Include="SpatialSceneGraphOct.cpp" />
     <ClCompile Include="SpriteFont.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Triangle.cpp" />

@@ -17,6 +17,11 @@ namespace Otherwise
 		mKeyMap[keyID] = true;
 	}
 
+	void Otherwise::InputHandler::unPressKey(unsigned int keyID)
+	{
+		mKeyMap[keyID] = false;
+	}
+
 	bool Otherwise::InputHandler::isKeyDown(unsigned int keyID)
 	{
 		auto it = mKeyMap.find(keyID);

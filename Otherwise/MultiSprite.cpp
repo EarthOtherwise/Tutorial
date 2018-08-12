@@ -38,6 +38,9 @@ namespace Otherwise
 		glEnableVertexAttribArray(2);
 		glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, mColour));
 
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mNormalX));
+
 		glBindVertexArray(0);
 	}
 
@@ -49,10 +52,10 @@ namespace Otherwise
 
 	void MultiSprite::addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour)
 	{
-		Vertex bottomLeft(destRect.x, destRect.y, depth, uvRect.x, uvRect.y, colour);
-		Vertex bottomRight(destRect.x + destRect.z, destRect.y, depth, uvRect.x + uvRect.z, uvRect.y, colour);
-		Vertex topLeft(destRect.x, destRect.y + destRect.w, depth, uvRect.x, uvRect.y + uvRect.w, colour);
-		Vertex topRight(destRect.x + destRect.z, destRect.y + destRect.w, depth, uvRect.x + uvRect.z, uvRect.y + uvRect.w, colour);
+		Vertex bottomLeft(destRect.x, destRect.y, depth, uvRect.x, uvRect.y, 0.0f, 0.0f, 1.0f, colour);
+		Vertex bottomRight(destRect.x + destRect.z, destRect.y, depth, uvRect.x + uvRect.z, uvRect.y, 0.0f, 0.0f, 1.0f, colour);
+		Vertex topLeft(destRect.x, destRect.y + destRect.w, depth, uvRect.x, uvRect.y + uvRect.w, 0.0f, 0.0f, 1.0f, colour);
+		Vertex topRight(destRect.x + destRect.z, destRect.y + destRect.w, depth, uvRect.x + uvRect.z, uvRect.y + uvRect.w, 0.0f, 0.0f, 1.0f, colour);
 
 		mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 	}
