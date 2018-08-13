@@ -82,11 +82,11 @@ int main(int argc, char** argv)
 
 	std::vector<Otherwise::OCube> cubes;
 
-	for (float i = -50; i < 50; i += 10)
+	for (float i = 10; i < 50; i += 5)
 	{
-		for (float j = -50; j < 50; j += 10)
+		for (float j = 10; j < 50; j += 5)
 		{
-			for (float k = -50; k < 50; k += 10)
+			for (float k = 10; k < 50; k += 5)
 			{
 				spatialGraph.addEntityToGraph(new Otherwise::OCube(glm::vec3(i, j, k), 1.0f, "Textures/red.png", "Textures/green.png", "Textures/blue.png",
 					"Textures/purple.png", "Textures/orange.png", "Textures/yellow.png", &multiSprite2));
