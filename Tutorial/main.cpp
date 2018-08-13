@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 	Otherwise::Square triangle("Textures/apple.png");
 	Otherwise::Triangle square;
 
-	GLuint programID = Otherwise::compileLinkSimpleShaders("TextureVert.vert", "TextureFrag.frag");
+	
 	GLuint secondProgramID = Otherwise::compileLinkSimpleShaders("SimpleVert.vert", "SimpleFrag.frag");
 
 	GLint shaderPerspectiveID = glGetUniformLocation(programID, "Perspective");

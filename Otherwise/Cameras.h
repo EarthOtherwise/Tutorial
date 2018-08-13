@@ -23,8 +23,11 @@ namespace Otherwise
 	class Camera2D
 	{
 	public:
+		Camera2D() {}
 		Camera2D(int screenWidth, int screenHeight, glm::vec2 position, float scale);
 		~Camera2D();
+
+		void init(int screenWidth, int screenHeight, glm::vec2 position, float scale);
 
 		glm::mat4 getMatrix() { return mOrthoProjection; }
 

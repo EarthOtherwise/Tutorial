@@ -12,12 +12,9 @@ namespace Otherwise
 	{
 	}
 
-	void LogoState::update()
+	void LogoState::init(std::string vertShader, std::string fragShader)
 	{
-	}
-
-	void LogoState::render()
-	{
+		mProgramID = Otherwise::compileLinkSimpleShaders(vertShader, fragShader);
 	}
 
 }
