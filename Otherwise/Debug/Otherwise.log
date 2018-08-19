@@ -2,6 +2,8 @@
   Triangle.cpp
   Square.cpp
   SpriteFont.cpp
+  SpatialSceneGraphOct.cpp
+  SpatialEntity.cpp
   SimpleShader.cpp
   PicoPNG.cpp
   OCube.cpp

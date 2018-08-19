@@ -11,6 +11,7 @@
 #include"SpriteFont.h"
 #include"OCube.h"
 #include"SpatialSceneGraphOct.h"
+#include "GameLogo.h"
 
 /*temporarily include iostream*/
 #include<iostream>
@@ -23,6 +24,10 @@ int main(int argc, char** argv)
 	Otherwise::Window newWindow;
 	newWindow.create("Window", 512, 512, 0);
 
+	GameLogo gameLogo;
+	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow);
+	gameLogo.logoUpdateRenderLoop();
+
 	Otherwise::InputHandler newInput;
 
 	bool doQuit = false;
@@ -30,7 +35,7 @@ int main(int argc, char** argv)
 	Otherwise::Square triangle("Textures/apple.png");
 	Otherwise::Triangle square;
 
-	
+	GLuint programID = Otherwise::compileLinkSimpleShaders("TextureVert.vert", "TextureFrag.frag");
 	GLuint secondProgramID = Otherwise::compileLinkSimpleShaders("SimpleVert.vert", "SimpleFrag.frag");
 
 	GLint shaderPerspectiveID = glGetUniformLocation(programID, "Perspective");

@@ -73,6 +73,7 @@ namespace Otherwise
 			mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 		}
 		void addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour);
+		void setSpriteAlpha(int sprite, GLubyte newAlpha);
 
 		void prepareBatches();
 

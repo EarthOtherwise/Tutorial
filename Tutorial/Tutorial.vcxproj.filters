@@ -35,6 +35,12 @@
     <None Include="TextureFrag.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Logo.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Logo.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogo.h">

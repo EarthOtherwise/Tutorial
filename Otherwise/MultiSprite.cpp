@@ -60,6 +60,14 @@ namespace Otherwise
 		mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 	}
 
+	void MultiSprite::setSpriteAlpha(int sprite, GLubyte newAlpha)
+	{
+		mSprites[sprite].mBottomLeft.mColour.mA = newAlpha;
+		mSprites[sprite].mTopLeft.mColour.mA = newAlpha;
+		mSprites[sprite].mBottomRight.mColour.mA = newAlpha;
+		mSprites[sprite].mTopRight.mColour.mA = newAlpha;
+	}
+
 	void MultiSprite::prepareBatches()
 	{
 		if (mSprites.empty())
@@ -126,29 +134,26 @@ namespace Otherwise
 	{
 		glBindVertexArray(mVao);
 
-		GLuint queryID;
-		glGenQueries(1, &queryID);
+		/*GLuint queryID;
+		glGenQueries(1, &queryID);*/
 
-		for  (unsigned int i = 0; i < mSpriteBatches.size(); i++)
+		for (unsigned int i = 0; i < mSpriteBatches.size(); i++)
 		{
 			glBindTexture(GL_TEXTURE_2D, mSpriteBatches[i].mTextureID);
 
-			glBeginQuery(GL_SAMPLES_PASSED, queryID);
+			//glBeginQuery(GL_SAMPLES_PASSED, queryID);
 
 			glDrawArrays(GL_TRIANGLES, mSpriteBatches[i].mOffset, mSpriteBatches[i].mNumVerticies);
 
-			glEndQuery(GL_SAMPLES_PASSED);
+			/*glEndQuery(GL_SAMPLES_PASSED);
 			GLuint query = GL_FALSE;
 			while (query == GL_FALSE)
 			{
 				glGetQueryObjectuiv(queryID, GL_QUERY_RESULT_AVAILABLE, &query);
 			}
 			glGetQueryObjectuiv(queryID, GL_QUERY_RESULT, &query);
-			std::cout << "Sprite " << i << '\n' << query << '\n';
+			std::cout << "Sprite " << i << '\n' << query << '\n';*/
 		}
-
-		int a;
-		std::cin >> a;
 
 		glBindVertexArray(0);
 	}

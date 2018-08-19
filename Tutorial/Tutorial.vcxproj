@@ -127,6 +127,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Logo.frag" />
+    <None Include="Logo.vert" />
     <None Include="SimpleFrag.frag" />
     <None Include="SimpleVert.vert" />
     <None Include="TextureFrag.frag" />
