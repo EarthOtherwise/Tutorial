@@ -1,4 +1,5 @@
 ﻿  Cameras.cpp
+  GraphicsResourceManager.cpp
   ImageLoad.cpp
 ImageLoad.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
 ImageLoad.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data

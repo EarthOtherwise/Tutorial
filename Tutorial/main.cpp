@@ -12,6 +12,7 @@
 #include"OCube.h"
 #include"SpatialSceneGraphOct.h"
 #include "GameLogo.h"
+#include "GraphicsResourceManager.h"
 
 /*temporarily include iostream*/
 #include<iostream>
@@ -24,8 +25,10 @@ int main(int argc, char** argv)
 	Otherwise::Window newWindow;
 	newWindow.create("Window", 512, 512, 0);
 
+	Otherwise::GraphicsResourceManager graphics;
+
 	GameLogo gameLogo;
-	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow);
+	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &graphics);
 	gameLogo.logoUpdateRenderLoop();
 
 	Otherwise::InputHandler newInput;

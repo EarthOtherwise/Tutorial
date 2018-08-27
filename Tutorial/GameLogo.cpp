@@ -11,7 +11,7 @@ GameLogo::~GameLogo()
 {
 }
 
-void GameLogo::init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::Window* windowptr)
+void GameLogo::init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::Window* windowptr, Otherwise::GraphicsResourceManager* graphics)
 {
 	mProgramID = Otherwise::compileLinkSimpleShaders(vertShader, fragShader);
 	mPerspectiveUniformID = glGetUniformLocation(mProgramID, "Perspective");
@@ -20,7 +20,8 @@ void GameLogo::init(std::string vertShader, std::string fragShader, int screenWi
 	mScreenWidth = screenWidth;
 	mScreenHeight = screenHeight;
 	mWindow = windowptr;
-	mMultiSprite.init();
+	mGraphics = graphics;
+	mGraphics->mMultiSprite2D.init();
 }
 
 void GameLogo::logoUpdateRenderLoop()
@@ -32,31 +33,31 @@ void GameLogo::logoUpdateRenderLoop()
 	float quarterScreenHeight = mScreenHeight / 4.0f;
 	float threeQuartersScreenHeight = mScreenHeight - quarterScreenHeight;
 
-	mMultiSprite.addSprite(starscapeTextureID, 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(starscapeTextureID, 0.0f,
 		Otherwise::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)),
 		Otherwise::Vertex(0.0f, mScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)),
 		Otherwise::Vertex(mScreenWidth, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)),
 		Otherwise::Vertex(mScreenWidth, mScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)));
 
-	mMultiSprite.addSprite(starscapeTextureID, 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(starscapeTextureID, 0.0f,
 		Otherwise::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)),
 		Otherwise::Vertex(0.0f, quarterScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)),
 		Otherwise::Vertex(mScreenWidth, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)),
 		Otherwise::Vertex(mScreenWidth, quarterScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)));
 
-	mMultiSprite.addSprite(starscapeTextureID, 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(starscapeTextureID, 0.0f,
 		Otherwise::Vertex(0.0f, threeQuartersScreenHeight, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)),
 		Otherwise::Vertex(0.0f, mScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)),
 		Otherwise::Vertex(mScreenWidth, threeQuartersScreenHeight, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)),
 		Otherwise::Vertex(mScreenWidth, mScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(0, 0, 0, 255)));
 
-	mMultiSprite.addSprite(Otherwise::loadPng("Textures/logo.png"), 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(Otherwise::loadPng("Textures/logo.png"), 0.0f,
 		Otherwise::Vertex(quarterScreenHeight, quarterScreenHeight, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)),
 		Otherwise::Vertex(quarterScreenHeight, threeQuartersScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)),
 		Otherwise::Vertex(threeQuartersScreenHeight, quarterScreenHeight, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)),
 		Otherwise::Vertex(threeQuartersScreenHeight, threeQuartersScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Otherwise::ColourRGBA8(255, 255, 255, 255)));
 
-	mMultiSprite.prepareBatches();
+	mGraphics->mMultiSprite2D.prepareBatches();
 
 	int startTime = SDL_GetTicks();
 	int currentTime = startTime;
@@ -67,14 +68,14 @@ void GameLogo::logoUpdateRenderLoop()
 	{
 		if (logoTime < 4000)
 		{
-			mMultiSprite.setSpriteAlpha(3, pow((logoTime/251), 2.0f));
-			mMultiSprite.prepareBatches();
+			mGraphics->mMultiSprite2D.setSpriteAlpha(3, pow((logoTime/251), 2.0f));
+			mGraphics->mMultiSprite2D.prepareBatches();
 			render();
 		}
 		else
 		{
-			mMultiSprite.setSpriteAlpha(3, 255);
-			mMultiSprite.prepareBatches();
+			mGraphics->mMultiSprite2D.setSpriteAlpha(3, 255);
+			mGraphics->mMultiSprite2D.prepareBatches();
 			render();
 		}
 		currentTime = SDL_GetTicks();
@@ -92,7 +93,7 @@ void GameLogo::render()
 
 	glUniformMatrix4fv(mPerspectiveUniformID, 1, GL_FALSE, &mOrthographicMatrix[0][0]);
 
-	mMultiSprite.renderBatches();
+	mGraphics->mMultiSprite2D.renderBatches();
 	
 	glUseProgram(0);
 

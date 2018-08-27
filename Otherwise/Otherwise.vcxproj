@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cameras.h" />
+    <ClInclude Include="GraphicsResourceManager.h" />
     <ClInclude Include="ImageLoad.h" />
     <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp" />
+    <ClCompile Include="GraphicsResourceManager.cpp" />
     <ClCompile Include="ImageLoad.cpp" />
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />
