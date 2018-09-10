@@ -1,11 +1,8 @@
 ﻿  Cameras.cpp
   GraphicsResourceManager.cpp
 <<<<<<< HEAD
-<<<<<<< HEAD
   GUI.cpp
 GUI.cpp(231): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
 >>>>>>> cf613703a399194d3ae507097f8e444e58249142
   ImageLoad.cpp

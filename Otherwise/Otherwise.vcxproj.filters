@@ -76,12 +76,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
 <<<<<<< HEAD
-<<<<<<< HEAD
     <ClInclude Include="GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
 >>>>>>> cf613703a399194d3ae507097f8e444e58249142
   </ItemGroup>
@@ -138,12 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
 <<<<<<< HEAD
-<<<<<<< HEAD
     <ClCompile Include="GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
 >>>>>>> cf613703a399194d3ae507097f8e444e58249142
   </ItemGroup>

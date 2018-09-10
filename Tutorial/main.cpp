@@ -14,11 +14,8 @@
 #include "GameLogo.h"
 #include "GraphicsResourceManager.h"
 <<<<<<< HEAD
-<<<<<<< HEAD
 #include "GUI.h"
 #include "MainMenu.h"
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
 >>>>>>> cf613703a399194d3ae507097f8e444e58249142
 
