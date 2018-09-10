@@ -153,7 +153,10 @@
     <ClInclude Include="Cameras.h" />
     <ClInclude Include="GraphicsResourceManager.h" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClInclude Include="GUI.h" />
+=======
+>>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
 >>>>>>> cf613703a399194d3ae507097f8e444e58249142
     <ClInclude Include="ImageLoad.h" />
@@ -178,7 +181,10 @@
     <ClCompile Include="Cameras.cpp" />
     <ClCompile Include="GraphicsResourceManager.cpp" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="GUI.cpp" />
+=======
+>>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
 >>>>>>> cf613703a399194d3ae507097f8e444e58249142
     <ClCompile Include="ImageLoad.cpp" />

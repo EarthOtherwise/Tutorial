@@ -9,7 +9,13 @@ MainMenu.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible
      Creating library C:\Tutorial\Release\Tutorial.lib and object C:\Tutorial\Release\Tutorial.exp
   Generating code
 <<<<<<< HEAD
+<<<<<<< HEAD
   All 1791 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+=======
+  56 of 1701 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    27 functions had inline decision re-evaluated but remain unchanged
+>>>>>>> cf613703a399194d3ae507097f8e444e58249142
 =======
   56 of 1701 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
     4 functions were new in current compilation
