@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/DragDropDemo/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/DragDropDemo/CMakeFiles/generate.stamp is up-to-date.
+  Sample_DragDropDemo.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIDragDropDemo.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIDragDropDemo.exp
+  CEGUIDragDropDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIDragDropDemo.dll

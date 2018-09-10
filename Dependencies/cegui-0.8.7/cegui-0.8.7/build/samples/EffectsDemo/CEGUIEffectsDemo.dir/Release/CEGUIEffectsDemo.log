@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/EffectsDemo/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/EffectsDemo/CMakeFiles/generate.stamp is up-to-date.
+  EffectsDemo.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIEffectsDemo.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIEffectsDemo.exp
+  CEGUIEffectsDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIEffectsDemo.dll

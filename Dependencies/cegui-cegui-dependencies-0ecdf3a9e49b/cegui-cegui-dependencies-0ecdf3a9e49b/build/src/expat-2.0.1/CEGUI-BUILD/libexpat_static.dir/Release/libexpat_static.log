@@ -1,0 +1,7 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/src/expat-2.0.1/CEGUI-BUILD/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/src/expat-2.0.1/CEGUI-BUILD/CMakeFiles/generate.stamp is up-to-date.
+  xmlrole.c
+  xmltok.c
+  xmlparse.c
+  Generating Code...
+  libexpat_static.vcxproj -> C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\build\dependencies\lib\static\libexpat.lib

@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/src/glew-1.7.0/CEGUI-BUILD/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/src/glew-1.7.0/CEGUI-BUILD/CMakeFiles/generate.stamp is up-to-date.
+  glew.c
+     Creating library C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/dependencies/lib/dynamic/glew_d.lib and object C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/dependencies/lib/dynamic/glew_d.exp
+  glew.vcxproj -> C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\build\dependencies\bin\glew_d.dll
+  glew.vcxproj -> C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/dependencies/bin/glew_d.pdb (Full PDB)

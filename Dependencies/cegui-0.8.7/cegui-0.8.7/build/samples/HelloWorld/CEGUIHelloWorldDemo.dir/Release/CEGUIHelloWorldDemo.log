@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/HelloWorld/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/HelloWorld/CMakeFiles/generate.stamp is up-to-date.
+  HelloWorld.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIHelloWorldDemo.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIHelloWorldDemo.exp
+  CEGUIHelloWorldDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIHelloWorldDemo.dll

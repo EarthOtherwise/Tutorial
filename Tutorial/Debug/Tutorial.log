@@ -1,9 +1,5 @@
-﻿  main.cpp
-  GameLogo.cpp
-c:\tutorial\tutorial\gamelogo.cpp(20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\tutorial\tutorial\gamelogo.cpp(21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\tutorial\tutorial\gamelogo.cpp(69): warning C4244: 'argument': conversion from 'double' to 'GLubyte', possible loss of data
-  Generating Code...
-     Creating library C:\Tutorial\Debug\Tutorial.lib and object C:\Tutorial\Debug\Tutorial.exp
+﻿  MainMenu.cpp
+c:\tutorial\tutorial\mainmenu.cpp(24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\tutorial\tutorial\mainmenu.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Tutorial.vcxproj -> C:\Tutorial\Debug\Tutorial.exe
   Tutorial.vcxproj -> C:\Tutorial\Debug\Tutorial.pdb (Partial PDB)

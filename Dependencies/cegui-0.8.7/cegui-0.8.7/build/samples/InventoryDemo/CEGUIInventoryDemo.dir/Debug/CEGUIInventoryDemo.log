@@ -1,0 +1,11 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/InventoryDemo/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/InventoryDemo/CMakeFiles/generate.stamp is up-to-date.
+  BoolArray2D.cpp
+  InventoryBase.cpp
+  InventoryItem.cpp
+  InventoryItemRenderer.cpp
+  InventoryReceiver.cpp
+  Sample_InventoryDemo.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIInventoryDemo_d.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIInventoryDemo_d.exp
+  CEGUIInventoryDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIInventoryDemo_d.dll
+  CEGUIInventoryDemo.vcxproj -> C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUIInventoryDemo_d.pdb (Full PDB)

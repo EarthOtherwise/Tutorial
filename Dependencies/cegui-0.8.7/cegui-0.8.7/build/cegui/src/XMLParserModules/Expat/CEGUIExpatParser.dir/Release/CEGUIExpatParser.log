@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/cegui/src/XMLParserModules/Expat/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/cegui/src/XMLParserModules/Expat/CMakeFiles/generate.stamp is up-to-date.
+  XMLParser.cpp
+  XMLParserModule.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIExpatParser.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIExpatParser.exp
+  CEGUIExpatParser.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIExpatParser.dll
