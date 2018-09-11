@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/Demo6/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/Demo6/CMakeFiles/generate.stamp is up-to-date.
+  Sample_Demo6.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIDemo6_d.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIDemo6_d.exp
+  CEGUIDemo6.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIDemo6_d.dll
+  CEGUIDemo6.vcxproj -> C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUIDemo6_d.pdb (Full PDB)

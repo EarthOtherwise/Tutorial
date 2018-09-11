@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\CMakeFiles\356d4d4b0519febadcc6e509f4bf7c9e\PACKAGE_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1645BF3C-6176-3DBD-923C-76A220C824DF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

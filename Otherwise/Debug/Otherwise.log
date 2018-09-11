@@ -15,6 +15,9 @@
   ImageLoad.cpp
 c:\tutorial\otherwise\imageload.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
 c:\tutorial\otherwise\imageload.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+  GUI.cpp
+c:\tutorial\otherwise\gui.cpp(231): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+  GraphicsResourceManager.cpp
   Cameras.cpp
   Generating Code...
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
@@ -23,4 +26,8 @@ opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already d
 opengl32.lib(OPENGL32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+CEGUIBase-0_d.lib(CEGUIBase-0_d.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+CEGUIBase-0_d.lib(CEGUIBase-0_d.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+CEGUIOpenGLRenderer-0_d.lib(CEGUIOpenGLRenderer-0_d.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+CEGUIOpenGLRenderer-0_d.lib(CEGUIOpenGLRenderer-0_d.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
   Otherwise.vcxproj -> C:\Tutorial\Debug\Otherwise.lib

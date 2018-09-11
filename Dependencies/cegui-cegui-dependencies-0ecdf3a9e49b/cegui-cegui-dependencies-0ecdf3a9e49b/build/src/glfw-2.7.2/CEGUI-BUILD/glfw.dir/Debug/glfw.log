@@ -1,0 +1,33 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/src/glfw-2.7.2/CEGUI-BUILD/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/src/glfw-2.7.2/CEGUI-BUILD/CMakeFiles/generate.stamp is up-to-date.
+  enable.c
+  fullscreen.c
+  glext.c
+  image.c
+  init.c
+  input.c
+  joystick.c
+  stream.c
+C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\src\glfw-2.7.2\lib\stream.c(31): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\src\glfw-2.7.2\lib\stream.c(31): note: command-line arguments:  see previous definition of '_CRT_SECURE_NO_WARNINGS'
+  tga.c
+  thread.c
+  time.c
+  window.c
+  win32_dllmain.c
+  win32_enable.c
+  win32_fullscreen.c
+  win32_glext.c
+  win32_init.c
+C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\src\glfw-2.7.2\lib\win32\win32_init.c(237): warning C4996: 'GetVersionExA': was declared deprecated
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\um\sysinfoapi.h(450): note: see declaration of 'GetVersionExA'
+  win32_joystick.c
+  win32_thread.c
+  win32_time.c
+  Generating Code...
+  Compiling...
+  win32_window.c
+  Generating Code...
+     Creating library C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/dependencies/lib/dynamic/glfw_d.lib and object C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/dependencies/lib/dynamic/glfw_d.exp
+  glfw.vcxproj -> C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\build\dependencies\bin\glfw_d.dll
+  glfw.vcxproj -> C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/dependencies/bin/glfw_d.pdb (Full PDB)

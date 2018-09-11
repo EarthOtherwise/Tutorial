@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\samples\TreeDemo\Sample_TreeDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\samples\TreeDemo\Sample_TreeDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\samples\common\include\Sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\samples\common\include\SampleBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\samples\TreeDemo\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{C1C2AD67-B5D5-3455-A59E-C63E984C9234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{140CD5EA-F01A-3FB7-9E8D-1DEB548D3051}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

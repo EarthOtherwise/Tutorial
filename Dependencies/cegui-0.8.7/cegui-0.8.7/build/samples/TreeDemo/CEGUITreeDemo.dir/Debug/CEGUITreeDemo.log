@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/TreeDemo/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/TreeDemo/CMakeFiles/generate.stamp is up-to-date.
+  Sample_TreeDemo.cpp
+     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUITreeDemo_d.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUITreeDemo_d.exp
+  CEGUITreeDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUITreeDemo_d.dll
+  CEGUITreeDemo.vcxproj -> C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUITreeDemo_d.pdb (Full PDB)

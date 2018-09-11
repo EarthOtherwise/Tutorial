@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/src/pcre-8.12/CEGUI-BUILD/CMakeLists.txt
+  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/src/pcre-8.12/CEGUI-BUILD/CMakeFiles/generate.stamp is up-to-date.
+  dftables.c
+     Creating library C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/src/pcre-8.12/CEGUI-BUILD/Release/dftables.lib and object C:/Tutorial/Dependencies/cegui-cegui-dependencies-0ecdf3a9e49b/cegui-cegui-dependencies-0ecdf3a9e49b/build/src/pcre-8.12/CEGUI-BUILD/Release/dftables.exp
+  dftables.vcxproj -> C:\Tutorial\Dependencies\cegui-cegui-dependencies-0ecdf3a9e49b\cegui-cegui-dependencies-0ecdf3a9e49b\build\src\pcre-8.12\dftables.exe
