@@ -69,11 +69,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies/Include/;$(SolutionDir)Otherwise/;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies/Include;$(SolutionDir)Otherwise/;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependenciess/Lib/Release/;$(SolutionDir)Release/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies/Include/;$(SolutionDir)Otherwise/;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies/Include;$(SolutionDir)Otherwise/;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies/Lib/Debug/;$(SolutionDir)Debug/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -125,7 +125,6 @@
   <ItemGroup>
     <ClCompile Include="GameLogo.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Logo.frag" />
@@ -137,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogo.h" />
-    <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,0 @@
-﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/ScrollablePaneDemo/CMakeLists.txt
-  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/ScrollablePaneDemo/CMakeFiles/generate.stamp is up-to-date.
-  Sample_ScrollablePane.cpp
-     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIScrollablePaneDemo_d.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIScrollablePaneDemo_d.exp
-  CEGUIScrollablePaneDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIScrollablePaneDemo_d.dll
-  CEGUIScrollablePaneDemo.vcxproj -> C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUIScrollablePaneDemo_d.pdb (Full PDB)

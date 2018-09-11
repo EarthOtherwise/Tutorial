@@ -14,8 +14,6 @@ c:\tutorial\otherwise\release\logostate.obj
 c:\tutorial\otherwise\release\inputhandler.obj
 c:\tutorial\otherwise\release\initfilereadwrite.obj
 c:\tutorial\otherwise\release\imageload.obj
-c:\tutorial\otherwise\release\gui.obj
-c:\tutorial\otherwise\release\graphicsresourcemanager.obj
 c:\tutorial\otherwise\release\cameras.obj
 c:\tutorial\release\otherwise.lib
 c:\tutorial\otherwise\release\otherwise.tlog\cl.command.1.tlog

@@ -1,6 +1,0 @@
-﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/GameMenu/CMakeLists.txt
-  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/GameMenu/CMakeFiles/generate.stamp is up-to-date.
-  GameMenu.cpp
-     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIGameMenuDemo_d.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUIGameMenuDemo_d.exp
-  CEGUIGameMenuDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUIGameMenuDemo_d.dll
-  CEGUIGameMenuDemo.vcxproj -> C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUIGameMenuDemo_d.pdb (Full PDB)

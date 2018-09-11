@@ -1,10 +1,4 @@
 ﻿  Cameras.cpp
-  GraphicsResourceManager.cpp
-<<<<<<< HEAD
-  GUI.cpp
-GUI.cpp(231): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
   ImageLoad.cpp
 ImageLoad.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
 ImageLoad.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
@@ -25,6 +19,4 @@ ImageLoad.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'un
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-CEGUIBase-0.lib(CEGUIBase-0.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-CEGUIOpenGLRenderer-0.lib(CEGUIOpenGLRenderer-0.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
   Otherwise.vcxproj -> C:\Tutorial\Release\Otherwise.lib

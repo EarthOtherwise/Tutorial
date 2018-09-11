@@ -74,7 +74,7 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies/Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies/Include/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -89,7 +89,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Debug/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -126,7 +126,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Release/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,11 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cameras.h" />
-    <ClInclude Include="GraphicsResourceManager.h" />
-<<<<<<< HEAD
-    <ClInclude Include="GUI.h" />
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
     <ClInclude Include="ImageLoad.h" />
     <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
@@ -176,11 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp" />
-    <ClCompile Include="GraphicsResourceManager.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="GUI.cpp" />
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
     <ClCompile Include="ImageLoad.cpp" />
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />

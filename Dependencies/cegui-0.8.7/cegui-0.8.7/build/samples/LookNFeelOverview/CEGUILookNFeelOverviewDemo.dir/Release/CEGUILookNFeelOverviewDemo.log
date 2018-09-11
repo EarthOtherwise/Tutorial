@@ -1,5 +1,0 @@
-﻿  Building Custom Rule C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/samples/LookNFeelOverview/CMakeLists.txt
-  CMake does not need to re-run because C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/samples/LookNFeelOverview/CMakeFiles/generate.stamp is up-to-date.
-  LookNFeelOverview.cpp
-     Creating library C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUILookNFeelOverviewDemo.lib and object C:/Tutorial/Dependencies/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUILookNFeelOverviewDemo.exp
-  CEGUILookNFeelOverviewDemo.vcxproj -> C:\Tutorial\Dependencies\cegui-0.8.7\cegui-0.8.7\build\bin\CEGUILookNFeelOverviewDemo.dll

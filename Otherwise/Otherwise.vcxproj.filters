@@ -72,15 +72,6 @@
     <ClInclude Include="SpatialEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="GUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InitFileReadWrite.cpp">
@@ -131,14 +122,5 @@
     <ClCompile Include="SpatialEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="GUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-=======
->>>>>>> cf613703a399194d3ae507097f8e444e58249142
   </ItemGroup>
 </Project>

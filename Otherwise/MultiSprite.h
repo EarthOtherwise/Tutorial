@@ -74,13 +74,6 @@ namespace Otherwise
 		}
 		void addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour);
 		void setSpriteAlpha(int sprite, GLubyte newAlpha);
-		void removeBackSprites(int numberOfSprites)
-		{
-			for (int i = 0; i < numberOfSprites; i++)
-			{
-				mSprites.pop_back();
-			}
-		}
 
 		void prepareBatches();
 
