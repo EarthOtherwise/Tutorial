@@ -87,7 +87,6 @@ namespace Otherwise
 	{
 		mContext->getMouseCursor().hide();
 	}
-
 	CEGUI::Key::Scan SDLKeyToCEGUIKey(SDL_Keycode key)
 	{
 		using namespace CEGUI;
@@ -200,6 +199,23 @@ namespace Otherwise
 		}
 	}
 
+	void GUI::keyUpFunc(SDL_Event & evnt)
+	{
+		mContext->injectKeyUp(SDLKeyToCEGUIKey(evnt.key.keysym.sym));
+	}
+
+	void GUI::keyDownFunc(SDL_Event & evnt)
+	{
+		mContext->injectKeyDown(SDLKeyToCEGUIKey(evnt.key.keysym.sym));
+	}
+
+	void GUI::mouseMotionFunc(SDL_Event & evnt)
+	{
+		mContext->injectMousePosition(evnt.motion.x, evnt.motion.y);
+	}
+
+	
+
 	CEGUI::MouseButton SDLMouseButtonToCEGUIMouseButton(Uint8 sdlButton)
 	{
 		switch (sdlButton)
@@ -223,29 +239,14 @@ namespace Otherwise
 		mContext->injectChar(codePoint);
 	}
 
-	void GUI::inputGUI(SDL_Event & event)
+	void GUI::mouseButtonDownFunc(SDL_Event & evnt)
 	{
-		switch (event.type)
-		{
-		case SDL_MOUSEMOTION:
-			mContext->injectMousePosition(event.motion.x, event.motion.y);
-			break;
-		case SDL_KEYDOWN:
-			mContext->injectKeyDown(SDLKeyToCEGUIKey(event.key.keysym.sym));
-			break;
-		case SDL_KEYUP:
-			mContext->injectKeyUp(SDLKeyToCEGUIKey(event.key.keysym.sym));
-			break;
-		case SDL_TEXTINPUT:
-			decodeInputText(event);
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			mContext->injectMouseButtonDown(SDLMouseButtonToCEGUIMouseButton(event.button.button));
-			break;
-		case SDL_MOUSEBUTTONUP:
-			mContext->injectMouseButtonUp(SDLMouseButtonToCEGUIMouseButton(event.button.button));
-			break;
-		}
+		mContext->injectMouseButtonDown(SDLMouseButtonToCEGUIMouseButton(evnt.button.button));
+	}
+
+	void GUI::mouseButtonUPFunc(SDL_Event & evnt)
+	{
+		mContext->injectMouseButtonUp(SDLMouseButtonToCEGUIMouseButton(evnt.button.button));
 	}
 
 	void GUI::loadScheme(const std::string & schemeFile)

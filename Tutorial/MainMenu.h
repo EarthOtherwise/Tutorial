@@ -4,6 +4,7 @@
 #include "CEGUI/CEGUI.h"
 #include "Window.h"
 #include "Cameras.h"
+#include "InputHandler.h"
 
 class MainMenu
 {
@@ -13,7 +14,7 @@ public:
 
 	void init(Otherwise::GraphicsResourceManager* GRM, std::string vertShader, std::string fragShader, 
 		int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, 
-		Otherwise::Window* windowptr, Otherwise::GUI* gui);
+		Otherwise::Window* windowptr, Otherwise::GUI* gui, Otherwise::InputHandler* input);
 
 	void mainMenuLoop();
 	void render();
@@ -29,5 +30,6 @@ private:
 	glm::mat4 mOrthographicMatrix;
 	Otherwise::Window* mWindow;
 	float mScreenWidth, mScreenHeight;
+	Otherwise::InputHandler* mInput;
 };
 

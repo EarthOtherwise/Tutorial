@@ -15,15 +15,26 @@
 #include "GraphicsResourceManager.h"
 #include "GUI.h"
 #include "MainMenu.h"
+#include "OAudio.h"
 
 /*temporarily include iostream*/
 #include<iostream>
+
+void simpleFunction()
+{
+	std::cout << "Key pressed" << '\n';
+}
+
+void simpleButtonFunction(glm::vec2 mouseCoords)
+{
+	std::cout << "Key pressed" << '\n';
+}
 
 int main(int argc, char** argv)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
+	
 	Otherwise::Window newWindow;
 	newWindow.create("Window", 512, 512, 0);
 
@@ -36,11 +47,36 @@ int main(int argc, char** argv)
 	Otherwise::GUI gui;
 	gui.init("GUI");
 
+	Otherwise::InputHandler newInput;
+	newInput.init(&gui);
+
+	std::unordered_map<std::string, unsigned int> stringsToSDLKeycodes;
+	std::unordered_map<std::string, void(*)()> stringsToFunctions;
+	std::unordered_map<std::string, void(*)(glm::vec2)> stringsToButtonFunctions;
+
+	stringsToSDLKeycodes["T"] = SDLK_t;
+	stringsToFunctions["COutPressKey"] = simpleFunction;
+	stringsToSDLKeycodes["LeftClick"] = SDL_BUTTON_LEFT;
+	stringsToButtonFunctions["COutPressButton"] = simpleButtonFunction;
+	std::string filestring = "init.txt";
+
+	newInput.mapKeysFromFile(filestring, stringsToSDLKeycodes, stringsToFunctions, stringsToButtonFunctions);
+
 	MainMenu mainMenu;
-	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui);
+	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
 	mainMenu.mainMenuLoop();
 
-	Otherwise::InputHandler newInput;
+	Otherwise::OAudio audio;
+	audio.init();
+	std::string soundString = "SoundEffects/gun-cocking-01.wav";
+	std::string soundString1 = "SoundEffects/Suspense Section.wav";
+	std::string soundString2 = "SoundEffects/Vehicle-01.wav";
+	audio.loadSound(soundString);
+	audio.loadSound(soundString1);
+	audio.loadSound(soundString2);
+	audio.oPlaySound(soundString);
+	//audio.oPlaySound(soundString1);
+	//audio.oPlaySound(soundString2);
 
 	bool doQuit = false;
 
@@ -129,6 +165,8 @@ int main(int argc, char** argv)
 	multiSprite2.prepareBatches();
 	multiSprite3.prepareBatches();
 
+	audio.unLoadSound(soundString);
+
 	while (!doQuit)
 	{
 		
@@ -151,7 +189,7 @@ int main(int argc, char** argv)
 		//square.draw();
 		glUseProgram(0);
 		newInput.inputQueue();
-		if (newInput.isKeyDown(SDLK_w))
+		/*if (newInput.isKeyDown(SDLK_w))
 		{
 			doQuit = true;
 		}
@@ -163,7 +201,7 @@ int main(int argc, char** argv)
 			cameraMatrix = camera3D.getCameraMatrix();
 			modelCameraMatrix = modelMatrix * cameraMatrix;
 			newInput.unPressKey(SDLK_k);
-		}
+		}*/
 		newWindow.swapBuffer();
 
 	}

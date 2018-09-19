@@ -1,2 +1,10 @@
 Initialization File
 Debug
+KeyMap
+T
+COutPressKey
+KeyMapEnd
+ButtonMap
+LeftClick
+COutPressButton
+ButtonMapEnd

@@ -44,7 +44,6 @@ namespace Otherwise
 	public:
 		Camera3D(int screenWidth, int screenHeight, glm::vec3 position, glm::vec3 lookAt, float fieldOfView, float near, float far, glm::vec3 cameraRoll);
 		~Camera3D();
-
 		glm::mat4 getPerspectiveMatrix() { return mPerspectiveProjection; }
 		glm::mat4 getModelMatrix() { return mModelMatrix; }
 		glm::mat4 getCameraMatrix() { return mCameraMatrix; }

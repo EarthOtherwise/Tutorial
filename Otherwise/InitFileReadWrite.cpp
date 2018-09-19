@@ -42,6 +42,25 @@ namespace Otherwise
 		return returnString;
 	}
 
+	std::vector<std::string> Otherwise::readFile(std::string & filePath)
+	{
+		std::vector<std::string> returnVector;
+		std::string tempString;
+		std::ifstream initFile(filePath);
+		if (initFile.is_open())
+		{
+			while (getline(initFile, tempString))
+			{
+				returnVector.push_back(tempString);
+			}
+		}
+		else
+		{
+			Otherwise::throwFileError("Initialization", "The initialization file is missing or corrupt.");
+		}
+		return returnVector;
+	}
+
 	void Otherwise::writeInitFile(std::vector<std::string> initContents)
 	{
 		std::ofstream initFile("Init.txt");
@@ -87,5 +106,4 @@ namespace Otherwise
 
 		writeInitFile(tempFile);
 	}
-
 }

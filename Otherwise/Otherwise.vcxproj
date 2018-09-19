@@ -89,7 +89,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;fmodL_vc.lib;fmodL64_vc.lib;fmodstudioL_vc.lib;fmodstudioL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Debug/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -126,7 +126,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Release/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;fmod_vc.lib;fmod64_vc.lib;fmodstudio_vc.lib;fmodstudio64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,6 +159,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LogoState.h" />
     <ClInclude Include="MultiSprite.h" />
+    <ClInclude Include="OAudio.h" />
     <ClInclude Include="OCube.h" />
     <ClInclude Include="Otherwise.h" />
     <ClInclude Include="ErrHandler.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="LogoState.cpp" />
     <ClCompile Include="ErrHandler.cpp" />
     <ClCompile Include="MultiSprite.cpp" />
+    <ClCompile Include="OAudio.cpp" />
     <ClCompile Include="OCube.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />

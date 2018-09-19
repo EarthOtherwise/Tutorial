@@ -40,6 +40,7 @@ namespace Otherwise
 	{
 	}
 
+
 	void Camera3D::changePosition(glm::vec3 newPosition)
 	{
 		mPosition = newPosition;

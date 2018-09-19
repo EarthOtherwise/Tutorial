@@ -14,9 +14,10 @@ MainMenu::~MainMenu()
 
 void MainMenu::init(Otherwise::GraphicsResourceManager * GRM, std::string vertShader, std::string fragShader,
 	int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom,
-	Otherwise::Window* windowptr, Otherwise::GUI* gui)
+	Otherwise::Window* windowptr, Otherwise::GUI* gui, Otherwise::InputHandler* input)
 {
 	mGRM = GRM;
+	mInput = input;
 	mProgramID = Otherwise::compileLinkSimpleShaders(vertShader, fragShader);
 	mPerspectiveUniformID = glGetUniformLocation(mProgramID, "Perspective");
 	mCamera.init(screenWidth, screenHeight, cameraPosition, cameraZoom);
@@ -78,12 +79,7 @@ void MainMenu::mainMenuLoop()
 
 	while (!mStartGame)
 	{
-		SDL_Event evnt;
-
-		while (SDL_PollEvent(&evnt))
-		{
-			mGUI->inputGUI(evnt);
-		}
+		mInput->inputQueue();
 		mGUI->update();
 
 		render();

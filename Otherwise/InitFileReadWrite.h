@@ -10,6 +10,8 @@ namespace Otherwise
 	/*Read the initialization file and make it availible for use.*/
 	std::vector<std::string> readInitFile();
 
+	std::vector<std::string> readFile(std::string &filePath);
+
 	/*Make a single line from the init file availible for reading.*/
 	std::string readInitFileLine(unsigned int lineNumber);
 
