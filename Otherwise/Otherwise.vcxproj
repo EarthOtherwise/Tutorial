@@ -158,6 +158,7 @@
     <ClInclude Include="InitFileReadWrite.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LogoState.h" />
+    <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="MultiSprite.h" />
     <ClInclude Include="OAudio.h" />
     <ClInclude Include="OCube.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="LogoState.cpp" />
     <ClCompile Include="ErrHandler.cpp" />
+    <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="OAudio.cpp" />
     <ClCompile Include="OCube.cpp" />
