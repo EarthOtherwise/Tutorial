@@ -1,16 +1,2 @@
-﻿  GameLogo.cpp
-GameLogo.cpp(20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameLogo.cpp(21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameLogo.cpp(71): warning C4244: 'argument': conversion from 'double' to 'GLubyte', possible loss of data
-  main.cpp
-  MainMenu.cpp
-MainMenu.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-MainMenu.cpp(26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-     Creating library C:\Tutorial\Tutorial\Release\Tutorial.lib and object C:\Tutorial\Tutorial\Release\Tutorial.exp
-  Generating code
-  3051 of 3057 functions (99.8%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  Tutorial.vcxproj -> C:\Tutorial\Tutorial\Release\Tutorial.exe
+﻿  Tutorial.vcxproj -> C:\Tutorial\Tutorial\Release\Tutorial.exe
   Tutorial.vcxproj -> C:\Tutorial\Tutorial\Release\Tutorial.pdb (Full PDB)

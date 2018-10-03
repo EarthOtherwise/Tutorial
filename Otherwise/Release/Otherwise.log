@@ -1,32 +1,54 @@
-﻿  Cameras.cpp
-  GraphicsResourceManager.cpp
-  GUI.cpp
-GUI.cpp(214): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-  ImageLoad.cpp
-ImageLoad.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-ImageLoad.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-  InitFileReadWrite.cpp
-  InputHandler.cpp
-  LogoState.cpp
-  ErrHandler.cpp
-  MultiSprite.cpp
-  OAudio.cpp
-  OCube.cpp
-  PicoPNG.cpp
-  SimpleShader.cpp
-  SpatialEntity.cpp
-  SpatialSceneGraphOct.cpp
-  SpriteFont.cpp
-  Square.cpp
-  Triangle.cpp
-  Window.cpp
-glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-CEGUIBase-0.lib(CEGUIBase-0.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-CEGUIOpenGLRenderer-0.lib(CEGUIOpenGLRenderer-0.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-fmod_vc.lib(fmod.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-fmod64_vc.lib(fmod64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-fmodstudio_vc.lib(fmodstudio.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-fmodstudio64_vc.lib(fmodstudio64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-  Otherwise.vcxproj -> C:\Tutorial\Tutorial\Release\Otherwise.lib
+﻿  MessagingSystem.cpp
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(30): error C2061: syntax error: identifier 'Correspondent'
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(37): error C2065: 'Correspondent': undeclared identifier
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(37): error C2059: syntax error: '>'
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(37): error C2976: 'std::map': too few template arguments
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\map(72): note: see declaration of 'std::map'
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(39): error C2039: 'vector': is not a member of 'std'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\memory(1175): note: see declaration of 'std'
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(39): error C2143: syntax error: missing ';' before '<'
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(39): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\tutorial\tutorial\otherwise\MessagingSystem.h(39): error C2238: unexpected token(s) preceding ';'
+MessagingSystem.cpp(7): error C2512: 'std::map': no appropriate default constructor available
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\map(72): note: see declaration of 'std::map'
+MessagingSystem.cpp(62): error C2663: 'std::_Tree<_Traits>::find': 4 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(63): error C3536: 'doesSubscriberExist': cannot be used before it is initialized
+MessagingSystem.cpp(63): error C2663: 'std::_Tree<_Traits>::end': 2 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(69): error C2663: 'std::_Tree<_Traits>::find': 4 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(70): error C3536: 'doesPublisherExist': cannot be used before it is initialized
+MessagingSystem.cpp(70): error C2663: 'std::_Tree<_Traits>::end': 2 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(75): error C2227: left of '->second' must point to class/struct/union/generic type
+  MessagingSystem.cpp(75): note: type is 'int'
+MessagingSystem.cpp(75): error C2227: left of '->recieveSubscriber' must point to class/struct/union/generic type
+MessagingSystem.cpp(80): error C2663: 'std::_Tree<_Traits>::find': 4 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(81): error C3536: 'doesPublisherExist': cannot be used before it is initialized
+MessagingSystem.cpp(81): error C2663: 'std::_Tree<_Traits>::end': 2 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(83): error C2227: left of '->second' must point to class/struct/union/generic type
+  MessagingSystem.cpp(83): note: type is 'int'
+MessagingSystem.cpp(83): error C2227: left of '->removeSubscriber' must point to class/struct/union/generic type
+MessagingSystem.cpp(96): error C2511: 'void Otherwise::CorrespondentManager::listNewCorrespondent(std::string &,Otherwise::Correspondent *)': overloaded member function not found in 'Otherwise::CorrespondentManager'
+  c:\tutorial\tutorial\otherwise\MessagingSystem.h(20): note: see declaration of 'Otherwise::CorrespondentManager'
+MessagingSystem.cpp(97): error C2228: left of '.find' must have class/struct/union
+MessagingSystem.cpp(98): error C3536: 'activeCorrespondent': cannot be used before it is initialized
+MessagingSystem.cpp(98): error C2228: left of '.end' must have class/struct/union
+MessagingSystem.cpp(100): error C2677: binary '[': no global operator found which takes type 'std::string' (or there is no acceptable conversion)
+MessagingSystem.cpp(107): error C2663: 'std::_Tree<_Traits>::find': 4 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(108): error C3536: 'activeCorrespondent': cannot be used before it is initialized
+MessagingSystem.cpp(108): error C2663: 'std::_Tree<_Traits>::end': 2 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(110): error C2663: 'std::_Tree<_Traits>::erase': 3 overloads have no legal conversion for 'this' pointer
+MessagingSystem.cpp(117): error C2065: 'mAllPossibleCorrespondentSignatures': undeclared identifier
+MessagingSystem.cpp(117): error C2228: left of '.push_back' must have class/struct/union
+  MessagingSystem.cpp(117): note: type is 'unknown-type'
+MessagingSystem.cpp(123): error C2065: 'mAllPossibleCorrespondentSignatures': undeclared identifier
+MessagingSystem.cpp(123): error C2228: left of '.size' must have class/struct/union
+  MessagingSystem.cpp(123): note: type is 'unknown-type'
+MessagingSystem.cpp(125): error C2065: 'mAllPossibleCorrespondentSignatures': undeclared identifier
+MessagingSystem.cpp(127): error C2065: 'mAllPossibleCorrespondentSignatures': undeclared identifier
+MessagingSystem.cpp(127): error C2228: left of '.erase' must have class/struct/union
+  MessagingSystem.cpp(127): note: type is 'unknown-type'
+MessagingSystem.cpp(127): error C2228: left of '.begin' must have class/struct/union
+  MessagingSystem.cpp(127): note: type is 'unknown-type'
+MessagingSystem.cpp(135): error C2065: 'mAllPossibleCorrespondentSignatures': undeclared identifier
+MessagingSystem.cpp(135): error C2228: left of '.size' must have class/struct/union
+  MessagingSystem.cpp(135): note: type is 'unknown-type'
+MessagingSystem.cpp(137): error C2065: 'mAllPossibleCorrespondentSignatures': undeclared identifier
