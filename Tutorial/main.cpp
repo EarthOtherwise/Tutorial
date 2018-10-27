@@ -16,19 +16,10 @@
 #include "GUI.h"
 #include "MainMenu.h"
 #include "OAudio.h"
+#include "MessagingSystem.h"
 
 /*temporarily include iostream*/
 #include<iostream>
-
-void simpleFunction()
-{
-	std::cout << "Key pressed" << '\n';
-}
-
-void simpleButtonFunction(glm::vec2 mouseCoords)
-{
-	std::cout << "Key pressed" << '\n';
-}
 
 int main(int argc, char** argv)
 {
@@ -40,43 +31,27 @@ int main(int argc, char** argv)
 
 	Otherwise::GraphicsResourceManager graphics;
 
+	Otherwise::CorrespondentManager manager;
+	manager.init();
+
 	GameLogo gameLogo;
 	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &graphics);
 	gameLogo.logoUpdateRenderLoop();
 
 	Otherwise::GUI gui;
-	gui.init("GUI");
+	gui.init("GUI", &manager);
 
 	Otherwise::InputHandler newInput;
-	newInput.init(&gui);
-
-	std::unordered_map<std::string, unsigned int> stringsToSDLKeycodes;
-	std::unordered_map<std::string, void(*)()> stringsToFunctions;
-	std::unordered_map<std::string, void(*)(glm::vec2)> stringsToButtonFunctions;
-
-	stringsToSDLKeycodes["T"] = SDLK_t;
-	stringsToFunctions["COutPressKey"] = simpleFunction;
-	stringsToSDLKeycodes["LeftClick"] = SDL_BUTTON_LEFT;
-	stringsToButtonFunctions["COutPressButton"] = simpleButtonFunction;
-	std::string filestring = "init.txt";
-
-	newInput.mapKeysFromFile(filestring, stringsToSDLKeycodes, stringsToFunctions, stringsToButtonFunctions);
+	newInput.init(&manager);
 
 	MainMenu mainMenu;
 	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
 	mainMenu.mainMenuLoop();
 
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	Otherwise::OAudio audio;
-	audio.init();
-	std::string soundString = "SoundEffects/gun-cocking-01.wav";
-	std::string soundString1 = "SoundEffects/Suspense Section.wav";
-	std::string soundString2 = "SoundEffects/Vehicle-01.wav";
-	audio.loadSound(soundString);
-	audio.loadSound(soundString1);
-	audio.loadSound(soundString2);
-	audio.oPlaySound(soundString);
-	//audio.oPlaySound(soundString1);
-	//audio.oPlaySound(soundString2);
+	audio.init((std::string)"SoundMap1.txt", &manager);
 
 	bool doQuit = false;
 
@@ -104,11 +79,7 @@ int main(int argc, char** argv)
 
 	Otherwise::Camera2D camera2D (512, 512, glm::vec2(0.0f, 0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
-	Otherwise::Camera3D camera3D (512, 512, glm::vec3(53.0f, 53.0f, 53.0f), glm::vec3(50.0f, 50.0f, 50.0f), 40.0f, 2.0f, 30.0f, glm::vec3 (0.0f, 1.0f, 0.0f));
-	glm::mat4 perspective = camera3D.getPerspectiveMatrix();
-	glm::mat4 modelMatrix = camera3D.getModelMatrix();
-	glm::mat4 cameraMatrix = camera3D.getCameraMatrix();
-	glm::mat4 modelCameraMatrix = modelMatrix * cameraMatrix;
+	Otherwise::Camera3D camera3D (512, 512, glm::vec3(53.0f, 53.0f, 53.0f), 40.0f, 2.0f, 30.0f, glm::vec3 (0.0f, 1.0f, 0.0f), &manager, 1.0f, 0.0f);
 
 	Otherwise::MultiSprite multiSprite;
 	multiSprite.init();
@@ -165,21 +136,20 @@ int main(int argc, char** argv)
 	multiSprite2.prepareBatches();
 	multiSprite3.prepareBatches();
 
-	audio.unLoadSound(soundString);
-
 	while (!doQuit)
 	{
-		
+		audio.update();
+		camera3D.update();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
 		//triangle.textureDraw();
 		glUniformMatrix4fv(shaderPerspectiveID, 1, GL_FALSE, &ortho[0][0]);
 		//multiSprite3.renderBatches();
 		//multiSprite.renderBatches();
-		glUniformMatrix4fv(shaderPerspectiveID, 1, GL_FALSE, &perspective[0][0]);
-		glUniformMatrix4fv(shaderModelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
-		glUniformMatrix4fv(shaderCameraMatrixID, 1, GL_FALSE, &cameraMatrix[0][0]);
-		glUniformMatrix4fv(shaderModelCameraMatrixID, 1, GL_FALSE, &modelCameraMatrix[0][0]);
+		glUniformMatrix4fv(shaderPerspectiveID, 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(shaderModelMatrixID, 1, GL_FALSE, &camera3D.getModelMatrix()[0][0]);
+		glUniformMatrix4fv(shaderCameraMatrixID, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(shaderModelCameraMatrixID, 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
 		glUniform3f(shaderLightPositionID, 2.0f, 0.5f, -1.5f);
 		glUniform3f(shaderLightColourID, 1.0f, 1.0f, 1.0f);
 		glUniform1f(shaderLightIntensityID, 5.0f);
@@ -189,21 +159,7 @@ int main(int argc, char** argv)
 		//square.draw();
 		glUseProgram(0);
 		newInput.inputQueue();
-		/*if (newInput.isKeyDown(SDLK_w))
-		{
-			doQuit = true;
-		}
-		if (newInput.isKeyDown(SDLK_k))
-		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 1.0f, 0.0f));
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
-			newInput.unPressKey(SDLK_k);
-		}*/
 		newWindow.swapBuffer();
-
 	}
 
 	return 0;

@@ -54,7 +54,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="KeyMap.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="CorrespondentMasterList.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
     <Text Include="Init.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="SoundMap1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

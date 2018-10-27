@@ -2,6 +2,7 @@
 #include "SDL/SDL_Timer.h"
 #include "GL/glew.h"
 #include "UTF8-CPP/utf8.h"
+#include <iostream>
 
 namespace Otherwise
 {
@@ -17,8 +18,9 @@ namespace Otherwise
 
 	CEGUI::OpenGL3Renderer* GUI::mGUIRenderer = nullptr;
 
-	void GUI::init(const std::string & resourceDirectory)
+	void GUI::init(const std::string & resourceDirectory, CorrespondentManager *corrManager)
 	{
+		mFromInput.init(corrManager, (std::string)"InputToGUIReciever");
 		mGUIRenderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 		mPreviousTime = SDL_GetTicks();
@@ -48,6 +50,34 @@ namespace Otherwise
 		unsigned int currentTime = SDL_GetTicks();
 		unsigned int timeElapsed = currentTime - mPreviousTime;
 		mContext->injectTimePulse((float)timeElapsed / 1000.0f);
+
+		if (mFromInput.getMessage())
+		{
+			SDL_Event evnt = mFromInput.getEventMessage();
+			mFromInput.clearMessage();
+
+			switch (evnt.type)
+			{
+			case SDL_KEYDOWN:
+				keyDownFunc(evnt);
+				break;
+			case SDL_KEYUP:
+				keyUpFunc(evnt);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				mouseButtonDownFunc(evnt);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				mouseButtonUPFunc(evnt);
+				break;
+			case SDL_TEXTINPUT:
+				decodeInputText(evnt);
+				break;
+			case SDL_MOUSEMOTION:
+				mouseMotionFunc(evnt);
+				break;
+			}
+		}
 	}
 
 	void GUI::destory()

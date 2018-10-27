@@ -3,24 +3,40 @@
 #include "ErrHandler.h"
 #include <string>
 #include <map>
+#include <vector>
+#include "MessagingSystem.h"
 
 namespace Otherwise
 {
+	class OSound
+	{
+	public:
+		OSound();
+		~OSound();
+
+		void init(CorrespondentManager *corrManager, std::string &soundFile, FMOD::System *system);
+		void update();
+		void destroy();
+	private:
+		Correspondent soundReciever;
+		FMOD::Sound *mSound = nullptr;
+		FMOD::System *mSystem = nullptr;
+	};
+
 	class OAudio
 	{
 	public:
 		OAudio();
 		~OAudio();
 
-		void init();
-		void errorCheck(FMOD_RESULT result, std::string failLine);
-		void loadSound(std::string& soundFilePath, bool streaming = false);
-		void oPlaySound(std::string & soundFilePath);
-		void unLoadSound(std::string& soundFilePath);
+		void init(std::string &initialSoundMapFilePath, CorrespondentManager *corrManager);
+		void loadSoundMap(std::string& soundMapFilePath);
+		void update();
 
 	private:
 		FMOD::System* mSystem = nullptr;
-		std::map<std::string, FMOD::Sound*> mSoundMap;
+		std::vector<OSound> mSoundMap;
+		CorrespondentManager *mCorrespondentManager;
 	};
 
 }

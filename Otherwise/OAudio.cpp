@@ -1,22 +1,9 @@
 #include "OAudio.h"
+#include<fstream>
 
 namespace Otherwise
 {
-
-	OAudio::OAudio()
-	{
-	}
-
-
-	OAudio::~OAudio()
-	{
-	}
-	void OAudio::init()
-	{
-		errorCheck(FMOD::System_Create(&mSystem), "System Failed to be created.");
-		errorCheck(mSystem->init(8, FMOD_INIT_NORMAL, NULL), "FMOD System failed to initialize.");
-	}
-	void OAudio::errorCheck(FMOD_RESULT result, std::string failLine)
+	void errorCheck(FMOD_RESULT result, std::string failLine)
 	{
 		if (result != FMOD_OK)
 		{
@@ -24,43 +11,89 @@ namespace Otherwise
 		}
 	}
 
-	void OAudio::loadSound(std::string & soundFilePath, bool streaming/* = false*/)
+	OSound::OSound()
 	{
-		auto doesSoundExist = mSoundMap.find(soundFilePath);
-		if (doesSoundExist != mSoundMap.end())
-		{
-			return;
-		}
 
-		FMOD_MODE mode = FMOD_DEFAULT;
-		if (streaming)
-		{
-			mode |= FMOD_CREATESTREAM;
-		}
-
-		FMOD::Sound* newSound;
-		mSystem->createSound(soundFilePath.c_str(), mode, NULL, &newSound);
-		mSoundMap[soundFilePath] = newSound;
 	}
 
-	void OAudio::oPlaySound(std::string & soundFilePath)
+	OSound::~OSound()
 	{
-		auto doesSoundExist = mSoundMap.find(soundFilePath);
-		if (doesSoundExist != mSoundMap.end())
-		{
-			loadSound(soundFilePath);
-		}
-		mSystem->playSound(doesSoundExist->second, NULL, false, NULL);
+
 	}
 
-	void OAudio::unLoadSound(std::string & soundFilePath)
+	void OSound::init(CorrespondentManager * corrManager, std::string & soundFile, FMOD::System * system)
 	{
-		auto doesSoundExist = mSoundMap.find(soundFilePath);
-		if (doesSoundExist != mSoundMap.end())
+		soundReciever.init(corrManager, soundFile);
+		mSystem = system;
+		errorCheck(mSystem->createSound(soundFile.c_str(), FMOD_DEFAULT, NULL, &mSound), "Sound " + soundFile + " could not be initialized");
+	}
+
+	void OSound::update()
+	{
+		if (soundReciever.getMessage())
 		{
-			return;
+			errorCheck(mSystem->playSound(mSound, NULL, false, NULL), "Sound could not be played.");
+			soundReciever.clearMessage();
 		}
-		errorCheck(doesSoundExist->second->release(), "Failed to release sound");
-		mSoundMap.erase(doesSoundExist);
+	}
+
+	void OSound::destroy()
+	{
+		errorCheck(mSound->release(), "Failed to release Sound");
+	}
+
+	OAudio::OAudio()
+	{
+	}
+
+	OAudio::~OAudio()
+	{
+	}
+
+	void OAudio::init(std::string & initialSoundMapFilePath, CorrespondentManager * corrManager)
+	{
+		errorCheck(FMOD::System_Create(&mSystem), "System Failed to be created.");
+		errorCheck(mSystem->init(8, FMOD_INIT_NORMAL, NULL), "FMOD System failed to initialize.");
+		mCorrespondentManager = corrManager;
+		loadSoundMap(initialSoundMapFilePath);
+	}
+
+	void OAudio::loadSoundMap(std::string & soundMapFilePath)
+	{
+		if (!mSoundMap.empty())
+		{
+			mSoundMap.clear();
+		}
+
+		std::string tempString;
+		std::ifstream fileStream(soundMapFilePath);
+		if (fileStream.is_open())
+		{
+			while (getline(fileStream, tempString))
+			{
+				if (tempString == "SOUND")
+				{
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					OSound newSound;
+					mSoundMap.push_back(newSound);
+					mSoundMap.back().init(mCorrespondentManager, tempString, mSystem);
+				}
+			}
+		}
+		else
+		{
+			throwError(soundMapFilePath, soundMapFilePath + " sound map file is missing or corrupted.");
+		}
+	}
+
+	void OAudio::update()
+	{
+		for (unsigned int i = 0; i < mSoundMap.size(); i++)
+		{
+			mSoundMap[i].update();
+		}
 	}
 }

@@ -13,9 +13,23 @@ namespace Otherwise
 	{
 	}
 
-	void InputHandler::init(GUI * gui)
+	void InputHandler::init(CorrespondentManager *corrManager)
 	{
-		mGUI = gui;
+		mCorrespondentManager = corrManager;
+		std::string tempString = "InputToGUISender";
+		mToGUI.init(corrManager, tempString);
+		mMouseSender.init(corrManager, (std::string)"CameraLookAtSender");
+
+		tempString = "Init.txt";
+		std::string tempStart = "InputHandler";
+		std::string tempEnd = "InputHandlerEnd";
+		std::vector<std::string> tempVector;
+		extractLinesFromFile(&tempVector, tempStart, tempEnd, tempString);
+
+		for (std::string i : tempVector)
+		{
+			findAllKeys(i);
+		}
 	}
 
 	void Otherwise::InputHandler::pressKey(unsigned int keyID)
@@ -23,142 +37,53 @@ namespace Otherwise
 		auto it = mKeyMap.find(keyID);
 		if (it != mKeyMap.end())
 		{
-			it->second.keyFunction();
-		}
-	}
-
-	void Otherwise::InputHandler::unpressKey(unsigned int keyID)
-	{
-		auto it = mKeyMap.find(keyID);
-		if (it != mKeyMap.end())
-		{
-			it->second.keyFunction();
+			it->second.publish();
 		}
 	}
 
 	void Otherwise::InputHandler::pressButton(unsigned int keyID, glm::vec2 mousePosition)
 	{
-		auto it = mButtonMap.find(keyID);
-		if (it != mButtonMap.end())
+		auto it = mKeyMap.find(keyID);
+		if (it != mKeyMap.end())
 		{
-			it->second.buttonFunction(mousePosition);
+			it->second.publish(mousePosition);
 		}
 	}
 
-	void Otherwise::InputHandler::unpressButton(unsigned int keyID, glm::vec2 mousePosition)
+	void InputHandler::findAllKeys(std::string & filePath)
 	{
-		auto it = mButtonMap.find(keyID);
-		if (it != mButtonMap.end())
+		std::string tempString;
+		std::string currentKey;
+		std::ifstream fileStream(filePath);
+		if (fileStream.is_open())
 		{
-			it->second.buttonFunction(mousePosition);
+			while (getline(fileStream, tempString))
+			{
+				if (tempString == "KEY")
+				{
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					currentKey = tempString;
+				}
+				
+				if (tempString == "KEYCODE")
+				{
+					getline(fileStream, tempString);
+					mapKey(std::stoi(tempString, nullptr, 10), currentKey);
+				}
+			}
+		}
+		else
+		{
+			throwError(filePath, filePath + " could not be opened.");
 		}
 	}
 
-	void InputHandler::mapKeysFromFile(std::string & filePath,
-		std::unordered_map<std::string, unsigned int> initStringsToSDLKeycodes, 
-		std::unordered_map<std::string, void(*)()> initStringsToFunctions,
-		std::unordered_map<std::string, void(*)(glm::vec2)> buttonmapStringsToFunctions)
+	void InputHandler::mapKey(unsigned int keyID, std::string & signature)
 	{
-		std::vector<std::string> keymapFileStrings = readFile(filePath);
-
-		unsigned int iterator = 0;
-		while (keymapFileStrings[iterator] != "KeyMap")
-		{
-			if (iterator > keymapFileStrings.size())
-			{
-				throwError("keymapError", "keymap file " + filePath + " contains no labeled 'KeyMap'");
-			}
-			iterator++;
-		}
-
-		iterator++;
-
-		while (keymapFileStrings[iterator] != "KeyMapEnd")
-		{
-			if (iterator > keymapFileStrings.size())
-			{
-				throwError("keymapError", "keymap file " + filePath + " contains no labeled 'KeyMapEnd'");
-			}
-
-			unsigned int newKey = 0;
-			OKey newKeyFunction;
-
-			auto it = initStringsToSDLKeycodes.find(keymapFileStrings[iterator]);
-			if (it != initStringsToSDLKeycodes.end())
-			{
-				newKey =  it->second;
-			}
-			else
-			{
-				throwError("keymapSyntax", "Incorrect Keymap Syntax, no key where it was expected, instead I got: " + keymapFileStrings[iterator]);
-			}
-
-			iterator++;
-
-			auto knit = initStringsToFunctions.find(keymapFileStrings[iterator]);
-			if (knit != initStringsToFunctions.end())
-			{
-				newKeyFunction.keyFunction = knit->second;
-			}
-			else
-			{
-				throwError("keymapSyntax", "Incorrect Keymap Syntax, no function where it was expected, instead I got: " + keymapFileStrings[iterator]);
-			}
-
-			mKeyMap[newKey] = newKeyFunction;
-
-			iterator++;
-		}
-		
-		iterator = 0;
-
-		while (keymapFileStrings[iterator] != "ButtonMap")
-		{
-			if (iterator > keymapFileStrings.size())
-			{
-				throwError("buttonmapError", "buttonmap file " + filePath + " contains no labeled 'KeyMap'");
-			}
-			iterator++;
-		}
-
-		iterator++;
-
-		while (keymapFileStrings[iterator] != "ButtonMapEnd")
-		{
-			if (iterator > keymapFileStrings.size())
-			{
-				throwError("buttonmapError", "buttonmap file " + filePath + " contains no labeled 'KeyMapEnd'");
-			}
-
-			unsigned int newButton = 0;
-			OButton newButtonFunction;
-
-			auto it = initStringsToSDLKeycodes.find(keymapFileStrings[iterator]);
-			if (it != initStringsToSDLKeycodes.end())
-			{
-				newButton = it->second;
-			}
-			else
-			{
-				throwError("buttonmapSyntax", "Incorrect Keymap Syntax, no button where it was expected, instead I got: " + keymapFileStrings[iterator]);
-			}
-
-			iterator++;
-
-			auto knit = buttonmapStringsToFunctions.find(keymapFileStrings[iterator]);
-			if (knit != buttonmapStringsToFunctions.end())
-			{
-				newButtonFunction.buttonFunction = knit->second;
-			}
-			else
-			{
-				throwError("buttonmapSyntax", "Incorrect buttonmap Syntax, no function where it was expected, instead I got: " + keymapFileStrings[iterator]);
-			}
-
-			mButtonMap[newButton] = newButtonFunction;
-
-			iterator++;
-		}
+		Correspondent newCorrespondent;
+		mKeyMap.insert(std::pair<unsigned int, Correspondent>(keyID, newCorrespondent));
+		mKeyMap[keyID].init(mCorrespondentManager, signature);
 	}
 
 	void InputHandler::inputQueue()
@@ -167,6 +92,8 @@ namespace Otherwise
 
 		while (SDL_PollEvent(&evnt))
 		{
+			mToGUI.publish(evnt);
+
 			switch (evnt.type)
 			{
 			case SDL_QUIT:
@@ -175,43 +102,12 @@ namespace Otherwise
 				break;
 			case SDL_KEYDOWN:
 				pressKey(evnt.key.keysym.sym);
-				if (mGUI != nullptr)
-				{
-					mGUI->keyDownFunc(evnt);
-				}
-				break;
-			case SDL_KEYUP:
-				unpressKey(evnt.key.keysym.sym);
-				if (mGUI != nullptr)
-				{
-					mGUI->keyUpFunc(evnt);
-				}
-				break;
-			case SDL_MOUSEMOTION:
-				if (mGUI != nullptr)
-				{
-					mGUI->mouseMotionFunc(evnt);
-				}
-				break;
-			case SDL_TEXTINPUT:
-				if (mGUI != nullptr)
-				{
-					mGUI->decodeInputText(evnt);
-				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 				pressButton(evnt.button.button, glm::vec2(evnt.button.x, evnt.button.y));
-				if (mGUI != nullptr)
-				{
-					mGUI->mouseButtonDownFunc(evnt);
-				}
 				break;
-			case SDL_MOUSEBUTTONUP:
-				unpressButton(evnt.button.button, glm::vec2(evnt.button.x, evnt.button.y));
-				if (mGUI != nullptr)
-				{
-					mGUI->mouseButtonUPFunc(evnt);
-				}
+			case SDL_MOUSEMOTION:
+				mMouseSender.publish(glm::vec2((float)evnt.motion.xrel, (float)evnt.motion.yrel));
 				break;
 			}
 		}

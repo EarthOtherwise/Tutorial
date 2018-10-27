@@ -1,13 +1,16 @@
 #pragma once
 #include <map>
 #include <memory>
+#include <vector>
 #include "GLM/glm.hpp"
+#include "SDL/SDL_events.h"
 
 namespace Otherwise
 {
 	struct Message
 	{
-		virtual glm::vec2 getMouseMessage() { glm::vec2(0.0f); }
+		virtual glm::vec2 getMouseMessage() { return glm::vec2(0.0f); }
+		virtual SDL_Event getEventMessage() { return SDL_Event(); }
 	};
 
 	struct MouseMessage : Message
@@ -16,13 +19,25 @@ namespace Otherwise
 		glm::vec2 mouseCoords;
 	};
 
+	struct EventMessage : Message
+	{
+		SDL_Event getEventMessage() { return evnt; }
+		SDL_Event evnt;
+	};
+
+	class Correspondent;
+
 	class CorrespondentManager
 	{
 	public:
 		CorrespondentManager();
 		~CorrespondentManager();
 
-		void createConnectionRequestListFromINIFile(std::string &iniFilePath);
+		void init();
+
+		void findAllConnections(std::string &filePath);
+
+		void checkConnectionRequests();
 
 		void createSubscription(std::string &subscriber, std::string &publisher);
 		void cancelSubscription(std::string &subscriber, std::string &publisher);
@@ -32,7 +47,7 @@ namespace Otherwise
 
 		void createCorrespondentSignature(std::string &signature);
 		void removeCorrespondentSignature(std::string &signature);
-		bool isCoorespondentSignature(std::string &signature);
+		bool isCorrespondentSignature(std::string &signature);
 	private:
 		std::map<std::string, Correspondent*> activeCorrespondents;
 		std::multimap<std::string, std::string> connectionRequests;
@@ -45,19 +60,23 @@ namespace Otherwise
 		Correspondent();
 		~Correspondent();
 
-		void init(CorrespondentManager* manager);
+		void init(CorrespondentManager* manager, std::string &signature);
 		void destroy();
+
+		void passToSubscribers(std::shared_ptr<Message> messagePtr);
 
 		void recieveSubscriber(std::string &subscriberSignature, Correspondent* subscriber);
 		void removeSubscriber(std::string &subscriberSignature);
 
-		void publishMessage();
-		void publishMouseMessage(glm::vec2 &mouseCoords);
+		void publish();
+		void publish(glm::vec2 &mouseCoords);
+		void publish(SDL_Event &evnt);
 
 		void recieveMessage(std::shared_ptr<Message> message);
 
 		bool getMessage();
 		glm::vec2 getMouseMessage();
+		SDL_Event getEventMessage();
 
 		void clearMessage();
 
@@ -65,5 +84,6 @@ namespace Otherwise
 		CorrespondentManager* mManager;
 		std::map<std::string, Correspondent*> mSubscribers;
 		std::shared_ptr<Message> mMessage;
+		std::string mSignature;
 	};
 }

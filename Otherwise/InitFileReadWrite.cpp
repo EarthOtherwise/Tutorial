@@ -106,4 +106,41 @@ namespace Otherwise
 
 		writeInitFile(tempFile);
 	}
+	void extractLinesFromFile(std::vector<std::string>* addTo, std::string & startLineMinusOne, std::string & endLinePlusOne, std::string & filePath)
+	{
+		unsigned int initSize = addTo->size();
+		std::string tempString;
+		std::fstream fileStream(filePath);
+		if (fileStream.is_open())
+		{
+			while (getline(fileStream, tempString))
+			{
+				if (tempString == startLineMinusOne)
+				{
+					while (getline(fileStream, tempString))
+					{
+						if (tempString == endLinePlusOne)
+						{
+							break;
+						}
+						else
+						{
+							addTo->push_back(tempString);
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			throwError(filePath, filePath + " file was missing or currupted.");
+		}
+
+		if (initSize == addTo->size())
+		{
+			throwError("ExtractLinesFromFile", "When looking in file " + filePath + 
+				" we could not find anything between the lines " + startLineMinusOne +
+				" and " + endLinePlusOne);
+		}
+	}
 }

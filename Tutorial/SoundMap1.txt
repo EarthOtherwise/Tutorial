@@ -1,0 +1,5 @@
+SOUND
+define publisher
+leftMouse
+defined subscriber
+SoundEffects/gun-cocking-01.wav

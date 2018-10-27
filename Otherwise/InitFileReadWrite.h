@@ -20,5 +20,7 @@ namespace Otherwise
 
 	/*Replace a single line in the init file.*/
 	void writeInitFileLine(unsigned int lineNumber, std::string replacementString);
+
+	void extractLinesFromFile(std::vector<std::string> *addTo, std::string &startLineMinusOne, std::string &endLinePlusOne, std::string &filePath);
 }
 

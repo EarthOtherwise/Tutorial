@@ -1,5 +1,6 @@
 #include "MessagingSystem.h"
 #include "InitFileReadWrite.h"
+#include <fstream>
 
 namespace Otherwise
 {
@@ -13,46 +14,84 @@ namespace Otherwise
 
 	}
 
-
-
-	void CorrespondentManager::createConnectionRequestListFromINIFile(std::string & iniFilePath)
+	void CorrespondentManager::init()
 	{
-		std::vector<std::string> iniFileStrings = readFile(iniFilePath);
+		std::string filePath = "CorrespondentMasterList.txt";
+		std::vector<std::string> tempVector = readFile(filePath);
 
-		unsigned int iterator = 0;
-		std::string subscriber;
-		std::string publisher;
-		while (iterator < iniFileStrings.size())
+		for (std::string i : tempVector)
 		{
-			if (iniFileStrings[iterator] == "Correspondents")
+			createCorrespondentSignature(i);
+		}
+
+		tempVector.clear();
+		filePath = "Init.txt";
+		std::string startline = "CorrespondentManager";
+		std::string endLine = "CorrespondentManagerEnd";
+		extractLinesFromFile(&tempVector, startline, endLine, filePath);
+
+		for (std::string i : tempVector)
+		{
+			findAllConnections(i);
+		}
+	}
+
+	void CorrespondentManager::findAllConnections(std::string & filePath)
+	{
+		std::string tempString;
+		std::string currentPublisher;
+		std::ifstream fileStream(filePath);
+		if (fileStream.is_open())
+		{
+			while (getline(fileStream, tempString))
 			{
-				iterator++;
-				while (iniFileStrings[iterator] != "EndCorrespondents")
+				if (tempString == "PUBLISHER")
 				{
-					if (isCoorespondentSignature(iniFileStrings[iterator]))
+					getline(fileStream, tempString);
+					if (isCorrespondentSignature(tempString))
 					{
-						subscriber = iniFileStrings[iterator];
-						iterator++;
-						if (isCoorespondentSignature(iniFileStrings[iterator]))
-						{
-							publisher = iniFileStrings[iterator];
-							createSubscription(subscriber, publisher);
-							iterator++;
-						}
-						else
-						{
-							throwError("CorrespondentError", "Requested correspondent " + iniFileStrings[iterator] + " does not exist.");
-						}
+						currentPublisher = tempString;
 					}
 					else
 					{
-						throwError("CorrespondentError", "Requested correspondent " + iniFileStrings[iterator] + " does not exist.");
+						throwError("PUBLISHER", "Program does not recognize publisher " + tempString);
+					}
+				}
+				if (tempString == "SUBSCRIBER")
+				{
+					getline(fileStream, tempString);
+					if (isCorrespondentSignature(tempString))
+					{
+						createSubscription(currentPublisher, tempString);
+					}
+					else
+					{
+						throwError("SUBSCRIBER", "Program does not recognize subscriber " + tempString);
 					}
 				}
 			}
-			else
+		}
+		else
+		{
+			throwError(filePath, filePath + " file is corrupt or missing.");
+		}
+
+	}
+
+	void CorrespondentManager::checkConnectionRequests()
+	{
+		for (std::multimap<std::string, std::string>::iterator currentRequest = connectionRequests.begin(); currentRequest != connectionRequests.end(); currentRequest++)
+		{
+			auto publisher = activeCorrespondents.find(currentRequest->first);
+			if (publisher != activeCorrespondents.end())
 			{
-				iterator++;
+				publisher = activeCorrespondents.find(currentRequest->second);
+				if (publisher != activeCorrespondents.end())
+				{
+					createSubscription((std::string)currentRequest->first, currentRequest->second);
+					connectionRequests.erase(currentRequest);
+					return;
+				}
 			}
 		}
 	}
@@ -94,12 +133,15 @@ namespace Otherwise
 
 	void CorrespondentManager::listNewCorrespondent(std::string & correspondentSignature, Correspondent * correspondent)
 	{
-		auto activeCorrespondent = activeCorrespondents.find(correspondentSignature);
-		if (activeCorrespondent == activeCorrespondents.end())
+		if (isCorrespondentSignature(correspondentSignature))
 		{
-			activeCorrespondents[correspondentSignature] = correspondent;
+			activeCorrespondents.insert(std::pair<std::string, Correspondent *>(correspondentSignature, correspondent));
+			checkConnectionRequests();
 		}
-		return;
+		else
+		{
+			throwError("CorrespondentError", "Correspondent " + correspondentSignature + " does not appear in CorrespondentMasterList");
+		}
 	}
 
 	void CorrespondentManager::deListCorrespondent(std::string & correspondentSignature)
@@ -109,7 +151,6 @@ namespace Otherwise
 		{
 			activeCorrespondents.erase(activeCorrespondent);
 		}
-		return;
 	}
 
 	void CorrespondentManager::createCorrespondentSignature(std::string & signature)
@@ -129,7 +170,7 @@ namespace Otherwise
 		}
 	}
 
-	bool CorrespondentManager::isCoorespondentSignature(std::string & signature)
+	bool CorrespondentManager::isCorrespondentSignature(std::string & signature)
 	{
 		unsigned int iterator = 0;
 		while (iterator < mAllPossibleCorrespondentSignatures.size())
@@ -138,6 +179,7 @@ namespace Otherwise
 			{
 				return true;
 			}
+			iterator++;
 		}
 		return false;
 	}
@@ -152,23 +194,29 @@ namespace Otherwise
 
 	}
 
-	void Correspondent::init(CorrespondentManager * manager)
+	void Correspondent::init(CorrespondentManager * manager, std::string &signature)
 	{
 		mManager = manager;
+		mSignature = signature;
+		manager->listNewCorrespondent(signature, this);
 	}
 
 	void Correspondent::destroy()
 	{
+		mManager->deListCorrespondent(mSignature);
+	}
 
+	void Correspondent::passToSubscribers(std::shared_ptr<Message> messagePtr)
+	{
+		for (auto iterator = mSubscribers.begin(); iterator != mSubscribers.end(); iterator++)
+		{
+			iterator->second->recieveMessage(messagePtr);
+		}
 	}
 
 	void Correspondent::recieveSubscriber(std::string & subscriberSignature, Correspondent * subscriber)
 	{
-		auto findSubscriber = mSubscribers.find(subscriberSignature);
-		if (findSubscriber != mSubscribers.end())
-		{
-			mSubscribers[subscriberSignature] = subscriber;
-		}
+		mSubscribers.insert(std::pair<std::string, Correspondent *>(subscriberSignature, subscriber));
 	}
 
 	void Correspondent::removeSubscriber(std::string & subscriberSignature)
@@ -180,23 +228,24 @@ namespace Otherwise
 		}
 	}
 
-	void Correspondent::publishMessage()
+	void Correspondent::publish()
 	{
 		std::shared_ptr<Message> newMessage(new Message);
-		for (auto iterator = mSubscribers.begin(); iterator != mSubscribers.end(); iterator++)
-		{
-			iterator->second->recieveMessage(newMessage);
-		}
+		passToSubscribers(newMessage);
 	}
 
-	void Correspondent::publishMouseMessage(glm::vec2 & mouseCoords)
+	void Correspondent::publish(glm::vec2 & mouseCoords)
 	{
 		std::shared_ptr<MouseMessage> newMessage(new MouseMessage);
 		newMessage->mouseCoords = mouseCoords;
-		for (auto iterator = mSubscribers.begin(); iterator != mSubscribers.end(); iterator++)
-		{
-			iterator->second->recieveMessage(newMessage);
-		}
+		passToSubscribers(newMessage);
+	}
+
+	void Correspondent::publish(SDL_Event & evnt)
+	{
+		std::shared_ptr<EventMessage> newMessage(new EventMessage);
+		newMessage->evnt = evnt;
+		passToSubscribers(newMessage);
 	}
 
 	void Correspondent::recieveMessage(std::shared_ptr<Message> message)
@@ -216,6 +265,11 @@ namespace Otherwise
 	glm::vec2 Correspondent::getMouseMessage()
 	{
 		return mMessage->getMouseMessage();
+	}
+
+	SDL_Event Correspondent::getEventMessage()
+	{
+		return mMessage->getEventMessage();
 	}
 
 	void Correspondent::clearMessage()

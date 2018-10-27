@@ -1,150 +1,160 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{10b5801a-30fe-4fb3-ad3f-3f7cc3d18008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{d7a53c24-f655-4091-af5e-a059533c0eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{97de73b2-28cb-4158-96b0-6d9a354e8d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDL">
+      <UniqueIdentifier>{eb7f5da3-6674-4f68-a340-10c38c8fd052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{d33c3614-f6ef-400d-b16b-9b931c0bb999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spatial Partitioning">
+      <UniqueIdentifier>{7daa8d6d-eb59-4b92-a558-b62b3a0ab03e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Otherwise.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IAppState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogoState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PicoPNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageLoad.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Cameras.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="ErrHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiSprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cameras.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteFont.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OCube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpatialSceneGraphOct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpatialEntity.h">
-      <Filter>Header Files</Filter>
+      <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsResourceManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="GUI.h">
-      <Filter>Header Files</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="IAppState.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoad.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="InitFileReadWrite.h">
-      <Filter>Header Files</Filter>
+      <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="OAudio.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="InputHandler.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoState.h">
+      <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="MessagingSystem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiSprite.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="OAudio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="OCube.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="PicoPNG.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleShader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="SpatialEntity.h">
+      <Filter>Spatial Partitioning</Filter>
+    </ClInclude>
+    <ClInclude Include="SpatialSceneGraphOct.h">
+      <Filter>Spatial Partitioning</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteFont.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Otherwise.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogoState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SimpleShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Square.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PicoPNG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageLoad.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cameras.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="ErrHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiSprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cameras.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteFont.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OCube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpatialSceneGraphOct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpatialEntity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsResourceManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="GUI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ImageLoad.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="InitFileReadWrite.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="OAudio.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoState.cpp">
+      <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="MessagingSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiSprite.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="OAudio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="OCube.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="PicoPNG.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleShader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="SpatialEntity.cpp">
+      <Filter>Spatial Partitioning</Filter>
+    </ClCompile>
+    <ClCompile Include="SpatialSceneGraphOct.cpp">
+      <Filter>Spatial Partitioning</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteFont.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>SDL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

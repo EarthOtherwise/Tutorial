@@ -3,6 +3,7 @@
 #include "SDL/SDL_events.h"
 #include "CEGUI/CEGUI.h"
 #include "CEGUI/RendererModules/OpenGL/GL3Renderer.h"
+#include "MessagingSystem.h"
 
 namespace Otherwise
 {
@@ -11,7 +12,7 @@ namespace Otherwise
 	public:
 		GUI();
 		~GUI();
-		void init(const std::string &resourceDirectory);
+		void init(const std::string &resourceDirectory, CorrespondentManager *corrManager);
 		void update();
 		void destory();
 		void render();
@@ -46,6 +47,7 @@ namespace Otherwise
 		CEGUI::GUIContext* mContext = nullptr;
 		CEGUI::Window* mRoot = nullptr;
 		unsigned int mPreviousTime = 0;
+		Correspondent mFromInput;
 	};
 
 }

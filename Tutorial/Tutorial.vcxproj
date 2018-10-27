@@ -140,7 +140,10 @@
     <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CorrespondentMasterList.txt" />
     <Text Include="Init.txt" />
+    <Text Include="KeyMap.txt" />
+    <Text Include="SoundMap1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

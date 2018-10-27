@@ -29,10 +29,21 @@ namespace Otherwise
 		mOrthoProjection = glm::scale(glm::mat4(1.0f), scaling) * mOrthoProjection;
 	}
 
-	Camera3D::Camera3D(int screenWidth, int screenHeight, glm::vec3 position, glm::vec3 lookAt, float fieldOfView, float near, float far, glm::vec3 cameraRoll) 
-		:  mPosition(position), mLookAtPosition(lookAt), mScreenRatio((float)screenWidth / (float)screenHeight), mNearClippingDistance(near), 
-		mFarClippingDistance(far), mFieldOfView(fieldOfView), mCameraRoll(cameraRoll)
+	Camera3D::Camera3D(int screenWidth, int screenHeight, glm::vec3 position, float fieldOfView, float near, float far,
+		glm::vec3 cameraRoll, CorrespondentManager *corrManager, float hAngle, float vAngle)
+		:  mPosition(position), mScreenRatio((float)screenWidth / (float)screenHeight), mNearClippingDistance(near), 
+		mFarClippingDistance(far), mFieldOfView(fieldOfView), mCameraRoll(cameraRoll), mHAngle(hAngle), mVangle(vAngle)
 	{
+		mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle), cos(mVangle) * cos(mHAngle));
+
+		mUpReciever.init(corrManager, (std::string)"CameraMoveUpReciever");
+		mDownReciever.init(corrManager, (std::string)"CameraMoveDownReciever");
+		mLeftReciever.init(corrManager, (std::string)"CameraMoveLeftReciever");
+		mRightReciever.init(corrManager, (std::string)"CameraMoveRightReciever");
+		mForwardReciever.init(corrManager, (std::string)"CameraMoveForwardReciever");
+		mBackReciever.init(corrManager, (std::string)"CameraMoveBackReciever");
+		mLookAtReciever.init(corrManager, (std::string)"CameraLookAtReciever");
+
 		update();
 	}
 
@@ -138,26 +149,68 @@ namespace Otherwise
 					isThereAGoodPoint = true;
 				}
 				iterator++;
-				std::cout << "Point " << iterator << " in relation to plane " << i << '\n';
 			}
-			std::cout << '\n';
 			if (!isThereAGoodPoint)
 			{
-				std::cout << "false" << '\n';
 				return false;
 			}
 
 			isThereAGoodPoint = false;
 			iterator = 0;
 		}
-		std::cout << "true" << '\n';
 		return true;
 	}
 
 	void Camera3D::update()
 	{
+
+		if (mLookAtReciever.getMessage())
+		{
+			glm::vec2 mouseCoordsChange = mLookAtReciever.getMouseMessage();
+			mHAngle -= mouseCoordsChange.x * mMouseSensitivity;
+			mVangle -= mouseCoordsChange.y * mMouseSensitivity;
+			mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle), cos(mVangle) * cos(mHAngle));
+			mLookAtReciever.clearMessage();
+		}
+
+		if (mForwardReciever.getMessage())
+		{
+			mPosition += mLookAtPosition * mForward;
+			mForwardReciever.clearMessage();
+		}
+
+		if (mBackReciever.getMessage())
+		{
+			mPosition += mLookAtPosition * mBack;
+			mBackReciever.clearMessage();
+		}
+
+		if (mLeftReciever.getMessage())
+		{
+			mPosition += mLeft * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
+			mLeftReciever.clearMessage();
+		}
+
+		if (mRightReciever.getMessage())
+		{
+			mPosition += mRight * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
+			mRightReciever.clearMessage();
+		}
+
+		if (mUpReciever.getMessage())
+		{
+			mPosition += glm::vec3(0.0f, mUp, 0.0f);
+			mUpReciever.clearMessage();
+		}
+
+		if (mDownReciever.getMessage())
+		{
+			mPosition += glm::vec3(0.0f, mDown, 0.0f);
+			mDownReciever.clearMessage();
+		}
+
 		mProjectionMatrix = glm::perspective(glm::radians(mFieldOfView), mScreenRatio, mNearClippingDistance, mFarClippingDistance);
-		mCameraMatrix = glm::lookAt(mPosition, mLookAtPosition, glm::vec3(0.0f, 1.0f, 0.0f));
+		mCameraMatrix = glm::lookAt(mPosition, mPosition + mLookAtPosition, glm::vec3(0.0f, 1.0f, 0.0f));
 		mModelMatrix = glm::mat4(1.0f);
 		mPerspectiveProjection = mProjectionMatrix * mCameraMatrix * mModelMatrix;
 	}

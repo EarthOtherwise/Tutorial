@@ -1,26 +1,4 @@
-﻿  Window.cpp
-  Triangle.cpp
-  Square.cpp
-  SpriteFont.cpp
-  SpatialSceneGraphOct.cpp
-  SpatialEntity.cpp
-  SimpleShader.cpp
-  PicoPNG.cpp
-  OCube.cpp
-  OAudio.cpp
-  MultiSprite.cpp
-  ErrHandler.cpp
-  LogoState.cpp
-  InputHandler.cpp
-  InitFileReadWrite.cpp
-  ImageLoad.cpp
-c:\tutorial - copy\otherwise\imageload.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-c:\tutorial - copy\otherwise\imageload.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-  GUI.cpp
-c:\tutorial - copy\otherwise\gui.cpp(214): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-  GraphicsResourceManager.cpp
-  Cameras.cpp
-  Generating Code...
+﻿  MessagingSystem.cpp
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 glew32.lib(glew32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
@@ -39,4 +17,4 @@ fmodstudioL_vc.lib(fmodstudioL.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 
 fmodstudioL_vc.lib(fmodstudioL.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-  Otherwise.vcxproj -> C:\Tutorial - Copy\Debug\Otherwise.lib
+  Otherwise.vcxproj -> C:\Tutorial\Tutorial\Debug\Otherwise.lib
