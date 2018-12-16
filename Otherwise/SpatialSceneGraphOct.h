@@ -3,6 +3,7 @@
 #include<vector>
 #include<cmath>
 #include"SpatialEntity.h"
+#include"OCollision.h"
 
 namespace Otherwise
 {
@@ -25,10 +26,14 @@ namespace Otherwise
 		void createChildren();
 
 		std::vector<glm::vec3> getPoints();
+
+		OCollAABB* getBox() { return &mBox; }
 	private:
 		float mMinX, mMaxX, mMinY, mMaxY, mMinZ, mMaxZ;
+		glm::vec3 mCenter;
 		std::vector<SpatialEntity*> mEntitiesWithin;
 		std::vector<SpatialSceneGraphOct*> mOctsWithin;
+		OCollAABB mBox;
 	};
 
 }

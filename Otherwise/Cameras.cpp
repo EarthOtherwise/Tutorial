@@ -29,12 +29,16 @@ namespace Otherwise
 		mOrthoProjection = glm::scale(glm::mat4(1.0f), scaling) * mOrthoProjection;
 	}
 
-	Camera3D::Camera3D(int screenWidth, int screenHeight, glm::vec3 position, float fieldOfView, float near, float far,
-		glm::vec3 cameraRoll, CorrespondentManager *corrManager, float hAngle, float vAngle)
-		:  mPosition(position), mScreenRatio((float)screenWidth / (float)screenHeight), mNearClippingDistance(near), 
-		mFarClippingDistance(far), mFieldOfView(fieldOfView), mCameraRoll(cameraRoll), mHAngle(hAngle), mVangle(vAngle)
+	Camera3D::Camera3D(int screenWidth, int screenHeight, glm::vec3 position, 
+		float fieldOfView, float near, float far, glm::vec3 cameraRoll, 
+		CorrespondentManager *corrManager, float hAngle, float vAngle)
+		: mPosition(position), mScreenRatio((float)screenWidth / (float)screenHeight),
+		mNearClippingDistance(near), mFarClippingDistance(far), 
+		mFieldOfView(fieldOfView), mCameraRoll(cameraRoll), mHAngle(hAngle), 
+		mVangle(vAngle)
 	{
-		mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle), cos(mVangle) * cos(mHAngle));
+		mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle),
+			cos(mVangle) * cos(mHAngle));
 
 		mUpReciever.init(corrManager, (std::string)"CameraMoveUpReciever");
 		mDownReciever.init(corrManager, (std::string)"CameraMoveDownReciever");
@@ -43,6 +47,9 @@ namespace Otherwise
 		mForwardReciever.init(corrManager, (std::string)"CameraMoveForwardReciever");
 		mBackReciever.init(corrManager, (std::string)"CameraMoveBackReciever");
 		mLookAtReciever.init(corrManager, (std::string)"CameraLookAtReciever");
+
+		mFrustum.pos = &mPosition;
+		createFrustum();
 
 		update();
 	}
@@ -60,105 +67,57 @@ namespace Otherwise
 
 	void Camera3D::createFrustum()
 	{
-		mFrustumPlanes.clear();
-		float nearFrustumHeight = glm::tan(mFieldOfView/2) * mNearClippingDistance;
+		mFrustum.planes.clear();
+		float nearFrustumHeight = glm::tan(mFieldOfView/2.0f) * mNearClippingDistance;
 		float nearFrustumWidth = nearFrustumHeight * mScreenRatio;
-		float farFrustumHeight = glm::tan(mFieldOfView/2) * mFarClippingDistance;
+		float farFrustumHeight = glm::tan(mFieldOfView/2.0f) * mFarClippingDistance;
 		float farFrustumWidth = farFrustumHeight * mScreenRatio;
+		glm::vec3 farClippingCenter = mPosition + mLookAtPosition * mFarClippingDistance;
+		glm::vec3 nearClippingCenter = mPosition + mLookAtPosition * mNearClippingDistance;
 
-		glm::vec3 viewDirection = glm::normalize(mLookAtPosition - mPosition);
-		glm::vec3 farClippingCenter = mPosition + viewDirection * mFarClippingDistance;
-		glm::vec3 nearClippingCenter = mPosition + viewDirection * mNearClippingDistance;
-
-		glm::vec3 cameraRight = glm::normalize(glm::cross(viewDirection, mCameraRoll));
-		glm::vec3 cameraUp = glm::normalize(glm::cross(viewDirection, cameraRight));
+		glm::vec3 cameraRight = glm::normalize(glm::cross(mLookAtPosition, mCameraRoll));
+		glm::vec3 cameraUp = glm::normalize(glm::cross(mLookAtPosition, cameraRight));
 		
 		//near clipping frustum plane
-		mFrustumPlanes.push_back(Plane(viewDirection, glm::dot(-viewDirection, nearClippingCenter)));
-
+		mFrustum.planes.push_back(OCollPlane(mLookAtPosition, glm::dot(-mLookAtPosition, nearClippingCenter)));
+		/*std::cout << "Near plane normal: " << mFrustum.planes.back().normal.x
+			<< ", " << mFrustum.planes.back().normal.y << ". "
+			<< mFrustum.planes.back().normal.z << " has offset: "
+			<< mFrustum.planes.back().offset << std::endl;*/
 		//far clipping frustum plane
-		mFrustumPlanes.push_back(Plane(-viewDirection, glm::dot(viewDirection, farClippingCenter)));
-
+		mFrustum.planes.push_back(OCollPlane(-mLookAtPosition, glm::dot(mLookAtPosition, farClippingCenter)));
+		/*std::cout << "Far plane normal: " << mFrustum.planes.back().normal.x
+			<< ", " << mFrustum.planes.back().normal.y << ". "
+			<< mFrustum.planes.back().normal.z << " has offset: "
+			<< mFrustum.planes.back().offset << std::endl;*/
 		//right clipping frustum plane
 		glm::vec3 planeNormal = -glm::normalize(glm::cross(cameraUp, (farClippingCenter + cameraRight * farFrustumWidth) - mPosition));
-		mFrustumPlanes.push_back(Plane(planeNormal, glm::dot(-planeNormal, mPosition)));
-
+		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		/*std::cout << "Right plane normal: " << mFrustum.planes.back().normal.x
+			<< ", " << mFrustum.planes.back().normal.y << ". "
+			<< mFrustum.planes.back().normal.z << " has offset: "
+			<< mFrustum.planes.back().offset << std::endl;*/
 		//left clipping frustum plane
 		planeNormal = glm::normalize(glm::cross(cameraUp, (farClippingCenter - cameraRight * farFrustumWidth) - mPosition));
-		mFrustumPlanes.push_back(Plane(planeNormal, glm::dot(-planeNormal, mPosition)));
-
+		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		/*std::cout << "Left plane normal: " << mFrustum.planes.back().normal.x
+			<< ", " << mFrustum.planes.back().normal.y << ". "
+			<< mFrustum.planes.back().normal.z << " has offset: "
+			<< mFrustum.planes.back().offset << std::endl;*/
 		//top clipping frustum plane
 		planeNormal = -glm::normalize(glm::cross(cameraRight, (farClippingCenter - cameraUp * farFrustumHeight) - mPosition));
-		mFrustumPlanes.push_back(Plane(planeNormal, glm::dot(-planeNormal, mPosition)));
-
+		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		/*std::cout << "Top plane normal: " << mFrustum.planes.back().normal.x
+			<< ", " << mFrustum.planes.back().normal.y << ". "
+			<< mFrustum.planes.back().normal.z << " has offset: "
+			<< mFrustum.planes.back().offset << std::endl;*/
 		//bottom clipping frustum plane
 		planeNormal = glm::normalize(glm::cross(cameraRight, (farClippingCenter + cameraUp * farFrustumHeight) - mPosition));
-		mFrustumPlanes.push_back(Plane(planeNormal, glm::dot(-planeNormal, mPosition)));
-		mFrustum = true;
-	}
-
-	bool Camera3D::isSphereInView(glm::vec3 centerPoint, float radius)
-	{
-		if (!mFrustum)
-		{
-			createFrustum();
-		}
-		if (mFrustumPlanes[0].getDistance(centerPoint) < -radius)
-		{
-			return false;
-		}
-		if (mFrustumPlanes[1].getDistance(centerPoint) < -radius)
-		{
-			return false;
-		}
-		if (mFrustumPlanes[2].getDistance(centerPoint) < -radius)
-		{
-			return false;
-		}
-		if (mFrustumPlanes[3].getDistance(centerPoint) < -radius)
-		{
-			return false;
-		}
-		if (mFrustumPlanes[4].getDistance(centerPoint) < -radius)
-		{
-			return false;
-		}
-		if (mFrustumPlanes[5].getDistance(centerPoint) < -radius)
-		{
-			return false;
-		}
-		return true;
-	}
-
-	bool Camera3D::isBoxInView(std::vector<glm::vec3> points)
-	{
-		bool isThereAGoodPoint = false;
-		unsigned int iterator = 0;
-
-		if (!mFrustum)
-		{
-			createFrustum();
-		}
-
-		for (size_t i = 0; i < mFrustumPlanes.size(); i++)
-		{
-			while (!isThereAGoodPoint && iterator < 8)
-			{
-				if (mFrustumPlanes[i].getDistance(points[iterator]) > 0)
-				{
-					isThereAGoodPoint = true;
-				}
-				iterator++;
-			}
-			if (!isThereAGoodPoint)
-			{
-				return false;
-			}
-
-			isThereAGoodPoint = false;
-			iterator = 0;
-		}
-		return true;
+		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		/*std::cout << "Bottom plane normal: " << mFrustum.planes.back().normal.x
+			<< ", " << mFrustum.planes.back().normal.y << ". "
+			<< mFrustum.planes.back().normal.z << " has offset: "
+			<< mFrustum.planes.back().offset << std::endl;*/
 	}
 
 	void Camera3D::update()
@@ -171,42 +130,49 @@ namespace Otherwise
 			mVangle -= mouseCoordsChange.y * mMouseSensitivity;
 			mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle), cos(mVangle) * cos(mHAngle));
 			mLookAtReciever.clearMessage();
+			createFrustum();
 		}
 
 		if (mForwardReciever.getMessage())
 		{
 			mPosition += mLookAtPosition * mForward;
 			mForwardReciever.clearMessage();
+			createFrustum();
 		}
 
 		if (mBackReciever.getMessage())
 		{
 			mPosition += mLookAtPosition * mBack;
 			mBackReciever.clearMessage();
+			createFrustum();
 		}
 
 		if (mLeftReciever.getMessage())
 		{
 			mPosition += mLeft * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
 			mLeftReciever.clearMessage();
+			createFrustum();
 		}
 
 		if (mRightReciever.getMessage())
 		{
 			mPosition += mRight * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
 			mRightReciever.clearMessage();
+			createFrustum();
 		}
 
 		if (mUpReciever.getMessage())
 		{
 			mPosition += glm::vec3(0.0f, mUp, 0.0f);
 			mUpReciever.clearMessage();
+			createFrustum();
 		}
 
 		if (mDownReciever.getMessage())
 		{
 			mPosition += glm::vec3(0.0f, mDown, 0.0f);
 			mDownReciever.clearMessage();
+			createFrustum();
 		}
 
 		mProjectionMatrix = glm::perspective(glm::radians(mFieldOfView), mScreenRatio, mNearClippingDistance, mFarClippingDistance);

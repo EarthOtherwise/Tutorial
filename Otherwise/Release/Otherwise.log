@@ -1,28 +1,6 @@
 ﻿  Cameras.cpp
-c:\tutorial\tutorial\otherwise\cameras.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
-  GraphicsResourceManager.cpp
-  GUI.cpp
-c:\tutorial\tutorial\otherwise\gui.cpp(244): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
-  ImageLoad.cpp
-c:\tutorial\tutorial\otherwise\imageload.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-c:\tutorial\tutorial\otherwise\imageload.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-  InitFileReadWrite.cpp
-  InputHandler.cpp
-  LogoState.cpp
-c:\tutorial\tutorial\otherwise\cameras.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
-  ErrHandler.cpp
-  MessagingSystem.cpp
-  MultiSprite.cpp
-  OAudio.cpp
+c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
   OCube.cpp
-  PicoPNG.cpp
-  SimpleShader.cpp
-  SpatialEntity.cpp
-  SpatialSceneGraphOct.cpp
-  SpriteFont.cpp
-  Square.cpp
-  Triangle.cpp
-  Window.cpp
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
@@ -32,4 +10,4 @@ fmod_vc.lib(fmod.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already define
 fmod64_vc.lib(fmod64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudio_vc.lib(fmodstudio.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudio64_vc.lib(fmodstudio64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-  Otherwise.vcxproj -> C:\Tutorial\Tutorial\Release\Otherwise.lib
+  Otherwise.vcxproj -> C:\Tutorial - Copy\Tutorial\Release\Otherwise.lib

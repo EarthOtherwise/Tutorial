@@ -1,30 +1,31 @@
-c:\tutorial\tutorial\otherwise\debug\otherwise.pdb
-c:\tutorial\tutorial\otherwise\debug\otherwise.idb
-c:\tutorial\tutorial\otherwise\debug\cameras.obj
-c:\tutorial\tutorial\otherwise\debug\graphicsresourcemanager.obj
-c:\tutorial\tutorial\otherwise\debug\gui.obj
-c:\tutorial\tutorial\otherwise\debug\imageload.obj
-c:\tutorial\tutorial\otherwise\debug\initfilereadwrite.obj
-c:\tutorial\tutorial\otherwise\debug\inputhandler.obj
-c:\tutorial\tutorial\otherwise\debug\logostate.obj
-c:\tutorial\tutorial\otherwise\debug\errhandler.obj
-c:\tutorial\tutorial\otherwise\debug\messagingsystem.obj
-c:\tutorial\tutorial\otherwise\debug\multisprite.obj
-c:\tutorial\tutorial\otherwise\debug\oaudio.obj
-c:\tutorial\tutorial\otherwise\debug\ocube.obj
-c:\tutorial\tutorial\otherwise\debug\picopng.obj
-c:\tutorial\tutorial\otherwise\debug\simpleshader.obj
-c:\tutorial\tutorial\otherwise\debug\spatialentity.obj
-c:\tutorial\tutorial\otherwise\debug\spatialscenegraphoct.obj
-c:\tutorial\tutorial\otherwise\debug\spritefont.obj
-c:\tutorial\tutorial\otherwise\debug\square.obj
-c:\tutorial\tutorial\otherwise\debug\triangle.obj
-c:\tutorial\tutorial\otherwise\debug\window.obj
-c:\tutorial\tutorial\debug\otherwise.lib
-c:\tutorial\tutorial\debug\otherwise.pdb
-c:\tutorial\tutorial\otherwise\debug\otherwise.tlog\cl.command.1.tlog
-c:\tutorial\tutorial\otherwise\debug\otherwise.tlog\cl.read.1.tlog
-c:\tutorial\tutorial\otherwise\debug\otherwise.tlog\cl.write.1.tlog
-c:\tutorial\tutorial\otherwise\debug\otherwise.tlog\lib-link.read.1.tlog
-c:\tutorial\tutorial\otherwise\debug\otherwise.tlog\lib-link.write.1.tlog
-c:\tutorial\tutorial\otherwise\debug\otherwise.tlog\lib.command.1.tlog
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.pdb
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.idb
+c:\tutorial - copy\tutorial\otherwise\debug\triangle.obj
+c:\tutorial - copy\tutorial\otherwise\debug\square.obj
+c:\tutorial - copy\tutorial\otherwise\debug\spritefont.obj
+c:\tutorial - copy\tutorial\otherwise\debug\spatialscenegraphoct.obj
+c:\tutorial - copy\tutorial\otherwise\debug\spatialentity.obj
+c:\tutorial - copy\tutorial\otherwise\debug\simpleshader.obj
+c:\tutorial - copy\tutorial\otherwise\debug\picopng.obj
+c:\tutorial - copy\tutorial\otherwise\debug\ocube.obj
+c:\tutorial - copy\tutorial\otherwise\debug\ocollision.obj
+c:\tutorial - copy\tutorial\otherwise\debug\oaudio.obj
+c:\tutorial - copy\tutorial\otherwise\debug\multisprite.obj
+c:\tutorial - copy\tutorial\otherwise\debug\messagingsystem.obj
+c:\tutorial - copy\tutorial\otherwise\debug\errhandler.obj
+c:\tutorial - copy\tutorial\otherwise\debug\logostate.obj
+c:\tutorial - copy\tutorial\otherwise\debug\inputhandler.obj
+c:\tutorial - copy\tutorial\otherwise\debug\initfilereadwrite.obj
+c:\tutorial - copy\tutorial\otherwise\debug\imageload.obj
+c:\tutorial - copy\tutorial\otherwise\debug\gui.obj
+c:\tutorial - copy\tutorial\otherwise\debug\graphicsresourcemanager.obj
+c:\tutorial - copy\tutorial\otherwise\debug\cameras.obj
+c:\tutorial - copy\tutorial\otherwise\debug\window.obj
+c:\tutorial - copy\tutorial\debug\otherwise.lib
+c:\tutorial - copy\tutorial\debug\otherwise.pdb
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.tlog\cl.command.1.tlog
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.tlog\cl.read.1.tlog
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.tlog\cl.write.1.tlog
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.tlog\lib-link.read.1.tlog
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.tlog\lib-link.write.1.tlog
+c:\tutorial - copy\tutorial\otherwise\debug\otherwise.tlog\lib.command.1.tlog

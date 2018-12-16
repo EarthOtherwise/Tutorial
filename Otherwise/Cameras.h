@@ -3,24 +3,10 @@
 #include"glm/gtc/matrix_transform.hpp"
 #include <vector>
 #include "MessagingSystem.h"
+#include "OCollision.h"
 
 namespace Otherwise
 {
-	class Plane
-	{
-	public:
-		Plane() {}
-		Plane(glm::vec3 normal, float originDistance) : mNormal(normal), mOriginDistance(originDistance) {}
-		~Plane() {}
-
-		float getDistance(glm::vec3 position)
-		{
-			return glm::dot(mNormal, position) + mOriginDistance;
-		}
-	private:
-		glm::vec3 mNormal;
-		float mOriginDistance;
-	};
 	class Camera2D
 	{
 	public:
@@ -53,14 +39,12 @@ namespace Otherwise
 		glm::vec3 getPosition() { return mPosition; }
 		void changePosition(glm::vec3 newPosition);
 		void createFrustum();
-		bool isSphereInView(glm::vec3 centerPoint, float radius);
-		bool isBoxInView(std::vector<glm::vec3> points);
 	
 		void update();
-	private:
-		bool mFrustum = false;
 
-		std::vector<Plane> mFrustumPlanes;
+		OCollCnvx* getFrustum() { return &mFrustum; }
+	private:
+		OCollCnvx mFrustum;
 
 		float mScreenRatio;
 		float mNearClippingDistance;

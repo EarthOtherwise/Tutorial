@@ -161,6 +161,7 @@
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="MultiSprite.h" />
     <ClInclude Include="OAudio.h" />
+    <ClInclude Include="OCollision.h" />
     <ClInclude Include="OCube.h" />
     <ClInclude Include="Otherwise.h" />
     <ClInclude Include="ErrHandler.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="OAudio.cpp" />
+    <ClCompile Include="OCollision.cpp" />
     <ClCompile Include="OCube.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />

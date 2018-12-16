@@ -12,16 +12,23 @@ namespace Otherwise
 	{
 		if (mMaxX <= mMinX)
 		{
-			throwError("SpatialGraph", "Tried to create a spatial grapher where the minimun X is greater thatn or equal to our Maximunm X.");
+			throwError("SpatialGraph", "Tried to create a spatial graph where the minimun X is greater thatn or equal to our Maximunm X.");
 		}
 		if (mMaxY <= mMinY)
 		{
-			throwError("SpatialGraph", "Tried to create a spatial grapher where the minimun Y is greater thatn or equal to our Maximunm Y.");
+			throwError("SpatialGraph", "Tried to create a spatial graph where the minimun Y is greater thatn or equal to our Maximunm Y.");
 		}
 		if (mMaxZ <= mMinZ)
 		{
-			throwError("SpatialGraph", "Tried to create a spatial grapher where the minimun Z is greater thatn or equal to our Maximunm Z.");
+			throwError("SpatialGraph", "Tried to create a spatial graph where the minimun Z is greater thatn or equal to our Maximunm Z.");
 		}
+
+		
+		
+		mCenter = getCenter();
+		mBox.pos = &mCenter;
+		mBox.maxOffset = glm::vec3(maxX, maxY, maxZ) - mCenter;
+		mBox.minOffset = glm::vec3(minX, minY, minZ) - mCenter;
 	}
 
 

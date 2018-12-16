@@ -94,6 +94,7 @@
     <ClInclude Include="Otherwise.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="OCollision.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp">
@@ -156,5 +157,6 @@
     <ClCompile Include="Window.cpp">
       <Filter>SDL</Filter>
     </ClCompile>
+    <ClCompile Include="OCollision.cpp" />
   </ItemGroup>
 </Project>

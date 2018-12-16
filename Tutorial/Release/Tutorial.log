@@ -1,16 +1,9 @@
-﻿  GameLogo.cpp
-c:\tutorial\tutorial\otherwise\cameras.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\tutorial\tutorial\tutorial\gamelogo.cpp(20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\tutorial\tutorial\tutorial\gamelogo.cpp(21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\tutorial\tutorial\tutorial\gamelogo.cpp(71): warning C4244: 'argument': conversion from 'double' to 'GLubyte', possible loss of data
-  main.cpp
-c:\tutorial\tutorial\otherwise\cameras.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
-  MainMenu.cpp
-c:\tutorial\tutorial\otherwise\cameras.h(80): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\tutorial\tutorial\tutorial\mainmenu.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\tutorial\tutorial\tutorial\mainmenu.cpp(26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-     Creating library C:\Tutorial\Tutorial\Release\Tutorial.lib and object C:\Tutorial\Tutorial\Release\Tutorial.exp
+﻿  main.cpp
+c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
+     Creating library C:\Tutorial - Copy\Tutorial\Release\Tutorial.lib and object C:\Tutorial - Copy\Tutorial\Release\Tutorial.exp
   Generating code
-  All 2184 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 2180 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Tutorial.vcxproj -> C:\Tutorial\Tutorial\Release\Tutorial.exe
+  Tutorial.vcxproj -> C:\Tutorial - Copy\Tutorial\Release\Tutorial.exe

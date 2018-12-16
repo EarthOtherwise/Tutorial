@@ -17,6 +17,7 @@
 #include "MainMenu.h"
 #include "OAudio.h"
 #include "MessagingSystem.h"
+#include "OCollision.h"
 
 /*temporarily include iostream*/
 #include<iostream>
@@ -79,7 +80,12 @@ int main(int argc, char** argv)
 
 	Otherwise::Camera2D camera2D (512, 512, glm::vec2(0.0f, 0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
-	Otherwise::Camera3D camera3D (512, 512, glm::vec3(53.0f, 53.0f, 53.0f), 40.0f, 2.0f, 30.0f, glm::vec3 (0.0f, 1.0f, 0.0f), &manager, 1.0f, 0.0f);
+
+	Otherwise::Camera3D camera3D(512, 512, glm::vec3(53.0f, 53.0f, 53.0f),
+		45.0f, 1.0f, 100.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, -1.57f, 0.0f);
+
+	Otherwise::Camera3D cameraCheck(512, 512, glm::vec3(53.0f, 53.0f, 53.0f),
+		45.0f, 1.0f, 20.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, -1.57f, 0.0f);
 
 	Otherwise::MultiSprite multiSprite;
 	multiSprite.init();
@@ -98,28 +104,39 @@ int main(int argc, char** argv)
 
 	std::vector<Otherwise::SpatialSceneGraphOct*> sceneGraphOctStack;
 	std::vector<Otherwise::SpatialEntity*> spatialEntityStack;
-	float minSpace = -100.0f;
-	float maxSpace = 100.0f;
+	float minSpace = -1000.0f;
+	float maxSpace = 1000.0f;
 	Otherwise::SpatialSceneGraphOct spatialGraph(minSpace, maxSpace, minSpace, maxSpace, minSpace, maxSpace);
 	spatialGraph.createChildren();
 	sceneGraphOctStack.push_back(&spatialGraph);
 
 	std::vector<Otherwise::OCube> cubes;
 
-	for (float i = 10; i < 50; i += 5)
+	GLuint frontSprite = Otherwise::loadPng("Textures/red.png");
+	GLuint backSprite = Otherwise::loadPng("Textures/green.png");
+	GLuint leftSprite = Otherwise::loadPng("Textures/blue.png");
+	GLuint rightSprite = Otherwise::loadPng("Textures/purple.png");
+	GLuint topSprite = Otherwise::loadPng("Textures/orange.png");
+	GLuint bottomSprite = Otherwise::loadPng("Textures/yellow.png");
+
+	for (float i = -100; i <= 100; i += 1)
 	{
-		for (float j = 10; j < 50; j += 5)
+		for (float j = -100; j < 100; j += 1)
 		{
-			for (float k = 10; k < 50; k += 5)
+			for (float k = -100; k < 100; k += 1)
 			{
-				spatialGraph.addEntityToGraph(new Otherwise::OCube(glm::vec3(i, j, k), 1.0f, "Textures/red.png", "Textures/green.png", "Textures/blue.png",
-					"Textures/purple.png", "Textures/orange.png", "Textures/yellow.png", &multiSprite2));
+				spatialGraph.addEntityToGraph(new Otherwise::OCube(glm::vec3(i, j, k),
+					0.3f, frontSprite, frontSprite, frontSprite, frontSprite, frontSprite,
+					frontSprite, &multiSprite2));
 			}
 		}
 	}
+
+	std::cout << "camera at " << cameraCheck.getPosition().x << ", " << cameraCheck.getPosition().y << ", " << cameraCheck.getPosition().z << std::endl;
+
 	for (unsigned int i = 0; i < sceneGraphOctStack.size(); i++)
 	{
-		if (camera3D.isBoxInView(sceneGraphOctStack[i]->getPoints()))
+		if (Otherwise::aABBCnvx(sceneGraphOctStack[i]->getBox(), cameraCheck.getFrustum()))
 		{
 			sceneGraphOctStack[i]->addToStack(&spatialEntityStack, &sceneGraphOctStack);
 		}
@@ -127,14 +144,19 @@ int main(int argc, char** argv)
 
 	for (unsigned int i = 0; i < spatialEntityStack.size(); i++)
 	{
-		if (camera3D.isSphereInView(spatialEntityStack[i]->getPosition(), spatialEntityStack[i]->getCollisionRadius()))
+		if (Otherwise::aABBCnvx(spatialEntityStack[i]->getBox(), cameraCheck.getFrustum()))
 		{
+			spatialEntityStack[i]->changeTextures(backSprite, backSprite, backSprite, backSprite, backSprite, backSprite);
 			spatialEntityStack[i]->renderEntity();
+			//std::cout << "Box at " << spatialEntityStack[i]->getPosition().x << ", " << spatialEntityStack[i]->getPosition().y << ", " << spatialEntityStack[i]->getPosition().z << std::endl;
 		}
+		
 	}
 
 	multiSprite2.prepareBatches();
 	multiSprite3.prepareBatches();
+
+
 
 	while (!doQuit)
 	{

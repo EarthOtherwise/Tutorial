@@ -1,3 +1,3 @@
-﻿     Creating library C:\Tutorial\Tutorial\Debug\Tutorial.lib and object C:\Tutorial\Tutorial\Debug\Tutorial.exp
-  Tutorial.vcxproj -> C:\Tutorial\Tutorial\Debug\Tutorial.exe
-  Tutorial.vcxproj -> C:\Tutorial\Tutorial\Debug\Tutorial.pdb (Partial PDB)
+﻿  main.cpp
+c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Tutorial.vcxproj -> C:\Tutorial - Copy\Tutorial\Debug\Tutorial.exe

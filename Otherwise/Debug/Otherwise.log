@@ -1,4 +1,32 @@
-﻿  MessagingSystem.cpp
+﻿  Cameras.cpp
+c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
+  GraphicsResourceManager.cpp
+  GUI.cpp
+c:\tutorial - copy\tutorial\otherwise\gui.cpp(244): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+  ImageLoad.cpp
+c:\tutorial - copy\tutorial\otherwise\imageload.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+c:\tutorial - copy\tutorial\otherwise\imageload.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+  InitFileReadWrite.cpp
+  InputHandler.cpp
+  LogoState.cpp
+c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
+  ErrHandler.cpp
+  MessagingSystem.cpp
+  MultiSprite.cpp
+  OAudio.cpp
+  OCollision.cpp
+  OCube.cpp
+  PicoPNG.cpp
+  SimpleShader.cpp
+  SpatialEntity.cpp
+  SpatialSceneGraphOct.cpp
+  SpriteFont.cpp
+  Square.cpp
+  Triangle.cpp
+  Generating Code...
+  Compiling...
+  Window.cpp
+  Generating Code...
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 glew32.lib(glew32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
@@ -17,4 +45,5 @@ fmodstudioL_vc.lib(fmodstudioL.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 
 fmodstudioL_vc.lib(fmodstudioL.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-  Otherwise.vcxproj -> C:\Tutorial\Tutorial\Debug\Otherwise.lib
+GraphicsResourceManager.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+  Otherwise.vcxproj -> C:\Tutorial - Copy\Tutorial\Debug\Otherwise.lib
