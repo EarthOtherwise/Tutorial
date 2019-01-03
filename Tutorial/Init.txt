@@ -19,3 +19,13 @@ PUBLISHER
 CameraLookAtSender
 SUBSCRIBER
 CameraLookAtReciever
+
+PUBLISHER
+Network
+SUBSCRIBER
+ChatSender
+
+PUBLISHER
+ChatSender
+SUBSCRIBER
+Network

@@ -44,6 +44,9 @@
     <None Include="Logo.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="GUI\layouts\console.layout">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogo.h">

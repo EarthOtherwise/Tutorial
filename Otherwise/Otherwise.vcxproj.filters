@@ -95,6 +95,7 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="OCollision.h" />
+    <ClInclude Include="ONetwork.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp">
@@ -158,5 +159,6 @@
       <Filter>SDL</Filter>
     </ClCompile>
     <ClCompile Include="OCollision.cpp" />
+    <ClCompile Include="ONetwork.cpp" />
   </ItemGroup>
 </Project>

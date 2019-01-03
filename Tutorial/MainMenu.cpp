@@ -85,6 +85,10 @@ void MainMenu::mainMenuLoop()
 		render();
 	}
 
+	startButton->destroy();
+	exitButton->destroy();
+	textBox->destroy();
+
 	glEnable(GL_DEPTH_TEST);
 
 }

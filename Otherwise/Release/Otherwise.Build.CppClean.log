@@ -18,6 +18,36 @@ c:\tutorial - copy\tutorial\otherwise\release\gui.obj
 c:\tutorial - copy\tutorial\otherwise\release\graphicsresourcemanager.obj
 c:\tutorial - copy\tutorial\otherwise\release\cameras.obj
 c:\tutorial - copy\tutorial\otherwise\release\window.obj
-c:\tutorial - copy\tutorial\otherwise\release\otherwise.tlog\cl.command.1.tlog
-c:\tutorial - copy\tutorial\otherwise\release\otherwise.tlog\cl.read.1.tlog
-c:\tutorial - copy\tutorial\otherwise\release\otherwise.tlog\cl.write.1.tlog
+c:\tutorial - copy\tutorial\otherwise\release\spatialscenegraphoct.obj
+c:\tutorial - copy\tutorial\otherwise\release\spatialentity.obj
+c:\tutorial\tutorial\otherwise\release\otherwise.pdb
+c:\tutorial\tutorial\otherwise\release\square.obj
+c:\tutorial\tutorial\otherwise\release\spritefont.obj
+c:\tutorial\tutorial\otherwise\release\spatialscenegraphoct.obj
+c:\tutorial\tutorial\otherwise\release\spatialentity.obj
+c:\tutorial\tutorial\otherwise\release\simpleshader.obj
+c:\tutorial\tutorial\otherwise\release\picopng.obj
+c:\tutorial\tutorial\otherwise\release\ocube.obj
+c:\tutorial\tutorial\otherwise\release\ocollision.obj
+c:\tutorial\tutorial\otherwise\release\oaudio.obj
+c:\tutorial\tutorial\otherwise\release\multisprite.obj
+c:\tutorial\tutorial\otherwise\release\messagingsystem.obj
+c:\tutorial\tutorial\otherwise\release\errhandler.obj
+c:\tutorial\tutorial\otherwise\release\logostate.obj
+c:\tutorial\tutorial\otherwise\release\inputhandler.obj
+c:\tutorial\tutorial\otherwise\release\initfilereadwrite.obj
+c:\tutorial\tutorial\otherwise\release\imageload.obj
+c:\tutorial\tutorial\otherwise\release\gui.obj
+c:\tutorial\tutorial\otherwise\release\graphicsresourcemanager.obj
+c:\tutorial\tutorial\otherwise\release\cameras.obj
+c:\tutorial\tutorial\otherwise\release\window.obj
+c:\tutorial\tutorial\otherwise\release\triangle.obj
+c:\tutorial\tutorial\otherwise\release\onetwork.obj
+c:\tutorial - copy\tutorial\release\otherwise.lib
+c:\tutorial\tutorial\release\otherwise.lib
+c:\tutorial\tutorial\otherwise\release\otherwise.tlog\cl.command.1.tlog
+c:\tutorial\tutorial\otherwise\release\otherwise.tlog\cl.read.1.tlog
+c:\tutorial\tutorial\otherwise\release\otherwise.tlog\cl.write.1.tlog
+c:\tutorial\tutorial\otherwise\release\otherwise.tlog\lib-link.read.1.tlog
+c:\tutorial\tutorial\otherwise\release\otherwise.tlog\lib-link.write.1.tlog
+c:\tutorial\tutorial\otherwise\release\otherwise.tlog\lib.command.1.tlog

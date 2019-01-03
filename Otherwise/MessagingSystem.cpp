@@ -248,6 +248,13 @@ namespace Otherwise
 		passToSubscribers(newMessage);
 	}
 
+	void Correspondent::publish(std::string & string)
+	{
+		std::shared_ptr<StringMessage> newMessage(new StringMessage);
+		newMessage->string = string;
+		passToSubscribers(newMessage);
+	}
+
 	void Correspondent::recieveMessage(std::shared_ptr<Message> message)
 	{
 		mMessage = message;
@@ -270,6 +277,11 @@ namespace Otherwise
 	SDL_Event Correspondent::getEventMessage()
 	{
 		return mMessage->getEventMessage();
+	}
+
+	std::string Correspondent::getStringMessage()
+	{
+		return mMessage->getStringMessage();
 	}
 
 	void Correspondent::clearMessage()

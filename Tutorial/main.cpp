@@ -18,6 +18,8 @@
 #include "OAudio.h"
 #include "MessagingSystem.h"
 #include "OCollision.h"
+#include "ErrHandler.h"
+#include "ONetwork.h"
 
 /*temporarily include iostream*/
 #include<iostream>
@@ -34,6 +36,18 @@ int main(int argc, char** argv)
 
 	Otherwise::CorrespondentManager manager;
 	manager.init();
+
+	Otherwise::ONetwork network(&manager);
+	std::string ip;
+	std::cin >> ip;
+	if (ip == "0")
+	{
+		network.initHosting(1598);
+	}
+	else
+	{
+		network.connectToHost(ip.c_str(), 1598);
+	}
 
 	GameLogo gameLogo;
 	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &graphics);
@@ -81,10 +95,10 @@ int main(int argc, char** argv)
 	Otherwise::Camera2D camera2D (512, 512, glm::vec2(0.0f, 0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
 
-	Otherwise::Camera3D camera3D(512, 512, glm::vec3(53.0f, 53.0f, 53.0f),
+	Otherwise::Camera3D camera3D(512, 512, glm::vec3(0.0f, 0.0f, 0.0f),
 		45.0f, 1.0f, 100.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, -1.57f, 0.0f);
 
-	Otherwise::Camera3D cameraCheck(512, 512, glm::vec3(53.0f, 53.0f, 53.0f),
+	Otherwise::Camera3D cameraCheck(512, 512, glm::vec3(0.0f, 0.0f, 0.0f),
 		45.0f, 1.0f, 20.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, -1.57f, 0.0f);
 
 	Otherwise::MultiSprite multiSprite;
@@ -119,11 +133,11 @@ int main(int argc, char** argv)
 	GLuint topSprite = Otherwise::loadPng("Textures/orange.png");
 	GLuint bottomSprite = Otherwise::loadPng("Textures/yellow.png");
 
-	for (float i = -100; i <= 100; i += 1)
+	for (float i = -1; i <= 1; i += 1)
 	{
-		for (float j = -100; j < 100; j += 1)
+		for (float j = -1; j < 1; j += 1)
 		{
-			for (float k = -100; k < 100; k += 1)
+			for (float k = -1; k < 1; k += 1)
 			{
 				spatialGraph.addEntityToGraph(new Otherwise::OCube(glm::vec3(i, j, k),
 					0.3f, frontSprite, frontSprite, frontSprite, frontSprite, frontSprite,
@@ -131,8 +145,6 @@ int main(int argc, char** argv)
 			}
 		}
 	}
-
-	std::cout << "camera at " << cameraCheck.getPosition().x << ", " << cameraCheck.getPosition().y << ", " << cameraCheck.getPosition().z << std::endl;
 
 	for (unsigned int i = 0; i < sceneGraphOctStack.size(); i++)
 	{
@@ -156,10 +168,12 @@ int main(int argc, char** argv)
 	multiSprite2.prepareBatches();
 	multiSprite3.prepareBatches();
 
-
+	gui.mChatBox.setVisible(true);
 
 	while (!doQuit)
 	{
+		network.update();
+		gui.update();
 		audio.update();
 		camera3D.update();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -181,6 +195,9 @@ int main(int argc, char** argv)
 		//square.draw();
 		glUseProgram(0);
 		newInput.inputQueue();
+
+		gui.render();
+
 		newWindow.swapBuffer();
 	}
 

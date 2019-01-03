@@ -3,6 +3,7 @@
 #include "GL/glew.h"
 #include "UTF8-CPP/utf8.h"
 #include <iostream>
+#include"ErrHandler.h"
 
 namespace Otherwise
 {
@@ -43,6 +44,8 @@ namespace Otherwise
 
 		mRoot = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 		mContext->setRootWindow(mRoot);
+
+		mChatBox.init(mRoot, corrManager, false);
 	}
 
 	void GUI::update()
@@ -78,6 +81,8 @@ namespace Otherwise
 				break;
 			}
 		}
+
+		mChatBox.update();
 	}
 
 	void GUI::destory()
@@ -302,6 +307,94 @@ namespace Otherwise
 	{
 		widget->setPosition(CEGUI::UVector2(CEGUI::UDim(percRect.x, pixRect.x), CEGUI::UDim(percRect.y, pixRect.y)));
 		widget->setSize(CEGUI::USize(CEGUI::UDim(percRect.z, pixRect.z), CEGUI::UDim(percRect.w, pixRect.w)));
+	}
+
+	ChatBox::ChatBox()
+	{
+	}
+
+	ChatBox::~ChatBox()
+	{
+	}
+
+	void ChatBox::init(CEGUI::Window * root, CorrespondentManager * corMan, bool visible)
+	{
+		createCEGUIWindow(root);
+		setVisible(visible);
+		mCorr.init(corMan, std::string("ChatSender"));
+	}
+
+	void ChatBox::setVisible(bool visible)
+	{
+		mConsoleWindow->setVisible(visible);
+		CEGUI::Editbox *editBox = (CEGUI::Editbox*)mConsoleWindow->getChild("Editbox");
+		if (visible)
+		{
+			editBox->activate();
+		}
+		else
+		{
+			editBox->deactivate();
+		}
+	}
+
+	void ChatBox::update()
+	{
+		if (mCorr.getMessage())
+		{
+			outputText(mCorr.getStringMessage());
+			mCorr.clearMessage();
+		}
+	}
+
+	void ChatBox::createCEGUIWindow(CEGUI::Window * root)
+	{
+		CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
+
+		mConsoleWindow = 
+			CEGUI::WindowManager::getSingleton().loadLayoutFromFile("console.layout");
+
+		if (mConsoleWindow)
+		{
+			root->addChild(mConsoleWindow);
+			registerHandlers();
+		}
+		else
+		{
+			throwError("layout", "could not create chat window");
+		}
+	}
+
+	void ChatBox::registerHandlers()
+	{
+		mConsoleWindow->getChild("Submit")->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&ChatBox::handleTextSubmitted, this));
+
+		mConsoleWindow->getChild("Editbox")->subscribeEvent(CEGUI::Editbox::EventTextAccepted,
+			CEGUI::Event::Subscriber(&ChatBox::handleTextSubmitted, this));
+	}
+
+	bool ChatBox::handleTextSubmitted()
+	{
+		CEGUI::String message = mConsoleWindow->getChild("Editbox")->getText();
+		mCorr.publish(std::string(message.c_str()));
+		outputText(message);
+		mConsoleWindow->getChild("Editbox")->setText("");
+
+		return true;
+	}
+
+	void ChatBox::outputText(CEGUI::String message)
+	{
+		if (message.length() > 0)
+		{
+			CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>
+				(mConsoleWindow->getChild("History"));
+
+			CEGUI::ListboxTextItem *newItem = new CEGUI::ListboxTextItem(message);
+
+			outputWindow->addItem(newItem);
+		}
 	}
 
 }
