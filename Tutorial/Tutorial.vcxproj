@@ -83,7 +83,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;Otherwise.lib;SDL2_net.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;assimp-vc140-mt.lib;glew32.lib;Otherwise.lib;SDL2_net.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -131,6 +131,8 @@
     <None Include="GUI\layouts\console.layout" />
     <None Include="Logo.frag" />
     <None Include="Logo.vert" />
+    <None Include="Mesh.frag" />
+    <None Include="Mesh.vert" />
     <None Include="SimpleFrag.frag" />
     <None Include="SimpleVert.vert" />
     <None Include="TextureFrag.frag" />

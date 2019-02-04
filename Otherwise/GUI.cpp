@@ -92,7 +92,7 @@ namespace Otherwise
 
 	void GUI::render()
 	{
-		glDisable(GL_DEPTH_TEST);
+		//glDisable(GL_DEPTH_TEST);
 
 		mGUIRenderer->beginRendering();
 		mContext->draw();
@@ -101,7 +101,8 @@ namespace Otherwise
 		glBindVertexArray(0);
 		glDisable(GL_SCISSOR_TEST);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_DEPTH_TEST);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);

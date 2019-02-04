@@ -73,7 +73,7 @@ void MainMenu::mainMenuLoop()
 	mGUI->showMouseCursor();
 	SDL_ShowCursor(false);
 
-	glDisable(GL_DEPTH_TEST);
+	
 
 	mGRM->mMultiSprite2D.prepareBatches();
 
@@ -89,8 +89,6 @@ void MainMenu::mainMenuLoop()
 	exitButton->destroy();
 	textBox->destroy();
 
-	glEnable(GL_DEPTH_TEST);
-
 }
 
 void MainMenu::render()
@@ -100,7 +98,7 @@ void MainMenu::render()
 	glUseProgram(mProgramID);
 
 	glUniformMatrix4fv(mPerspectiveUniformID, 1, GL_FALSE, &mOrthographicMatrix[0][0]);
-
+	glDisable(GL_DEPTH_TEST);
 	mGRM->mMultiSprite2D.renderBatches();
 
 	mGUI->render();

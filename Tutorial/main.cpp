@@ -20,6 +20,7 @@
 #include "OCollision.h"
 #include "ErrHandler.h"
 #include "ONetwork.h"
+#include "OMeshRenderer.h"
 
 /*temporarily include iostream*/
 #include<iostream>
@@ -39,7 +40,7 @@ int main(int argc, char** argv)
 
 	Otherwise::ONetwork network(&manager);
 	std::string ip;
-	std::cin >> ip;
+	ip = "0";
 	if (ip == "0")
 	{
 		network.initHosting(1598);
@@ -84,6 +85,15 @@ int main(int argc, char** argv)
 	GLint shaderLightColourID = glGetUniformLocation(programID, "LightColour");
 	GLint shaderLightIntensityID = glGetUniformLocation(programID, "LightIntensity");
 
+	GLuint meshProgramID = Otherwise::compileLinkSimpleShaders("Mesh.vert", "Mesh.frag");
+	GLint shaderPerspectiveIDm = glGetUniformLocation(meshProgramID, "Perspective");
+	GLint shaderCameraMatrixIDm = glGetUniformLocation(meshProgramID, "CameraMatrix");
+	GLint shaderModelMatrixIDm = glGetUniformLocation(meshProgramID, "ModelMatrix");
+	GLint shaderLightPositionIDm = glGetUniformLocation(meshProgramID, "LightPosition");
+	GLint shaderModelCameraMatrixIDm = glGetUniformLocation(meshProgramID, "ModelCameraMatrix");
+	GLint shaderLightColourIDm = glGetUniformLocation(meshProgramID, "LightColour");
+	GLint shaderLightIntensityIDm = glGetUniformLocation(meshProgramID, "LightIntensity");
+
 	Otherwise::MultiSprite multiSprite3;
 	multiSprite3.init();
 
@@ -95,8 +105,8 @@ int main(int argc, char** argv)
 	Otherwise::Camera2D camera2D (512, 512, glm::vec2(0.0f, 0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
 
-	Otherwise::Camera3D camera3D(512, 512, glm::vec3(0.0f, 0.0f, 0.0f),
-		45.0f, 1.0f, 100.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, -1.57f, 0.0f);
+	Otherwise::Camera3D camera3D(512, 512, glm::vec3(0.0f, 0.0f, 5.0f),
+		45.0f, 1.0f, 100.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, 1.57f, 0.0f);
 
 	Otherwise::Camera3D cameraCheck(512, 512, glm::vec3(0.0f, 0.0f, 0.0f),
 		45.0f, 1.0f, 20.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, -1.57f, 0.0f);
@@ -126,7 +136,7 @@ int main(int argc, char** argv)
 
 	std::vector<Otherwise::OCube> cubes;
 
-	GLuint frontSprite = Otherwise::loadPng("Textures/red.png");
+	GLuint frontSprite = Otherwise::loadPng("Textures/rainbow.png");
 	GLuint backSprite = Otherwise::loadPng("Textures/green.png");
 	GLuint leftSprite = Otherwise::loadPng("Textures/blue.png");
 	GLuint rightSprite = Otherwise::loadPng("Textures/purple.png");
@@ -156,11 +166,11 @@ int main(int argc, char** argv)
 
 	for (unsigned int i = 0; i < spatialEntityStack.size(); i++)
 	{
-		if (Otherwise::aABBCnvx(spatialEntityStack[i]->getBox(), cameraCheck.getFrustum()))
+		if (1/*Otherwise::aABBCnvx(spatialEntityStack[i]->getBox(), cameraCheck.getFrustum())*/)
 		{
 			spatialEntityStack[i]->changeTextures(backSprite, backSprite, backSprite, backSprite, backSprite, backSprite);
 			spatialEntityStack[i]->renderEntity();
-			//std::cout << "Box at " << spatialEntityStack[i]->getPosition().x << ", " << spatialEntityStack[i]->getPosition().y << ", " << spatialEntityStack[i]->getPosition().z << std::endl;
+			std::cout << "Box at " << spatialEntityStack[i]->getPosition().x << ", " << spatialEntityStack[i]->getPosition().y << ", " << spatialEntityStack[i]->getPosition().z << std::endl;
 		}
 		
 	}
@@ -169,6 +179,11 @@ int main(int argc, char** argv)
 	multiSprite3.prepareBatches();
 
 	gui.mChatBox.setVisible(true);
+
+	Otherwise::OMeshRenderer meshRenderer;
+	meshRenderer.init();
+	meshRenderer.addMesh("Meshes/suzanne.obj", frontSprite);
+	meshRenderer.prepareMesh();
 
 	while (!doQuit)
 	{
@@ -191,7 +206,18 @@ int main(int argc, char** argv)
 		glUniform1f(shaderLightIntensityID, 5.0f);
 		//multiSprite3.renderBatches();
 		multiSprite2.renderBatches();
-		glUseProgram(secondProgramID);
+
+		glUseProgram(meshProgramID);
+
+		glUniformMatrix4fv(shaderPerspectiveIDm, 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(shaderModelMatrixIDm, 1, GL_FALSE, &camera3D.getModelMatrix()[0][0]);
+		glUniformMatrix4fv(shaderCameraMatrixIDm, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(shaderModelCameraMatrixIDm, 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
+		glUniform3f(shaderLightPositionIDm, 2.0f, 0.5f, -1.5f);
+		glUniform3f(shaderLightColourIDm, 1.0f, 1.0f, 1.0f);
+		glUniform1f(shaderLightIntensityIDm, 5.0f);
+
+		meshRenderer.renderMesh();
 		//square.draw();
 		glUseProgram(0);
 		newInput.inputQueue();

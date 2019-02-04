@@ -96,6 +96,8 @@
     </ClInclude>
     <ClInclude Include="OCollision.h" />
     <ClInclude Include="ONetwork.h" />
+    <ClInclude Include="OAssImp.h" />
+    <ClInclude Include="OMeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp">
@@ -160,5 +162,7 @@
     </ClCompile>
     <ClCompile Include="OCollision.cpp" />
     <ClCompile Include="ONetwork.cpp" />
+    <ClCompile Include="OAssImp.cpp" />
+    <ClCompile Include="OMeshRenderer.cpp" />
   </ItemGroup>
 </Project>
