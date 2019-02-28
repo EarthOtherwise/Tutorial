@@ -34,6 +34,7 @@ namespace Otherwise
 		glm::mat4 getPerspectiveMatrix() { return mPerspectiveProjection; }
 		glm::mat4 getModelMatrix() { return mModelMatrix; }
 		glm::mat4 getCameraMatrix() { return mCameraMatrix; }
+		glm::mat4 getProjectionMatrix() { return mProjectionMatrix; }
 		glm::mat4 getModelCameraMatrix() { return mModelMatrix * mCameraMatrix; }
 
 		glm::vec3 getPosition() { return mPosition; }

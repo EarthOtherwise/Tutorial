@@ -74,8 +74,6 @@ void OMeshRenderer::renderMesh()
 	glBindVertexArray(mVao);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
 
-	std::cout << mMeshes[0].vertices.size() << std::endl;
-
 	glBindTexture(GL_TEXTURE_2D, mMeshes[0].texture);
 
 	glDrawElements(GL_TRIANGLES, mMeshes[0].indices.size(), GL_UNSIGNED_SHORT,

@@ -25,6 +25,11 @@
 /*temporarily include iostream*/
 #include<iostream>
 
+//#define GLM_ENABLE_EXPERIMENTAL
+//#include "glm/gtc/quaternion.hpp"
+//#include "glm/gtx/quaternion.hpp"
+//#include "glm/gtx/euler_angles.hpp"
+
 int main(int argc, char** argv)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -37,6 +42,9 @@ int main(int argc, char** argv)
 
 	Otherwise::CorrespondentManager manager;
 	manager.init();
+
+	Otherwise::Correspondent quitCorrespondent;
+	quitCorrespondent.init(&manager, (std::string)"QuitGame");
 
 	Otherwise::ONetwork network(&manager);
 	std::string ip;
@@ -93,6 +101,11 @@ int main(int argc, char** argv)
 	GLint shaderModelCameraMatrixIDm = glGetUniformLocation(meshProgramID, "ModelCameraMatrix");
 	GLint shaderLightColourIDm = glGetUniformLocation(meshProgramID, "LightColour");
 	GLint shaderLightIntensityIDm = glGetUniformLocation(meshProgramID, "LightIntensity");
+
+	GLuint billboardProgramID = Otherwise::compileLinkSimpleShaders("Billboard.vert", "Billboard.frag");
+	GLint shaderPerspectiveIDma = glGetUniformLocation(billboardProgramID, "Perspective");
+	GLint shaderCameraMatrixIDma = glGetUniformLocation(billboardProgramID, "CameraMatrix");
+	GLint shaderModelMatrixIDma = glGetUniformLocation(billboardProgramID, "ModelMatrix");
 
 	Otherwise::MultiSprite multiSprite3;
 	multiSprite3.init();
@@ -182,10 +195,26 @@ int main(int argc, char** argv)
 
 	Otherwise::OMeshRenderer meshRenderer;
 	meshRenderer.init();
-	meshRenderer.addMesh("Meshes/suzanne.obj", frontSprite);
+	meshRenderer.addMesh("Meshes/plane.obj", frontSprite);
 	meshRenderer.prepareMesh();
 
-	while (!doQuit)
+	std::vector<glm::mat4> meshModelMatrices;
+
+	for (float i = -10.0f; i < 10.0f; i += 5.0f)
+	{
+		for (float j = -10.0f; j < 10.0f; j += 5.0f)
+		{
+			for (float k = -10.0f; k < 10.0f; k += 5.0f)
+			{
+				glm::mat4 tempMatrix(1.0f);// = glm::scale(glm::mat4(1.0f), glm::vec3(k, k, k));
+				//tempMatrix *= glm::eulerAngleXYZ(i, j, k);
+				tempMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(i, j, k));
+				meshModelMatrices.push_back(tempMatrix);
+			}
+		}
+	}
+
+	while (!quitCorrespondent.getMessage())
 	{
 		network.update();
 		gui.update();
@@ -210,14 +239,24 @@ int main(int argc, char** argv)
 		glUseProgram(meshProgramID);
 
 		glUniformMatrix4fv(shaderPerspectiveIDm, 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
-		glUniformMatrix4fv(shaderModelMatrixIDm, 1, GL_FALSE, &camera3D.getModelMatrix()[0][0]);
+		
 		glUniformMatrix4fv(shaderCameraMatrixIDm, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
 		glUniformMatrix4fv(shaderModelCameraMatrixIDm, 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
 		glUniform3f(shaderLightPositionIDm, 2.0f, 0.5f, -1.5f);
 		glUniform3f(shaderLightColourIDm, 1.0f, 1.0f, 1.0f);
 		glUniform1f(shaderLightIntensityIDm, 5.0f);
 
-		meshRenderer.renderMesh();
+
+		glUseProgram(billboardProgramID);
+		glUniformMatrix4fv(shaderPerspectiveIDma, 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
+		glUniformMatrix4fv(shaderCameraMatrixIDma, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+
+		for (unsigned int i = 0; i < meshModelMatrices.size(); i++)
+		{
+			glUniformMatrix4fv(shaderModelMatrixIDma, 1, GL_FALSE, &meshModelMatrices[i][0][0]);
+			meshRenderer.renderMesh();
+		}
+		
 		//square.draw();
 		glUseProgram(0);
 		newInput.inputQueue();

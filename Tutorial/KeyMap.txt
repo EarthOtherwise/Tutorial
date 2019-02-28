@@ -24,6 +24,14 @@ CameraMoveBackReciever
 
 KEY
 PUBLISHER
+p
+KEYCODE
+112
+SUBSCRIBER
+QuitGame
+
+KEY
+PUBLISHER
 d
 KEYCODE
 100

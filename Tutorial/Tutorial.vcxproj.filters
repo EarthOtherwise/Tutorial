@@ -53,6 +53,12 @@
     <None Include="Mesh.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Billboard.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Billboard.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogo.h">

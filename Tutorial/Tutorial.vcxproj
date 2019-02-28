@@ -128,6 +128,8 @@
     <ClCompile Include="MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Billboard.frag" />
+    <None Include="Billboard.vert" />
     <None Include="GUI\layouts\console.layout" />
     <None Include="Logo.frag" />
     <None Include="Logo.vert" />

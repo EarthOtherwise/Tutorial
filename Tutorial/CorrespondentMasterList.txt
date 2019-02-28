@@ -18,3 +18,5 @@ CameraLookAtSender
 SoundEffects/gun-cocking-01.wav
 Network
 ChatSender
+p
+QuitGame

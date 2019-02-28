@@ -17,7 +17,7 @@ out vec3 VertexCameraNormal;
 
 void main()
 {
-	gl_Position = Perspective * vec4(vertexPosition, 1.0);
+	gl_Position = Perspective * ModelMatrix * vec4(vertexPosition, 1.0);
 	UV = vec2(vertexUV.x, 1.0 - vertexUV.y);
 
 	vec3 vertexCameraPosition = (CameraMatrix * ModelMatrix * vec4(vertexPosition, 1.0)).xyz;
