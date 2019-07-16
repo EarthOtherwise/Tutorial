@@ -11,7 +11,7 @@ GameLogo::~GameLogo()
 {
 }
 
-void GameLogo::init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::Window* windowptr, Otherwise::GraphicsResourceManager* graphics)
+void GameLogo::init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::OSInterface* windowptr, Otherwise::GraphicsResourceManager* graphics)
 {
 	mProgramID = Otherwise::compileLinkSimpleShaders(vertShader, fragShader);
 	mPerspectiveUniformID = glGetUniformLocation(mProgramID, "Perspective");

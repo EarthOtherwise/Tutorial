@@ -1,9 +1,10 @@
 #pragma once
 #include "glm/glm.hpp"
-#include "SDL/SDL_events.h"
+#include "OSInterface.h"
 #include "CEGUI/CEGUI.h"
 #include "CEGUI/RendererModules/OpenGL/GL3Renderer.h"
 #include "MessagingSystem.h"
+#include "ProgramClock.h"
 
 namespace Otherwise
 {
@@ -31,7 +32,7 @@ private:
 	public:
 		GUI();
 		~GUI();
-		void init(const std::string &resourceDirectory, CorrespondentManager *corrManager);
+		void init(const std::string &resourceDirectory, CorrespondentManager *corrManager, OSInterface * osInterface);
 		void update();
 		void destory();
 		void render();
@@ -66,9 +67,8 @@ private:
 		static CEGUI::OpenGL3Renderer* mGUIRenderer;
 		CEGUI::GUIContext* mContext = nullptr;
 		CEGUI::Window* mRoot = nullptr;
-		unsigned int mPreviousTime = 0;
-		Correspondent mFromInput;
-		
+		OSInterface * mosInterface;
+		ProgramClock mClock;
 	};
 
 }

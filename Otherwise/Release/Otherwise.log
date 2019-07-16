@@ -1,4 +1,11 @@
-﻿  OMeshRenderer.cpp
+﻿  GUI.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock.h(301): warning C4005: 'INADDR_ANY': macro redefinition
+  d:\gpicppstf\tutorial\tutorial\dependencies\include\net\sdl_net.h(102): note: see previous definition of 'INADDR_ANY'
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock.h(303): warning C4005: 'INADDR_BROADCAST': macro redefinition
+  d:\gpicppstf\tutorial\tutorial\dependencies\include\net\sdl_net.h(111): note: see previous definition of 'INADDR_BROADCAST'
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\winsock.h(304): warning C4005: 'INADDR_NONE': macro redefinition
+  d:\gpicppstf\tutorial\tutorial\dependencies\include\net\sdl_net.h(105): note: see previous definition of 'INADDR_NONE'
+d:\gpicppstf\tutorial\tutorial\otherwise\gui.cpp(245): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
 assimp-vc140-mt.lib(assimp-vc140-mt.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
@@ -10,4 +17,12 @@ fmod_vc.lib(fmod.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already define
 fmod64_vc.lib(fmod64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudio_vc.lib(fmodstudio.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudio64_vc.lib(fmodstudio64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-  Otherwise.vcxproj -> C:\Tutorial\Tutorial\Release\Otherwise.lib
+OSInterface.obj : warning LNK4006: "public: void __thiscall Otherwise::ONetwork::sendData(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,struct _TCPsocket *)" (?sendData@ONetwork@Otherwise@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAU_TCPsocket@@@Z) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: void __thiscall Otherwise::ONetwork::recieveConnection(void)" (?recieveConnection@ONetwork@Otherwise@@QAEXXZ) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: void __thiscall Otherwise::ONetwork::connectToHost(char const *,unsigned short)" (?connectToHost@ONetwork@Otherwise@@QAEXPBDG@Z) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: void __thiscall Otherwise::ONetwork::update(void)" (?update@ONetwork@Otherwise@@QAEXXZ) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: void __thiscall Otherwise::ONetwork::quitHosting(void)" (?quitHosting@ONetwork@Otherwise@@QAEXXZ) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: void __thiscall Otherwise::ONetwork::initHosting(unsigned short)" (?initHosting@ONetwork@Otherwise@@QAEXG@Z) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: __thiscall Otherwise::ONetwork::~ONetwork(void)" (??1ONetwork@Otherwise@@QAE@XZ) already defined in OSInterface.obj; second definition ignored
+OSInterface.obj : warning LNK4006: "public: __thiscall Otherwise::ONetwork::ONetwork(class Otherwise::CorrespondentManager *)" (??0ONetwork@Otherwise@@QAE@PAVCorrespondentManager@1@@Z) already defined in OSInterface.obj; second definition ignored
+  Otherwise.vcxproj -> D:\GPICPPSTF\Tutorial\Tutorial\Release\Otherwise.lib

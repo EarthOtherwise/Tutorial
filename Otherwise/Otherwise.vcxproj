@@ -89,7 +89,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;assimp-vc140-mt.lib;glew32.lib;opengl32.lib;SDL2_net.lib;SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;fmodL_vc.lib;fmodL64_vc.lib;fmodstudioL_vc.lib;fmodstudioL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;assimp-vc140-mt.lib;glew32.lib;opengl32.lib;SDL2_net.lib;SDL2_ttf.lib;liblua53.a;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;fmodL_vc.lib;fmodL64_vc.lib;fmodstudioL_vc.lib;fmodstudioL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Debug/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -126,7 +126,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/Lib/Release/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;assimp-vc140-mt.lib;glew32.lib;opengl32.lib;SDL2_net.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;fmod_vc.lib;fmod64_vc.lib;fmodstudio_vc.lib;fmodstudio64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;assimp-vc140-mt.lib;glew32.lib;opengl32.lib;SDL2_net.lib;SDL2_ttf.lib;liblua53.a;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;fmod_vc.lib;fmod64_vc.lib;fmodstudio_vc.lib;fmodstudio64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -158,6 +158,7 @@
     <ClInclude Include="InitFileReadWrite.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LogoState.h" />
+    <ClInclude Include="LuaWrapper.h" />
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="MultiSprite.h" />
     <ClInclude Include="OAssImp.h" />
@@ -166,16 +167,19 @@
     <ClInclude Include="OCube.h" />
     <ClInclude Include="OMeshRenderer.h" />
     <ClInclude Include="ONetwork.h" />
+    <ClInclude Include="OSInterface.h" />
     <ClInclude Include="Otherwise.h" />
     <ClInclude Include="ErrHandler.h" />
+    <ClInclude Include="Particles.h" />
     <ClInclude Include="PicoPNG.h" />
+    <ClInclude Include="ProgramClock.h" />
     <ClInclude Include="SimpleShader.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpatialEntity.h" />
     <ClInclude Include="SpatialSceneGraphOct.h" />
     <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp" />
@@ -186,6 +190,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="LogoState.cpp" />
     <ClCompile Include="ErrHandler.cpp" />
+    <ClCompile Include="LuaWrapper.cpp" />
     <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="OAssImp.cpp" />
@@ -194,14 +199,17 @@
     <ClCompile Include="OCube.cpp" />
     <ClCompile Include="OMeshRenderer.cpp" />
     <ClCompile Include="ONetwork.cpp" />
+    <ClCompile Include="OSInterface.cpp" />
+    <ClCompile Include="Particles.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
+    <ClCompile Include="ProgramClock.cpp" />
     <ClCompile Include="SimpleShader.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpatialEntity.cpp" />
     <ClCompile Include="SpatialSceneGraphOct.cpp" />
     <ClCompile Include="SpriteFont.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

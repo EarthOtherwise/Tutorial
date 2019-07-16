@@ -3,14 +3,12 @@
 #include <memory>
 #include <vector>
 #include "GLM/glm.hpp"
-#include "SDL/SDL_events.h"
 
 namespace Otherwise
 {
 	struct Message
 	{
 		virtual glm::vec2 getMouseMessage() { return glm::vec2(0.0f); }
-		virtual SDL_Event getEventMessage() { return SDL_Event(); }
 		virtual std::string getStringMessage() { return std::string(""); }
 	};
 
@@ -18,12 +16,6 @@ namespace Otherwise
 	{
 		glm::vec2 getMouseMessage() { return mouseCoords; }
 		glm::vec2 mouseCoords;
-	};
-
-	struct EventMessage : Message
-	{
-		SDL_Event getEventMessage() { return evnt; }
-		SDL_Event evnt;
 	};
 
 	struct StringMessage : Message
@@ -77,14 +69,12 @@ namespace Otherwise
 
 		void publish();
 		void publish(glm::vec2 &mouseCoords);
-		void publish(SDL_Event &evnt);
 		void publish(std::string &string);
 
 		void recieveMessage(std::shared_ptr<Message> message);
 
 		bool getMessage();
 		glm::vec2 getMouseMessage();
-		SDL_Event getEventMessage();
 		std::string getStringMessage();
 
 		void clearMessage();

@@ -14,7 +14,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::init(Otherwise::GraphicsResourceManager * GRM, std::string vertShader, std::string fragShader,
 	int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom,
-	Otherwise::Window* windowptr, Otherwise::GUI* gui, Otherwise::InputHandler* input)
+	Otherwise::OSInterface* windowptr, Otherwise::GUI* gui, Otherwise::InputHandler* input)
 {
 	mGRM = GRM;
 	mInput = input;

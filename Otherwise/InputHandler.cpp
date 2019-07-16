@@ -13,14 +13,28 @@ namespace Otherwise
 	{
 	}
 
-	void InputHandler::init(CorrespondentManager *corrManager)
+	void InputHandler::mapMouse(unsigned buttonID, std::string& signature)
 	{
-		mCorrespondentManager = corrManager;
-		std::string tempString = "InputToGUISender";
-		mToGUI.init(corrManager, tempString);
-		mMouseSender.init(corrManager, (std::string)"CameraLookAtSender");
+		auto newButton = std::make_unique<MouseOspondent>();
+		newButton->corr.init(mCorrespondentManager, signature);
+		newButton->cond.down = true;
+		newButton->cond.button = buttonID;
+		mButtons.push_back(std::move(newButton));
+	}
 
-		tempString = "Init.txt";
+	void InputHandler::init(CorrespondentManager *corrManager,
+		OSInterface * osInterface)
+	{
+		mOSInterface = osInterface;
+		mCorrespondentManager = corrManager;
+
+		auto newMotion = std::make_unique<MotOspondent>();
+		newMotion->corr.init(mCorrespondentManager,
+			(std::string)"CameraLookAtSender");
+		newMotion->relative = true;
+		mMotions.push_back(std::move(newMotion));
+
+		std::string tempString = "Init.txt";
 		std::string tempStart = "InputHandler";
 		std::string tempEnd = "InputHandlerEnd";
 		std::vector<std::string> tempVector;
@@ -29,24 +43,6 @@ namespace Otherwise
 		for (std::string i : tempVector)
 		{
 			findAllKeys(i);
-		}
-	}
-
-	void Otherwise::InputHandler::pressKey(unsigned int keyID)
-	{
-		auto it = mKeyMap.find(keyID);
-		if (it != mKeyMap.end())
-		{
-			it->second.publish();
-		}
-	}
-
-	void Otherwise::InputHandler::pressButton(unsigned int keyID, glm::vec2 mousePosition)
-	{
-		auto it = mKeyMap.find(keyID);
-		if (it != mKeyMap.end())
-		{
-			it->second.publish(mousePosition);
 		}
 	}
 
@@ -81,34 +77,38 @@ namespace Otherwise
 
 	void InputHandler::mapKey(unsigned int keyID, std::string & signature)
 	{
-		Correspondent newCorrespondent;
-		mKeyMap.insert(std::pair<unsigned int, Correspondent>(keyID, newCorrespondent));
-		mKeyMap[keyID].init(mCorrespondentManager, signature);
+		auto newKey = std::make_unique<KeyOspondent>();
+		newKey->corr.init(mCorrespondentManager, signature);
+		newKey->cond.down = true;
+		newKey->cond.key = keyID;
+		mKeys.push_back(std::move(newKey));
 	}
 
 	void InputHandler::inputQueue()
 	{
-		SDL_Event evnt;
+		InputState state = mOSInterface->getInput();
 
-		while (SDL_PollEvent(&evnt))
+		for (unsigned int i = 0; i < state.mButtons.size(); i++)
 		{
-			mToGUI.publish(evnt);
-
-			switch (evnt.type)
+			for (unsigned int j = 0; j < mButtons.size(); j++)
 			{
-			case SDL_QUIT:
-				SDL_Quit();
-				exit(60);
-				break;
-			case SDL_KEYDOWN:
-				pressKey(evnt.key.keysym.sym);
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				pressButton(evnt.button.button, glm::vec2(evnt.button.x, evnt.button.y));
-				break;
-			case SDL_MOUSEMOTION:
-				mMouseSender.publish(glm::vec2((float)evnt.motion.xrel, (float)evnt.motion.yrel));
-				break;
+				mButtons[j]->update(&state.mButtons[i]);
+			}
+		}
+
+		for (unsigned int i = 0; i < state.mKeys.size(); i++)
+		{
+			for (unsigned int j = 0; j < mKeys.size(); j++)
+			{
+				mKeys[j]->update(&state.mKeys[i]);
+			}
+		}
+
+		for (unsigned int i = 0; i < state.mMotions.size(); i++)
+		{
+			for (unsigned int j = 0; j < mMotions.size(); j++)
+			{
+				mMotions[j]->update(&state.mMotions[i]);
 			}
 		}
 	}

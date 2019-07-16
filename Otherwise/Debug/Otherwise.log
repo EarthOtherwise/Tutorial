@@ -1,36 +1,48 @@
 ﻿  Cameras.cpp
-c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gpicppstf\tutorial\tutorial\otherwise\cameras.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
   GraphicsResourceManager.cpp
   GUI.cpp
-c:\tutorial - copy\tutorial\otherwise\gui.cpp(244): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
+d:\gpicppstf\tutorial\tutorial\otherwise\gui.cpp(250): warning C4244: 'argument': conversion from 'Sint32' to 'float', possible loss of data
   ImageLoad.cpp
-c:\tutorial - copy\tutorial\otherwise\imageload.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
-c:\tutorial - copy\tutorial\otherwise\imageload.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+d:\gpicppstf\tutorial\tutorial\otherwise\imageload.cpp(99): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+d:\gpicppstf\tutorial\tutorial\otherwise\imageload.cpp(103): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
   InitFileReadWrite.cpp
   InputHandler.cpp
   LogoState.cpp
-c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gpicppstf\tutorial\tutorial\otherwise\cameras.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
   ErrHandler.cpp
   MessagingSystem.cpp
   MultiSprite.cpp
+  OAssImp.cpp
   OAudio.cpp
   OCollision.cpp
   OCube.cpp
+  OMeshRenderer.cpp
+  ONetwork.cpp
+  Particles.cpp
+d:\gpicppstf\tutorial\tutorial\otherwise\particles.cpp(40): warning C4305: 'initializing': truncation from 'double' to 'float'
   PicoPNG.cpp
   SimpleShader.cpp
+  Skybox.cpp
+d:\gpicppstf\tutorial\tutorial\otherwise\skybox.cpp(77): warning C4244: 'initializing': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+d:\gpicppstf\tutorial\tutorial\otherwise\skybox.cpp(81): warning C4244: '-=': conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+  Generating Code...
+  Compiling...
   SpatialEntity.cpp
   SpatialSceneGraphOct.cpp
   SpriteFont.cpp
   Square.cpp
   Triangle.cpp
-  Generating Code...
-  Compiling...
   Window.cpp
   Generating Code...
+assimp-vc140-mt.lib(assimp-vc140-mt.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+assimp-vc140-mt.lib(assimp-vc140-mt.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 glew32.lib(glew32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 opengl32.lib(OPENGL32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+SDL2_net.lib(SDL2_net.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+SDL2_net.lib(SDL2_net.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 CEGUIBase-0_d.lib(CEGUIBase-0_d.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
@@ -46,4 +58,4 @@ fmodstudioL_vc.lib(fmodstudioL.dll) : warning LNK4221: This object file does not
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 GraphicsResourceManager.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-  Otherwise.vcxproj -> C:\Tutorial - Copy\Tutorial\Debug\Otherwise.lib
+  Otherwise.vcxproj -> D:\GPICPPSTF\Tutorial\Tutorial\Debug\Otherwise.lib

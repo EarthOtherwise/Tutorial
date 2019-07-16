@@ -88,9 +88,6 @@
     <ClInclude Include="Triangle.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>SDL</Filter>
-    </ClInclude>
     <ClInclude Include="Otherwise.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -98,6 +95,11 @@
     <ClInclude Include="ONetwork.h" />
     <ClInclude Include="OAssImp.h" />
     <ClInclude Include="OMeshRenderer.h" />
+    <ClInclude Include="Particles.h" />
+    <ClInclude Include="Skybox.h" />
+    <ClInclude Include="LuaWrapper.h" />
+    <ClInclude Include="OSInterface.h" />
+    <ClInclude Include="ProgramClock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cameras.cpp">
@@ -157,12 +159,14 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>SDL</Filter>
-    </ClCompile>
     <ClCompile Include="OCollision.cpp" />
     <ClCompile Include="ONetwork.cpp" />
     <ClCompile Include="OAssImp.cpp" />
     <ClCompile Include="OMeshRenderer.cpp" />
+    <ClCompile Include="Particles.cpp" />
+    <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="LuaWrapper.cpp" />
+    <ClCompile Include="OSInterface.cpp" />
+    <ClCompile Include="ProgramClock.cpp" />
   </ItemGroup>
 </Project>

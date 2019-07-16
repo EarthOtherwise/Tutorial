@@ -1,8 +1,6 @@
 #include "GUI.h"
-#include "SDL/SDL_Timer.h"
 #include "GL/glew.h"
 #include "UTF8-CPP/utf8.h"
-#include <iostream>
 #include"ErrHandler.h"
 
 namespace Otherwise
@@ -19,12 +17,12 @@ namespace Otherwise
 
 	CEGUI::OpenGL3Renderer* GUI::mGUIRenderer = nullptr;
 
-	void GUI::init(const std::string & resourceDirectory, CorrespondentManager *corrManager)
+	void GUI::init(const std::string & resourceDirectory, CorrespondentManager *corrManager, OSInterface * osInterface)
 	{
-		mFromInput.init(corrManager, (std::string)"InputToGUIReciever");
 		mGUIRenderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
 		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
-		mPreviousTime = SDL_GetTicks();
+		mosInterface = osInterface;
+		mClock.set();
 
 		resourceProvider->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets/");
 		resourceProvider->setResourceGroupDirectory("schemes", resourceDirectory + "/schemes/");
@@ -50,37 +48,34 @@ namespace Otherwise
 
 	void GUI::update()
 	{
-		unsigned int currentTime = SDL_GetTicks();
-		unsigned int timeElapsed = currentTime - mPreviousTime;
-		mContext->injectTimePulse((float)timeElapsed / 1000.0f);
+		mContext->injectTimePulse((float)mClock.getSet() / 1000.0f);
 
-		if (mFromInput.getMessage())
-		{
-			SDL_Event evnt = mFromInput.getEventMessage();
-			mFromInput.clearMessage();
+			std::vector<SDL_Event> evnt = mosInterface->getEvents();
 
-			switch (evnt.type)
+			for (unsigned int i = 0; i < evnt.size(); i++)
 			{
-			case SDL_KEYDOWN:
-				keyDownFunc(evnt);
-				break;
-			case SDL_KEYUP:
-				keyUpFunc(evnt);
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				mouseButtonDownFunc(evnt);
-				break;
-			case SDL_MOUSEBUTTONUP:
-				mouseButtonUPFunc(evnt);
-				break;
-			case SDL_TEXTINPUT:
-				decodeInputText(evnt);
-				break;
-			case SDL_MOUSEMOTION:
-				mouseMotionFunc(evnt);
-				break;
+				switch (evnt[i].type)
+				{
+				case SDL_KEYDOWN:
+					keyDownFunc(evnt[i]);
+					break;
+				case SDL_KEYUP:
+					keyUpFunc(evnt[i]);
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					mouseButtonDownFunc(evnt[i]);
+					break;
+				case SDL_MOUSEBUTTONUP:
+					mouseButtonUPFunc(evnt[i]);
+					break;
+				case SDL_TEXTINPUT:
+					decodeInputText(evnt[i]);
+					break;
+				case SDL_MOUSEMOTION:
+					mouseMotionFunc(evnt[i]);
+					break;
+				}
 			}
-		}
 
 		mChatBox.update();
 	}

@@ -241,13 +241,6 @@ namespace Otherwise
 		passToSubscribers(newMessage);
 	}
 
-	void Correspondent::publish(SDL_Event & evnt)
-	{
-		std::shared_ptr<EventMessage> newMessage(new EventMessage);
-		newMessage->evnt = evnt;
-		passToSubscribers(newMessage);
-	}
-
 	void Correspondent::publish(std::string & string)
 	{
 		std::shared_ptr<StringMessage> newMessage(new StringMessage);
@@ -272,11 +265,6 @@ namespace Otherwise
 	glm::vec2 Correspondent::getMouseMessage()
 	{
 		return mMessage->getMouseMessage();
-	}
-
-	SDL_Event Correspondent::getEventMessage()
-	{
-		return mMessage->getEventMessage();
 	}
 
 	std::string Correspondent::getStringMessage()

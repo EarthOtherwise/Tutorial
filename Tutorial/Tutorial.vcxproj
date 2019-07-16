@@ -137,6 +137,8 @@
     <None Include="Mesh.vert" />
     <None Include="SimpleFrag.frag" />
     <None Include="SimpleVert.vert" />
+    <None Include="Skybox.frag" />
+    <None Include="Skybox.vert" />
     <None Include="TextureFrag.frag" />
     <None Include="TextureVert.vert" />
   </ItemGroup>

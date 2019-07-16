@@ -4,7 +4,7 @@
 #include "GraphicsResourceManager.h"
 #include "SimpleShader.h"
 #include "ImageLoad.h"
-#include "Window.h"
+#include "OSInterface.h"
 
 #include <math.h>
 
@@ -14,7 +14,7 @@ public:
 	GameLogo();
 	~GameLogo();
 
-	void init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::Window* windowptr, Otherwise::GraphicsResourceManager* graphics);
+	void init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::OSInterface* windowptr, Otherwise::GraphicsResourceManager* graphics);
 
 	void logoUpdateRenderLoop();
 
@@ -25,6 +25,6 @@ private:
 	GLuint mProgramID;
 	GLint mPerspectiveUniformID;
 	glm::mat4 mOrthographicMatrix;
-	Otherwise::Window* mWindow;
+	Otherwise::OSInterface* mWindow;
 	float mScreenWidth, mScreenHeight;
 };

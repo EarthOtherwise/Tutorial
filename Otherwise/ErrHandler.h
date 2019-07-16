@@ -4,7 +4,6 @@
 #include<fstream>
 #include<string>
 #include<ctime>
-#include<SDL/SDL.h>
 #include"InitFileReadWrite.h"
 
 namespace Otherwise

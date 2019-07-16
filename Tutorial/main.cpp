@@ -1,16 +1,15 @@
-#include"InputHandler.h"
-#include"Window.h"
-#include"InitFileReadWrite.h"
-#include<SDL/SDL.h>
-#include"Triangle.h"
-#include"SimpleShader.h"
-#include"Square.h"
-#include"MultiSprite.h"
-#include"imageLoad.h"
-#include"Cameras.h"
-#include"SpriteFont.h"
-#include"OCube.h"
-#include"SpatialSceneGraphOct.h"
+#include "InputHandler.h"
+#include "InitFileReadWrite.h"
+#include "OSInterface.h"
+#include "Triangle.h"
+#include "SimpleShader.h"
+#include "Square.h"
+#include "MultiSprite.h"
+#include "imageLoad.h"
+#include "Cameras.h"
+#include "SpriteFont.h"
+#include "OCube.h"
+#include "SpatialSceneGraphOct.h"
 #include "GameLogo.h"
 #include "GraphicsResourceManager.h"
 #include "GUI.h"
@@ -19,11 +18,12 @@
 #include "MessagingSystem.h"
 #include "OCollision.h"
 #include "ErrHandler.h"
-#include "ONetwork.h"
 #include "OMeshRenderer.h"
+#include "Particles.h"
+#include "Skybox.h"
 
 /*temporarily include iostream*/
-#include<iostream>
+#include <iostream>
 
 //#define GLM_ENABLE_EXPERIMENTAL
 //#include "glm/gtc/quaternion.hpp"
@@ -32,11 +32,9 @@
 
 int main(int argc, char** argv)
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	
-	Otherwise::Window newWindow;
-	newWindow.create("Window", 512, 512, 0);
+	Otherwise::OSInterface osInterface;
+	osInterface.init();
+	osInterface.createWindow("Window", 512, 512, 0);
 
 	Otherwise::GraphicsResourceManager graphics;
 
@@ -59,17 +57,17 @@ int main(int argc, char** argv)
 	}
 
 	GameLogo gameLogo;
-	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &graphics);
+	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &osInterface, &graphics);
 	gameLogo.logoUpdateRenderLoop();
 
 	Otherwise::GUI gui;
-	gui.init("GUI", &manager);
+	gui.init("GUI", &manager, &osInterface);
 
 	Otherwise::InputHandler newInput;
-	newInput.init(&manager);
+	newInput.init(&manager, &osInterface);
 
 	MainMenu mainMenu;
-	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
+	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &osInterface, &gui, &newInput);
 	mainMenu.mainMenuLoop();
 
 	SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -106,6 +104,12 @@ int main(int argc, char** argv)
 	GLint shaderPerspectiveIDma = glGetUniformLocation(billboardProgramID, "Perspective");
 	GLint shaderCameraMatrixIDma = glGetUniformLocation(billboardProgramID, "CameraMatrix");
 	GLint shaderModelMatrixIDma = glGetUniformLocation(billboardProgramID, "ModelMatrix");
+	GLint shaderScaleID = glGetUniformLocation(billboardProgramID, "Scale");
+
+	GLuint skyboxProgramID = Otherwise::compileLinkSimpleShaders("Skybox.vert", "Skybox.frag");
+	GLint skyboxPerspectiveIDma = glGetUniformLocation(skyboxProgramID, "Perspective");
+	GLint skyboxCameraMatrixIDma = glGetUniformLocation(skyboxProgramID, "CameraMatrix");
+	GLint skyboxModelMatrixIDma = glGetUniformLocation(skyboxProgramID, "ModelMatrix");
 
 	Otherwise::MultiSprite multiSprite3;
 	multiSprite3.init();
@@ -214,8 +218,23 @@ int main(int argc, char** argv)
 		}
 	}
 
+	Otherwise::ParticleEmitterCone pEmit;
+	pEmit.init(glm::vec3(1.0f), 0.001f, glm::vec3(0.0f, 0.0f, 0.001f), 0.0005f,
+		1000, 100000);
+
+	Otherwise::Skybox skybox;
+	skybox.init("Meshes/skybox.obj", "Textures/xpos.png", "Textures/xneg.png", 
+		"Textures/ypos.png", "Textures/yneg.png", "Textures/zpos.png", 
+		"Textures/zneg.png");
+	skybox.prepare();
+
+	unsigned int lastTime = SDL_GetTicks();
+
 	while (!quitCorrespondent.getMessage())
 	{
+		unsigned int deltaTime = SDL_GetTicks() - lastTime;
+		lastTime = SDL_GetTicks();
+
 		network.update();
 		gui.update();
 		audio.update();
@@ -250,12 +269,38 @@ int main(int argc, char** argv)
 		glUseProgram(billboardProgramID);
 		glUniformMatrix4fv(shaderPerspectiveIDma, 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
 		glUniformMatrix4fv(shaderCameraMatrixIDma, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+		glUniform1f(shaderScaleID, 0.07f);
 
-		for (unsigned int i = 0; i < meshModelMatrices.size(); i++)
+		pEmit.loopParticles(deltaTime);
+		std::vector<glm::vec3> vector = pEmit.getParticlePositions();
+		std::vector<glm::mat4> particleMatrices;
+
+		for (unsigned int i = 0; i < vector.size(); i++)
 		{
-			glUniformMatrix4fv(shaderModelMatrixIDma, 1, GL_FALSE, &meshModelMatrices[i][0][0]);
+			particleMatrices.push_back(glm::translate(glm::mat4(1.0f), vector[i]));
+		}
+
+
+
+		for (unsigned int i = 0; i < particleMatrices.size(); i++)
+		{
+			glUniformMatrix4fv(shaderModelMatrixIDma, 1, GL_FALSE, &particleMatrices[i][0][0]);
 			meshRenderer.renderMesh();
 		}
+
+		glUseProgram(skyboxProgramID);
+		glUniformMatrix4fv(skyboxPerspectiveIDma, 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
+
+		glm::mat4 modifiedCameraMatrix = camera3D.getCameraMatrix();
+		modifiedCameraMatrix[3][0] = 0.0f;
+		modifiedCameraMatrix[3][1] = 0.0f;
+		modifiedCameraMatrix[3][2] = 0.0f;
+
+		glUniformMatrix4fv(skyboxCameraMatrixIDma, 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
+
+		glUniformMatrix4fv(skyboxModelMatrixIDma, 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+
+		skybox.render();
 		
 		//square.draw();
 		glUseProgram(0);
@@ -263,7 +308,7 @@ int main(int argc, char** argv)
 
 		gui.render();
 
-		newWindow.swapBuffer();
+		osInterface.swapBuffer();
 	}
 
 	return 0;

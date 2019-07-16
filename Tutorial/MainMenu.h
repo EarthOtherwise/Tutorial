@@ -2,7 +2,7 @@
 #include "GraphicsResourceManager.h"
 #include "GUI.h"
 #include "CEGUI/CEGUI.h"
-#include "Window.h"
+#include "OSInterface.h"
 #include "Cameras.h"
 #include "InputHandler.h"
 
@@ -14,7 +14,7 @@ public:
 
 	void init(Otherwise::GraphicsResourceManager* GRM, std::string vertShader, std::string fragShader, 
 		int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, 
-		Otherwise::Window* windowptr, Otherwise::GUI* gui, Otherwise::InputHandler* input);
+		Otherwise::OSInterface* windowptr, Otherwise::GUI* gui, Otherwise::InputHandler* input);
 
 	void mainMenuLoop();
 	void render();
@@ -28,7 +28,7 @@ private:
 	GLuint mProgramID;
 	GLint mPerspectiveUniformID;
 	glm::mat4 mOrthographicMatrix;
-	Otherwise::Window* mWindow;
+	Otherwise::OSInterface* mWindow;
 	float mScreenWidth, mScreenHeight;
 	Otherwise::InputHandler* mInput;
 };

@@ -24,7 +24,7 @@ namespace Otherwise
 
 		/*Pop up a window indicating there was an error, print out the error word, as well as the filepath to the errorfile*/
 
-		SDL_Quit();
+		
 		exit(60);
 	}
 
@@ -35,7 +35,6 @@ namespace Otherwise
 		std::cin >> a;
 		if (a == 0)
 		{
-			SDL_Quit();
 			exit(60);
 		}
 	}

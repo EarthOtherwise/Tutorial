@@ -1,3 +1,14 @@
-﻿  main.cpp
-c:\tutorial - copy\tutorial\otherwise\cameras.h(64): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Tutorial.vcxproj -> C:\Tutorial - Copy\Tutorial\Debug\Tutorial.exe
+﻿  GameLogo.cpp
+d:\gpicppstf\tutorial\tutorial\otherwise\cameras.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gpicppstf\tutorial\tutorial\tutorial\gamelogo.cpp(20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gpicppstf\tutorial\tutorial\tutorial\gamelogo.cpp(21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gpicppstf\tutorial\tutorial\tutorial\gamelogo.cpp(71): warning C4244: 'argument': conversion from 'double' to 'GLubyte', possible loss of data
+  main.cpp
+d:\gpicppstf\tutorial\tutorial\otherwise\cameras.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
+  MainMenu.cpp
+d:\gpicppstf\tutorial\tutorial\otherwise\cameras.h(65): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gpicppstf\tutorial\tutorial\tutorial\mainmenu.cpp(25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\gpicppstf\tutorial\tutorial\tutorial\mainmenu.cpp(26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+     Creating library D:\GPICPPSTF\Tutorial\Tutorial\Debug\Tutorial.lib and object D:\GPICPPSTF\Tutorial\Tutorial\Debug\Tutorial.exp
+  Tutorial.vcxproj -> D:\GPICPPSTF\Tutorial\Tutorial\Debug\Tutorial.exe
