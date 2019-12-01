@@ -1,5 +1,5 @@
 #pragma once
-#include"glm/glm.hpp"
+#include"MathLibraryInterface.h"
 #include<vector>
 #include<cmath>
 #include"SpatialEntity.h"
@@ -20,17 +20,17 @@ namespace Otherwise
 		bool doesEntityBelongHere(SpatialEntity* entity);
 		void addEntityToGraph(SpatialEntity* entity);
 
-		glm::vec3 getCenter();
+		ovec3 getCenter();
 		float getXSideLength() { return std::abs(mMaxX - mMinX); }
 
 		void createChildren();
 
-		std::vector<glm::vec3> getPoints();
+		std::vector<ovec3> getPoints();
 
 		OCollAABB* getBox() { return &mBox; }
 	private:
 		float mMinX, mMaxX, mMinY, mMaxY, mMinZ, mMaxZ;
-		glm::vec3 mCenter;
+		ovec3 mCenter;
 		std::vector<SpatialEntity*> mEntitiesWithin;
 		std::vector<SpatialSceneGraphOct*> mOctsWithin;
 		OCollAABB mBox;

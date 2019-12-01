@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Cameras.h"
-#include "GraphicsResourceManager.h"
 #include "SimpleShader.h"
-#include "ImageLoad.h"
 #include "OSInterface.h"
+
+#include "GraphicsInterface.h"
 
 #include <math.h>
 
-class GameLogo
+/*class GameLogo
 {
 public:
 	GameLogo();
@@ -22,9 +22,11 @@ public:
 private:
 	Otherwise::Camera2D mCamera;
 	Otherwise::GraphicsResourceManager* mGraphics;
-	GLuint mProgramID;
-	GLint mPerspectiveUniformID;
+	Otherwise::Shader simple_shader;
+	std::string perspective = "Perspective";
+	Otherwise::ShaderUniform texture_perspective;
 	glm::mat4 mOrthographicMatrix;
 	Otherwise::OSInterface* mWindow;
 	float mScreenWidth, mScreenHeight;
 };
+*/

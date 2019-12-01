@@ -1,5 +1,5 @@
 #pragma once
-#include "glm/glm.hpp"
+#include "MathLibraryInterface.h"
 #include "OSInterface.h"
 #include "CEGUI/CEGUI.h"
 #include "CEGUI/RendererModules/OpenGL/GL3Renderer.h"
@@ -59,8 +59,8 @@ private:
 		void loadScheme(const std::string &schemeFile);
 		void setFont(const std::string &fontFile);
 
-		CEGUI::Window* createWidget(const std::string &scheme, const glm::vec4 &percRect, const glm::vec4 &pixRect, const std::string & name);
-		static void setWidgetRect(CEGUI::Window* widget, const glm::vec4 &percRect, const glm::vec4 &pixRect);
+		CEGUI::Window* createWidget(const std::string &scheme, const ovec4 &percRect, const ovec4 &pixRect, const std::string & name);
+		static void setWidgetRect(CEGUI::Window* widget, const ovec4 &percRect, const ovec4 &pixRect);
 
 		ChatBox mChatBox;
 	private:

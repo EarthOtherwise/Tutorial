@@ -1,6 +1,6 @@
 #pragma once
 #include"OCollision.h"
-#include"glm/glm.hpp"
+#include"MathLibraryInterface.h"
 #include<GL\glew.h>
 
 namespace Otherwise
@@ -14,7 +14,7 @@ namespace Otherwise
 		SpatialEntity();
 		~SpatialEntity();
 
-		glm::vec3 getPosition() { return mPosition; }
+		ovec3 getPosition() { return mPosition; }
 		FrustumCullingType getCollisionType() { return mCollisionType; }
 		virtual float getCollisionRadius();
 		virtual void renderEntity();
@@ -24,7 +24,7 @@ namespace Otherwise
 			GLuint sixthTextureFilePath) { return; }
 
 	protected:
-		glm::vec3 mPosition;
+		ovec3 mPosition;
 		FrustumCullingType mCollisionType = FrustumCullingType::RADIUS;
 	};
 

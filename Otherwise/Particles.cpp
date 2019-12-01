@@ -15,8 +15,8 @@ ParticleEmitterCone::~ParticleEmitterCone()
 {
 }
 
-void ParticleEmitterCone::init(glm::vec3 position, float emitterSize, 
-	glm::vec3 travelVec, float maxDisplacement, int particlesInWorld, 
+void ParticleEmitterCone::init(ovec3 position, float emitterSize, 
+	ovec3 travelVec, float maxDisplacement, int particlesInWorld, 
 	unsigned int particleLife)
 {
 	mPosition = position;
@@ -59,12 +59,12 @@ void ParticleEmitterCone::loopParticles(unsigned int msDeltaTime)
 				mMaxDisplacement);
 			std::uniform_real_distribution<float> posDisplace(-mEmitterSize,
 				mEmitterSize);
-
+			
 			mParticleLives[i] = static_cast<int>(mParticleLife);
-			mCurrentPositions[i] = glm::vec3(mPosition.x + posDisplace(mt),
-				mPosition.y + posDisplace(mt), mPosition.z + posDisplace(mt));
-			mTravelDirs[i] = glm::vec3(mTravelVec.x + displace(mt),
-				mTravelVec.y + displace(mt), mTravelVec.z + displace(mt));
+			mCurrentPositions[i] = ovec3(mPosition.vect.x + posDisplace(mt),
+				mPosition.vect.y + posDisplace(mt), mPosition.vect.z + posDisplace(mt));
+			mTravelDirs[i] = ovec3(mTravelVec.vect.x + displace(mt),
+				mTravelVec.vect.y + displace(mt), mTravelVec.vect.z + displace(mt));
 			newParticles += 1.0f;
 		}
 		if (mParticleLives[i] > 1)
@@ -74,9 +74,9 @@ void ParticleEmitterCone::loopParticles(unsigned int msDeltaTime)
 	}
 }
 
-std::vector<glm::vec3> ParticleEmitterCone::getParticlePositions()
+std::vector<ovec3> ParticleEmitterCone::getParticlePositions()
 {
-	std::vector<glm::vec3> livingParticles;
+	std::vector<ovec3> livingParticles;
 
 	for (unsigned int i = 0; i < mCurrentPositions.size(); i++)
 	{

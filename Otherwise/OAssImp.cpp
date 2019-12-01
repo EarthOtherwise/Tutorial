@@ -7,8 +7,8 @@
 namespace Otherwise
 {
 void loadAssimp(char * filePath, std::vector<unsigned short> &indices, 
-	std::vector<glm::vec3> &vertices, std::vector<glm::vec2> &uvs, 
-	std::vector<glm::vec3> &normals)
+	std::vector<ovec3> &vertices, std::vector<ovec2> &uvs, 
+	std::vector<ovec3> &normals)
 {
 	Assimp::Importer importer;
 
@@ -26,11 +26,11 @@ void loadAssimp(char * filePath, std::vector<unsigned short> &indices,
 
 	for (unsigned int i = 0; i < scene->mMeshes[0]->mNumVertices; i++)
 	{
-		vertices.push_back(glm::vec3(scene->mMeshes[0]->mVertices[i].x,
+		vertices.push_back(ovec3(scene->mMeshes[0]->mVertices[i].x,
 			scene->mMeshes[0]->mVertices[i].y, scene->mMeshes[0]->mVertices[i].z));
-		uvs.push_back(glm::vec2(scene->mMeshes[0]->mTextureCoords[0][i].x,
+		uvs.push_back(ovec2(scene->mMeshes[0]->mTextureCoords[0][i].x,
 			scene->mMeshes[0]->mTextureCoords[0][i].y));
-		normals.push_back(glm::vec3(scene->mMeshes[0]->mNormals[i].x,
+		normals.push_back(ovec3(scene->mMeshes[0]->mNormals[i].x,
 			scene->mMeshes[0]->mNormals[i].y, scene->mMeshes[0]->mNormals[i].z));
 	}
 

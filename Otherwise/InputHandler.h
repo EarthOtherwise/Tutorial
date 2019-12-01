@@ -2,7 +2,7 @@
 #include<unordered_map>
 #include "ErrHandler.h"
 #include "OSInterface.h"
-#include "glm/glm.hpp"
+#include "MathLibraryInterface.h"
 #include "MessagingSystem.h"
 
 namespace Otherwise
@@ -27,7 +27,7 @@ namespace Otherwise
 		{
 			if (cond.mouseConditions(state))
 			{
-				corr.publish(glm::vec2(static_cast<float>(state->x),
+				corr.publish(ovec2(static_cast<float>(state->x),
 					static_cast<float>(state->y)));
 			}
 		}
@@ -41,12 +41,12 @@ namespace Otherwise
 		{
 			if(relative)
 			{
-				corr.publish(glm::vec2(static_cast<float>(motion->xRel),
+				corr.publish(ovec2(static_cast<float>(motion->xRel),
 					static_cast<float>(motion->yRel)));
 			}
 			else
 			{
-				corr.publish(glm::vec2(static_cast<float>(motion->x),
+				corr.publish(ovec2(static_cast<float>(motion->x),
 					static_cast<float>(motion->y)));
 			}
 		}

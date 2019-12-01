@@ -234,7 +234,7 @@ namespace Otherwise
 		passToSubscribers(newMessage);
 	}
 
-	void Correspondent::publish(glm::vec2 & mouseCoords)
+	void Correspondent::publish(ovec2 & mouseCoords)
 	{
 		std::shared_ptr<MouseMessage> newMessage(new MouseMessage);
 		newMessage->mouseCoords = mouseCoords;
@@ -262,7 +262,7 @@ namespace Otherwise
 		return false;
 	}
 
-	glm::vec2 Correspondent::getMouseMessage()
+	ovec2 Correspondent::getMouseMessage()
 	{
 		return mMessage->getMouseMessage();
 	}

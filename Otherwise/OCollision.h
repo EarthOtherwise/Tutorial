@@ -1,5 +1,5 @@
 #pragma once
-#include"glm/glm.hpp"
+#include"MathLibraryInterface.h"
 #include<vector>
 
 namespace Otherwise
@@ -7,28 +7,28 @@ namespace Otherwise
 
 struct OCollSphr
 {
-	glm::vec3 *pos;
+	ovec3 *pos;
 	float radius;
 };
 
 struct OCollAABB
 {
-	glm::vec3 *pos;
-	glm::vec3 maxOffset;
-	glm::vec3 minOffset;
+	ovec3 *pos;
+	ovec3 maxOffset;
+	ovec3 minOffset;
 };
 
 struct OCollPlane
 {
-	OCollPlane(glm::vec3 newNormal, float newOffset) { normal = newNormal;
+	OCollPlane(ovec3 newNormal, float newOffset) { normal = newNormal;
 	offset = newOffset; }
-	glm::vec3 normal;
+	ovec3 normal;
 	float offset;
 };
 
 struct OCollCnvx
 {
-	glm::vec3 *pos;
+	ovec3 *pos;
 	std::vector<OCollPlane> planes;
 };
 

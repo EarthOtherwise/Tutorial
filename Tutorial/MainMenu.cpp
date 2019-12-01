@@ -1,8 +1,7 @@
 #include "MainMenu.h"
 #include "SpriteFont.h"
-#include"imageLoad.h"
 #include "simpleShader.h"
-
+/*
 MainMenu::MainMenu()
 {
 }
@@ -18,8 +17,8 @@ void MainMenu::init(Otherwise::GraphicsResourceManager * GRM, std::string vertSh
 {
 	mGRM = GRM;
 	mInput = input;
-	mProgramID = Otherwise::compileLinkSimpleShaders(vertShader, fragShader);
-	mPerspectiveUniformID = glGetUniformLocation(mProgramID, "Perspective");
+	simple_shader.load(vertShader, fragShader);
+	texture_perspective.get(simple_shader, perspective);
 	mCamera.init(screenWidth, screenHeight, cameraPosition, cameraZoom);
 	mOrthographicMatrix = mCamera.getMatrix();
 	mScreenWidth = screenWidth;
@@ -93,17 +92,15 @@ void MainMenu::mainMenuLoop()
 
 void MainMenu::render()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	Otherwise::clearBackScreenBuffer();
 
-	glUseProgram(mProgramID);
+	simple_shader.use();
 
-	glUniformMatrix4fv(mPerspectiveUniformID, 1, GL_FALSE, &mOrthographicMatrix[0][0]);
-	glDisable(GL_DEPTH_TEST);
+	texture_perspective.fill(mOrthographicMatrix);
+	Otherwise::depthTest(false);
 	mGRM->mMultiSprite2D.renderBatches();
 
 	mGUI->render();
-
-	glUseProgram(0);
 
 	mWindow->swapBuffer();
 }
@@ -120,3 +117,4 @@ bool MainMenu::beginGame(const CEGUI::EventArgs &e)
 	mStartGame = true;
 	return true;
 }
+*/

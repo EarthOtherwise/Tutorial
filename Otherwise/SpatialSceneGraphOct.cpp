@@ -27,8 +27,8 @@ namespace Otherwise
 		
 		mCenter = getCenter();
 		mBox.pos = &mCenter;
-		mBox.maxOffset = glm::vec3(maxX, maxY, maxZ) - mCenter;
-		mBox.minOffset = glm::vec3(minX, minY, minZ) - mCenter;
+		mBox.maxOffset = ovec3(maxX, maxY, maxZ) - mCenter;
+		mBox.minOffset = ovec3(minX, minY, minZ) - mCenter;
 	}
 
 
@@ -50,29 +50,29 @@ namespace Otherwise
 
 	bool SpatialSceneGraphOct::doesEntityBelongHere(SpatialEntity * entity)
 	{
-		if (entity->getPosition().x < mMinX)
+		if (entity->getPosition().vect.x < mMinX)
 		{
 			return false;
 		}
-		if (entity->getPosition().x >= mMaxX)
-		{
-			return false;
-		}
-
-		if (entity->getPosition().y < mMinY)
-		{
-			return false;
-		}
-		if (entity->getPosition().y >= mMaxY)
+		if (entity->getPosition().vect.x >= mMaxX)
 		{
 			return false;
 		}
 
-		if (entity->getPosition().z < mMinZ)
+		if (entity->getPosition().vect.y < mMinY)
 		{
 			return false;
 		}
-		if (entity->getPosition().z >= mMaxZ)
+		if (entity->getPosition().vect.y >= mMaxY)
+		{
+			return false;
+		}
+
+		if (entity->getPosition().vect.z < mMinZ)
+		{
+			return false;
+		}
+		if (entity->getPosition().vect.z >= mMaxZ)
 		{
 			return false;
 		}
@@ -106,12 +106,12 @@ namespace Otherwise
 		}
 	}
 
-	glm::vec3 SpatialSceneGraphOct::getCenter()
+	ovec3 SpatialSceneGraphOct::getCenter()
 	{
 		float middleX = mMinX + (std::abs(mMaxX - mMinX) / 2);
 		float middleY = mMinY + (std::abs(mMaxY - mMinY) / 2);
 		float middleZ = mMinZ + (std::abs(mMaxZ - mMinZ) / 2);
-		return glm::vec3(middleX, middleY, middleZ);
+		return ovec3(middleX, middleY, middleZ);
 	}
 
 	void SpatialSceneGraphOct::createChildren()
@@ -130,18 +130,18 @@ namespace Otherwise
 		mOctsWithin.push_back(new SpatialSceneGraphOct(middleX, mMaxX, middleY, mMaxY, middleZ, mMaxZ));
 	}
 
-	std::vector<glm::vec3> SpatialSceneGraphOct::getPoints()
+	std::vector<ovec3> SpatialSceneGraphOct::getPoints()
 	{
-		std::vector<glm::vec3> points;
+		std::vector<ovec3> points;
 
-		points.push_back(glm::vec3(mMinX, mMinY, mMinZ));
-		points.push_back(glm::vec3(mMaxX, mMinY, mMinZ));
-		points.push_back(glm::vec3(mMinX, mMaxY, mMinZ));
-		points.push_back(glm::vec3(mMaxX, mMaxY, mMinZ));
-		points.push_back(glm::vec3(mMinX, mMinY, mMaxZ));
-		points.push_back(glm::vec3(mMaxX, mMinY, mMaxZ));
-		points.push_back(glm::vec3(mMinX, mMaxY, mMaxZ));
-		points.push_back(glm::vec3(mMaxX, mMaxY, mMaxZ));
+		points.push_back(ovec3(mMinX, mMinY, mMinZ));
+		points.push_back(ovec3(mMaxX, mMinY, mMinZ));
+		points.push_back(ovec3(mMinX, mMaxY, mMinZ));
+		points.push_back(ovec3(mMaxX, mMaxY, mMinZ));
+		points.push_back(ovec3(mMinX, mMinY, mMaxZ));
+		points.push_back(ovec3(mMaxX, mMinY, mMaxZ));
+		points.push_back(ovec3(mMinX, mMaxY, mMaxZ));
+		points.push_back(ovec3(mMaxX, mMaxY, mMaxZ));
 
 		return points;
 	}

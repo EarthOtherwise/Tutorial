@@ -1,5 +1,4 @@
 #include "OCollision.h"
-#include"glm/gtc/matrix_transform.hpp"
 
 #include<iostream>
 
@@ -7,7 +6,7 @@ namespace Otherwise
 {
 bool sphrSphrColl(OCollSphr *first, OCollSphr *second)
 {
-	if ((*first->pos - *second->pos).length() < 
+	if ((*first->pos - *second->pos).vect.length() < 
 		first->radius + second->radius)
 	{
 		return true;
@@ -16,33 +15,33 @@ bool sphrSphrColl(OCollSphr *first, OCollSphr *second)
 }
 bool aABBAABBColl(OCollAABB *first, OCollAABB *second)
 {
-	if (first->pos->x + first->maxOffset.x <= 
-		second->pos->x + second->minOffset.x)
+	if (first->pos->vect.x + first->maxOffset.vect.x <=
+		second->pos->vect.x + second->minOffset.vect.x)
 	{
 		return false;
 	}
-	if (first->pos->y + first->maxOffset.y <= 
-		second->pos->y + second->minOffset.y)
+	if (first->pos->vect.y + first->maxOffset.vect.y <=
+		second->pos->vect.y + second->minOffset.vect.y)
 	{
 		return false;
 	}
-	if (first->pos->z + first->maxOffset.z <=
-		second->pos->z + second->minOffset.z)
+	if (first->pos->vect.z + first->maxOffset.vect.z <=
+		second->pos->vect.z + second->minOffset.vect.z)
 	{
 		return false;
 	}
-	if (second->pos->x + second->maxOffset.x <=
-		first->pos->x + first->minOffset.x)
+	if (second->pos->vect.x + second->maxOffset.vect.x <=
+		first->pos->vect.x + first->minOffset.vect.x)
 	{
 		return false;
 	}
-	if (second->pos->y + second->maxOffset.y <=
-		first->pos->y + first->minOffset.y)
+	if (second->pos->vect.y + second->maxOffset.vect.y <=
+		first->pos->vect.y + first->minOffset.vect.y)
 	{
 		return false;
 	}
-	if (second->pos->z + second->maxOffset.z <=
-		first->pos->z + first->minOffset.z)
+	if (second->pos->vect.z + second->maxOffset.vect.z <=
+		first->pos->vect.z + first->minOffset.vect.z)
 	{
 		return false;
 	}
@@ -50,7 +49,7 @@ bool aABBAABBColl(OCollAABB *first, OCollAABB *second)
 }
 bool sphrPlaneSide(OCollSphr *sphere, OCollPlane *plane)
 {
-	if (glm::dot(plane->normal, *sphere->pos) + plane->offset < 
+	if (dot_product(plane->normal, *sphere->pos) + plane->offset <
 		-sphere->radius)
 	{
 		return false;
@@ -71,44 +70,44 @@ bool sphrCnvxColl(OCollSphr *sphere, OCollCnvx *shape)
 bool aABBPlaneSide(OCollAABB *box, OCollPlane *plane)
 {
 	/*find which verticies are closes and furthest from the plane*/
-	glm::vec3 minRelToPlane;
-	glm::vec3 maxRelToPlane;
-	if (plane->normal.x >= 0.0f)
+	ovec3 minRelToPlane;
+	ovec3 maxRelToPlane;
+	if (plane->normal.vect.x >= 0.0f)
 	{
-		minRelToPlane.x = box->pos->x + box->minOffset.x;
-		maxRelToPlane.x = box->pos->x + box->maxOffset.x;
+		minRelToPlane.vect.x = box->pos->vect.x + box->minOffset.vect.x;
+		maxRelToPlane.vect.x = box->pos->vect.x + box->maxOffset.vect.x;
 	}
 	else
 	{
-		minRelToPlane.x = box->pos->x + box->maxOffset.x;
-		maxRelToPlane.x = box->pos->x + box->minOffset.x;
+		minRelToPlane.vect.x = box->pos->vect.x + box->maxOffset.vect.x;
+		maxRelToPlane.vect.x = box->pos->vect.x + box->minOffset.vect.x;
 	}
-	if (plane->normal.y >= 0.0f)
+	if (plane->normal.vect.y >= 0.0f)
 	{
-		minRelToPlane.y = box->pos->y + box->minOffset.y;
-		maxRelToPlane.y = box->pos->y + box->maxOffset.y;
-	}
-	else
-	{
-		minRelToPlane.y = box->pos->y + box->maxOffset.y;
-		maxRelToPlane.y = box->pos->y + box->minOffset.y;
-	}
-	if (plane->normal.z >= 0.0f)
-	{
-		minRelToPlane.z = box->pos->z + box->minOffset.z;
-		maxRelToPlane.z = box->pos->z + box->maxOffset.z;
+		minRelToPlane.vect.y = box->pos->vect.y + box->minOffset.vect.y;
+		maxRelToPlane.vect.y = box->pos->vect.y + box->maxOffset.vect.y;
 	}
 	else
 	{
-		minRelToPlane.z = box->pos->z + box->maxOffset.z;
-		maxRelToPlane.z = box->pos->z + box->minOffset.z;
+		minRelToPlane.vect.y = box->pos->vect.y + box->maxOffset.vect.y;
+		maxRelToPlane.vect.y = box->pos->vect.y + box->minOffset.vect.y;
+	}
+	if (plane->normal.vect.z >= 0.0f)
+	{
+		minRelToPlane.vect.z = box->pos->vect.z + box->minOffset.vect.z;
+		maxRelToPlane.vect.z = box->pos->vect.z + box->maxOffset.vect.z;
+	}
+	else
+	{
+		minRelToPlane.vect.z = box->pos->vect.z + box->maxOffset.vect.z;
+		maxRelToPlane.vect.z = box->pos->vect.z + box->minOffset.vect.z;
 	}
 
-	if (glm::dot(plane->normal, minRelToPlane) + plane->offset > 0)
+	if (dot_product(plane->normal, minRelToPlane) + plane->offset > 0)
 	{
 		return true;
 	}
-	if (glm::dot(plane->normal, maxRelToPlane) + plane->offset > 0)
+	if (dot_product(plane->normal, maxRelToPlane) + plane->offset > 0)
 	{
 		return true;
 	}

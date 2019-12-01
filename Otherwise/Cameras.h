@@ -1,6 +1,5 @@
 #pragma once
-#include"glm/glm.hpp"
-#include"glm/gtc/matrix_transform.hpp"
+#include"MathLibraryInterface.h"
 #include <vector>
 #include "MessagingSystem.h"
 #include "OCollision.h"
@@ -11,34 +10,34 @@ namespace Otherwise
 	{
 	public:
 		Camera2D() {}
-		Camera2D(int screenWidth, int screenHeight, glm::vec2 position, float scale);
+		Camera2D(int screenWidth, int screenHeight, ovec2 position, float scale);
 		~Camera2D();
 
-		void init(int screenWidth, int screenHeight, glm::vec2 position, float scale);
+		void init(int screenWidth, int screenHeight, ovec2 position, float scale);
 
-		glm::mat4 getMatrix() { return mOrthoProjection; }
+		omat4 getMatrix() { return mOrthoProjection; }
 
 	private:
 		int mScreenWidth, mScreenHeight;
-		glm::vec2 mPosition;
-		glm::mat4 mOrthoProjection;
+		ovec2 mPosition;
+		omat4 mOrthoProjection;
 		float mScale;
-		glm::mat4 mOrthoMatrix;
+		omat4 mOrthoMatrix;
 	};
 
 	class Camera3D
 	{
 	public:
-		Camera3D(int screenWidth, int screenHeight, glm::vec3 position, float fieldOfView, float near, float far, glm::vec3 cameraRoll, CorrespondentManager *corrManager, float hAngle, float vAngle);
+		Camera3D(int screenWidth, int screenHeight, ovec3 position, float fieldOfView, float near, float far, ovec3 cameraRoll, CorrespondentManager *corrManager, float hAngle, float vAngle);
 		~Camera3D();
-		glm::mat4 getPerspectiveMatrix() { return mPerspectiveProjection; }
-		glm::mat4 getModelMatrix() { return mModelMatrix; }
-		glm::mat4 getCameraMatrix() { return mCameraMatrix; }
-		glm::mat4 getProjectionMatrix() { return mProjectionMatrix; }
-		glm::mat4 getModelCameraMatrix() { return mModelMatrix * mCameraMatrix; }
+		omat4 getPerspectiveMatrix() { return mPerspectiveProjection; }
+		omat4 getModelMatrix() { return mModelMatrix; }
+		omat4 getCameraMatrix() { return mCameraMatrix; }
+		omat4 getProjectionMatrix() { return mProjectionMatrix; }
+		omat4 getModelCameraMatrix() { return mModelMatrix * mCameraMatrix; }
 
-		glm::vec3 getPosition() { return mPosition; }
-		void changePosition(glm::vec3 newPosition);
+		ovec3 getPosition() { return mPosition; }
+		void changePosition(ovec3 newPosition);
 		void createFrustum();
 	
 		void update();
@@ -62,7 +61,7 @@ namespace Otherwise
 		float mVangle = 0.0f;
 		float mHAngle = 0.0f;
 
-		float mMouseSensitivity = 0.005;
+		float mMouseSensitivity = 0.005f;
 
 		Correspondent mUpReciever;
 		Correspondent mDownReciever;
@@ -72,12 +71,12 @@ namespace Otherwise
 		Correspondent mBackReciever;
 		Correspondent mLookAtReciever;
 
-		glm::vec3 mCameraRoll; 
-		glm::vec3 mLookAtPosition;
-		glm::vec3 mPosition;
-		glm::mat4 mCameraMatrix;
-		glm::mat4 mModelMatrix;
-		glm::mat4 mProjectionMatrix;
-		glm::mat4 mPerspectiveProjection;
+		ovec3 mCameraRoll; 
+		ovec3 mLookAtPosition;
+		ovec3 mPosition;
+		omat4 mCameraMatrix;
+		omat4 mModelMatrix;
+		omat4 mProjectionMatrix;
+		omat4 mPerspectiveProjection;
 	};
 }

@@ -291,7 +291,7 @@ namespace Otherwise
 		mContext->setDefaultFont(fontFile);
 	}
 
-	CEGUI::Window * GUI::createWidget(const std::string & scheme, const glm::vec4 &percRect, const glm::vec4 &pixRect, const std::string & name)
+	CEGUI::Window * GUI::createWidget(const std::string & scheme, const ovec4 &percRect, const ovec4 &pixRect, const std::string & name)
 	{
 		CEGUI::Window* newWindow = CEGUI::WindowManager::getSingleton().createWindow(scheme, name);
 		setWidgetRect(newWindow, percRect, pixRect);
@@ -299,10 +299,10 @@ namespace Otherwise
 		return newWindow;
 	}
 
-	void GUI::setWidgetRect(CEGUI::Window * widget, const glm::vec4 &percRect, const glm::vec4 &pixRect)
+	void GUI::setWidgetRect(CEGUI::Window * widget, const ovec4 &percRect, const ovec4 &pixRect)
 	{
-		widget->setPosition(CEGUI::UVector2(CEGUI::UDim(percRect.x, pixRect.x), CEGUI::UDim(percRect.y, pixRect.y)));
-		widget->setSize(CEGUI::USize(CEGUI::UDim(percRect.z, pixRect.z), CEGUI::UDim(percRect.w, pixRect.w)));
+		widget->setPosition(CEGUI::UVector2(CEGUI::UDim(percRect.vect.x, pixRect.vect.x), CEGUI::UDim(percRect.vect.y, pixRect.vect.y)));
+		widget->setSize(CEGUI::USize(CEGUI::UDim(percRect.vect.z, pixRect.vect.z), CEGUI::UDim(percRect.vect.w, pixRect.vect.w)));
 	}
 
 	ChatBox::ChatBox()

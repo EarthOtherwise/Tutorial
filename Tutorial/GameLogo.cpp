@@ -1,7 +1,7 @@
 #include "GameLogo.h"
 #include "SDL/sdl.h"
 
-
+/*
 GameLogo::GameLogo()
 {
 }
@@ -13,8 +13,8 @@ GameLogo::~GameLogo()
 
 void GameLogo::init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Otherwise::OSInterface* windowptr, Otherwise::GraphicsResourceManager* graphics)
 {
-	mProgramID = Otherwise::compileLinkSimpleShaders(vertShader, fragShader);
-	mPerspectiveUniformID = glGetUniformLocation(mProgramID, "Perspective");
+	simple_shader.load(vertShader, fragShader);
+	texture_perspective.get(simple_shader, perspective);
 	mCamera.init(screenWidth, screenHeight, cameraPosition, cameraZoom);
 	mOrthographicMatrix = mCamera.getMatrix();
 	mScreenWidth = screenWidth;
@@ -26,7 +26,7 @@ void GameLogo::init(std::string vertShader, std::string fragShader, int screenWi
 
 void GameLogo::logoUpdateRenderLoop()
 {
-	glDisable(GL_DEPTH_TEST);
+	Otherwise::depthTest(false);
 	
 	GLuint starscapeTextureID = Otherwise::loadPng("Textures/starscape.png");
 
@@ -82,20 +82,19 @@ void GameLogo::logoUpdateRenderLoop()
 		logoTime = currentTime - startTime;
 	}
 
-	glEnable(GL_DEPTH_TEST);
+	Otherwise::depthTest(true);
 }
 
 void GameLogo::render()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	Otherwise::clearBackScreenBuffer();
 
-	glUseProgram(mProgramID);
+	simple_shader.use();
 
-	glUniformMatrix4fv(mPerspectiveUniformID, 1, GL_FALSE, &mOrthographicMatrix[0][0]);
+	texture_perspective.fill(mOrthographicMatrix);
 
 	mGraphics->mMultiSprite2D.renderBatches();
-	
-	glUseProgram(0);
 
 	mWindow->swapBuffer();
 }
+*/

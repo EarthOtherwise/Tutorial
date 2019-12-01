@@ -1,12 +1,13 @@
 #pragma once
-#include "GraphicsResourceManager.h"
 #include "GUI.h"
 #include "CEGUI/CEGUI.h"
 #include "OSInterface.h"
 #include "Cameras.h"
 #include "InputHandler.h"
 
-class MainMenu
+#include "GraphicsInterface.h"
+
+/*class MainMenu
 {
 public:
 	MainMenu();
@@ -25,11 +26,13 @@ private:
 	Otherwise::GUI* mGUI;
 	bool mStartGame = false;
 	Otherwise::Camera2D mCamera;
-	GLuint mProgramID;
-	GLint mPerspectiveUniformID;
+	Otherwise::Shader simple_shader;
+	std::string perspective = "Perspective";
+	Otherwise::ShaderUniform texture_perspective;
 	glm::mat4 mOrthographicMatrix;
 	Otherwise::OSInterface* mWindow;
 	float mScreenWidth, mScreenHeight;
 	Otherwise::InputHandler* mInput;
 };
 
+*/

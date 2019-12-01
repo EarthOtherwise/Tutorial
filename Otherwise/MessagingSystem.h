@@ -2,20 +2,20 @@
 #include <map>
 #include <memory>
 #include <vector>
-#include "GLM/glm.hpp"
+#include "MathLibraryInterface.h"
 
 namespace Otherwise
 {
 	struct Message
 	{
-		virtual glm::vec2 getMouseMessage() { return glm::vec2(0.0f); }
+		virtual ovec2 getMouseMessage() { return ovec2(0.0f); }
 		virtual std::string getStringMessage() { return std::string(""); }
 	};
 
 	struct MouseMessage : Message
 	{
-		glm::vec2 getMouseMessage() { return mouseCoords; }
-		glm::vec2 mouseCoords;
+		ovec2 getMouseMessage() { return mouseCoords; }
+		ovec2 mouseCoords;
 	};
 
 	struct StringMessage : Message
@@ -68,13 +68,13 @@ namespace Otherwise
 		void removeSubscriber(std::string &subscriberSignature);
 
 		void publish();
-		void publish(glm::vec2 &mouseCoords);
+		void publish(ovec2 &mouseCoords);
 		void publish(std::string &string);
 
 		void recieveMessage(std::shared_ptr<Message> message);
 
 		bool getMessage();
-		glm::vec2 getMouseMessage();
+		ovec2 getMouseMessage();
 		std::string getStringMessage();
 
 		void clearMessage();

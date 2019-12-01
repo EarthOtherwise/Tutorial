@@ -2,42 +2,39 @@
 #include<iostream>
 namespace Otherwise
 {
-
-
-
-	Camera2D::Camera2D(int screenWidth, int screenHeight, glm::vec2 position, float scale) : mScreenWidth(screenWidth), mScreenHeight(screenHeight), mPosition(position), mScale(scale)
+	Camera2D::Camera2D(int screenWidth, int screenHeight, ovec2 position, float scale) : mScreenWidth(screenWidth), mScreenHeight(screenHeight), mPosition(position), mScale(scale)
 	{
-		mOrthoMatrix = glm::ortho(0.0f, (float)mScreenWidth, 0.0f, (float)mScreenHeight);
-		mOrthoProjection = glm::translate(mOrthoMatrix, glm::vec3(mPosition.x, mPosition.y, 0.0f));
-		glm::vec3 scaling(mScale, mScale, 0.0f);
-		mOrthoProjection = glm::scale(glm::mat4(1.0f), scaling) * mOrthoProjection;
+		mOrthoMatrix = orthographic_matrix(0.0f, (float)mScreenWidth, 0.0f, (float)mScreenHeight);
+		mOrthoProjection = translate_matrix(mOrthoMatrix, ovec3(mPosition.vect.x, mPosition.vect.y, 0.0f));
+		ovec3 scaling(mScale, mScale, 0.0f);
+		mOrthoProjection = scale_matrix(omat4(1.0f), scaling) * mOrthoProjection;
 	}
 
 	Camera2D::~Camera2D()
 	{
 	}
 
-	void Camera2D::init(int screenWidth, int screenHeight, glm::vec2 position, float scale)
+	void Camera2D::init(int screenWidth, int screenHeight, ovec2 position, float scale)
 	{
 		mScreenWidth = screenWidth;
 		mScreenHeight = screenHeight;
 		mPosition = position;
 		mScale = scale;
-		mOrthoMatrix = glm::ortho(0.0f, (float)mScreenWidth, 0.0f, (float)mScreenHeight);
-		mOrthoProjection = glm::translate(mOrthoMatrix, glm::vec3(mPosition.x, mPosition.y, 0.0f));
-		glm::vec3 scaling(mScale, mScale, 0.0f);
-		mOrthoProjection = glm::scale(glm::mat4(1.0f), scaling) * mOrthoProjection;
+		mOrthoMatrix = orthographic_matrix(0.0f, (float)mScreenWidth, 0.0f, (float)mScreenHeight);
+		mOrthoProjection = translate_matrix(mOrthoMatrix, ovec3(mPosition.vect.x, mPosition.vect.y, 0.0f));
+		ovec3 scaling(mScale, mScale, 0.0f);
+		mOrthoProjection = scale_matrix(omat4(1.0f), scaling) * mOrthoProjection;
 	}
 
-	Camera3D::Camera3D(int screenWidth, int screenHeight, glm::vec3 position, 
-		float fieldOfView, float near, float far, glm::vec3 cameraRoll, 
+	Camera3D::Camera3D(int screenWidth, int screenHeight, ovec3 position, 
+		float fieldOfView, float near, float far, ovec3 cameraRoll, 
 		CorrespondentManager *corrManager, float hAngle, float vAngle)
 		: mPosition(position), mScreenRatio((float)screenWidth / (float)screenHeight),
 		mNearClippingDistance(near), mFarClippingDistance(far), 
 		mFieldOfView(fieldOfView), mCameraRoll(cameraRoll), mHAngle(hAngle), 
 		mVangle(vAngle)
 	{
-		mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle),
+		mLookAtPosition = ovec3(cos(mVangle) * sin(mHAngle), sin(mVangle),
 			cos(mVangle) * cos(mHAngle));
 
 		mUpReciever.init(corrManager, (std::string)"CameraMoveUpReciever");
@@ -59,7 +56,7 @@ namespace Otherwise
 	}
 
 
-	void Camera3D::changePosition(glm::vec3 newPosition)
+	void Camera3D::changePosition(ovec3 newPosition)
 	{
 		mPosition = newPosition;
 		update();
@@ -68,52 +65,52 @@ namespace Otherwise
 	void Camera3D::createFrustum()
 	{
 		mFrustum.planes.clear();
-		float nearFrustumHeight = glm::tan(mFieldOfView/2.0f) * mNearClippingDistance;
+		float nearFrustumHeight = tangent(mFieldOfView/2.0f) * mNearClippingDistance;
 		float nearFrustumWidth = nearFrustumHeight * mScreenRatio;
-		float farFrustumHeight = glm::tan(mFieldOfView/2.0f) * mFarClippingDistance;
+		float farFrustumHeight = tangent(mFieldOfView/2.0f) * mFarClippingDistance;
 		float farFrustumWidth = farFrustumHeight * mScreenRatio;
-		glm::vec3 farClippingCenter = mPosition + mLookAtPosition * mFarClippingDistance;
-		glm::vec3 nearClippingCenter = mPosition + mLookAtPosition * mNearClippingDistance;
+		ovec3 farClippingCenter = mPosition + mLookAtPosition * mFarClippingDistance;
+		ovec3 nearClippingCenter = mPosition + mLookAtPosition * mNearClippingDistance;
 
-		glm::vec3 cameraRight = glm::normalize(glm::cross(mLookAtPosition, mCameraRoll));
-		glm::vec3 cameraUp = glm::normalize(glm::cross(mLookAtPosition, cameraRight));
+		ovec3 cameraRight = normalize_vect(cross_product(mLookAtPosition, mCameraRoll));
+		ovec3 cameraUp = normalize_vect(cross_product(mLookAtPosition, cameraRight));
 		
 		//near clipping frustum plane
-		mFrustum.planes.push_back(OCollPlane(mLookAtPosition, glm::dot(-mLookAtPosition, nearClippingCenter)));
+		mFrustum.planes.push_back(OCollPlane(mLookAtPosition, dot_product(mLookAtPosition.inverse(), nearClippingCenter)));
 		/*std::cout << "Near plane normal: " << mFrustum.planes.back().normal.x
 			<< ", " << mFrustum.planes.back().normal.y << ". "
 			<< mFrustum.planes.back().normal.z << " has offset: "
 			<< mFrustum.planes.back().offset << std::endl;*/
 		//far clipping frustum plane
-		mFrustum.planes.push_back(OCollPlane(-mLookAtPosition, glm::dot(mLookAtPosition, farClippingCenter)));
+		mFrustum.planes.push_back(OCollPlane(mLookAtPosition.inverse(), dot_product(mLookAtPosition, farClippingCenter)));
 		/*std::cout << "Far plane normal: " << mFrustum.planes.back().normal.x
 			<< ", " << mFrustum.planes.back().normal.y << ". "
 			<< mFrustum.planes.back().normal.z << " has offset: "
 			<< mFrustum.planes.back().offset << std::endl;*/
 		//right clipping frustum plane
-		glm::vec3 planeNormal = -glm::normalize(glm::cross(cameraUp, (farClippingCenter + cameraRight * farFrustumWidth) - mPosition));
-		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		ovec3 planeNormal = normalize_vect(cross_product(cameraUp, (farClippingCenter + cameraRight * farFrustumWidth) - mPosition)).inverse();
+		mFrustum.planes.push_back(OCollPlane(planeNormal, dot_product(planeNormal.inverse(), mPosition)));
 		/*std::cout << "Right plane normal: " << mFrustum.planes.back().normal.x
 			<< ", " << mFrustum.planes.back().normal.y << ". "
 			<< mFrustum.planes.back().normal.z << " has offset: "
 			<< mFrustum.planes.back().offset << std::endl;*/
 		//left clipping frustum plane
-		planeNormal = glm::normalize(glm::cross(cameraUp, (farClippingCenter - cameraRight * farFrustumWidth) - mPosition));
-		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		planeNormal = normalize_vect(cross_product(cameraUp, (farClippingCenter - cameraRight * farFrustumWidth) - mPosition));
+		mFrustum.planes.push_back(OCollPlane(planeNormal, dot_product(planeNormal.inverse(), mPosition)));
 		/*std::cout << "Left plane normal: " << mFrustum.planes.back().normal.x
 			<< ", " << mFrustum.planes.back().normal.y << ". "
 			<< mFrustum.planes.back().normal.z << " has offset: "
 			<< mFrustum.planes.back().offset << std::endl;*/
 		//top clipping frustum plane
-		planeNormal = -glm::normalize(glm::cross(cameraRight, (farClippingCenter - cameraUp * farFrustumHeight) - mPosition));
-		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		planeNormal = normalize_vect(cross_product(cameraRight, (farClippingCenter - cameraUp * farFrustumHeight) - mPosition)).inverse();
+		mFrustum.planes.push_back(OCollPlane(planeNormal, dot_product(planeNormal.inverse(), mPosition)));
 		/*std::cout << "Top plane normal: " << mFrustum.planes.back().normal.x
 			<< ", " << mFrustum.planes.back().normal.y << ". "
 			<< mFrustum.planes.back().normal.z << " has offset: "
 			<< mFrustum.planes.back().offset << std::endl;*/
 		//bottom clipping frustum plane
-		planeNormal = glm::normalize(glm::cross(cameraRight, (farClippingCenter + cameraUp * farFrustumHeight) - mPosition));
-		mFrustum.planes.push_back(OCollPlane(planeNormal, glm::dot(-planeNormal, mPosition)));
+		planeNormal = normalize_vect(cross_product(cameraRight, (farClippingCenter + cameraUp * farFrustumHeight) - mPosition));
+		mFrustum.planes.push_back(OCollPlane(planeNormal, dot_product(planeNormal.inverse(), mPosition)));
 		/*std::cout << "Bottom plane normal: " << mFrustum.planes.back().normal.x
 			<< ", " << mFrustum.planes.back().normal.y << ". "
 			<< mFrustum.planes.back().normal.z << " has offset: "
@@ -125,10 +122,10 @@ namespace Otherwise
 
 		if (mLookAtReciever.getMessage())
 		{
-			glm::vec2 mouseCoordsChange = mLookAtReciever.getMouseMessage();
-			mHAngle -= mouseCoordsChange.x * mMouseSensitivity;
-			mVangle -= mouseCoordsChange.y * mMouseSensitivity;
-			mLookAtPosition = glm::vec3(cos(mVangle) * sin(mHAngle), sin(mVangle), cos(mVangle) * cos(mHAngle));
+			ovec2 mouseCoordsChange = mLookAtReciever.getMouseMessage();
+			mHAngle -= mouseCoordsChange.vect.x * mMouseSensitivity;
+			mVangle -= mouseCoordsChange.vect.y * mMouseSensitivity;
+			mLookAtPosition = ovec3(cos(mVangle) * sin(mHAngle), sin(mVangle), cos(mVangle) * cos(mHAngle));
 			mLookAtReciever.clearMessage();
 			createFrustum();
 		}
@@ -149,35 +146,35 @@ namespace Otherwise
 
 		if (mLeftReciever.getMessage())
 		{
-			mPosition += mLeft * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
+			mPosition += cross_product(ovec3(0.0f, 1.0f, 0.0f), mLookAtPosition) * mLeft;
 			mLeftReciever.clearMessage();
 			createFrustum();
 		}
 
 		if (mRightReciever.getMessage())
 		{
-			mPosition += mRight * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
+			mPosition += cross_product(ovec3(0.0f, 1.0f, 0.0f), mLookAtPosition) * mRight;
 			mRightReciever.clearMessage();
 			createFrustum();
 		}
 
 		if (mUpReciever.getMessage())
 		{
-			mPosition += glm::vec3(0.0f, mUp, 0.0f);
+			mPosition += ovec3(0.0f, mUp, 0.0f);
 			mUpReciever.clearMessage();
 			createFrustum();
 		}
 
 		if (mDownReciever.getMessage())
 		{
-			mPosition += glm::vec3(0.0f, mDown, 0.0f);
+			mPosition += ovec3(0.0f, mDown, 0.0f);
 			mDownReciever.clearMessage();
 			createFrustum();
 		}
 
-		mProjectionMatrix = glm::perspective(glm::radians(mFieldOfView), mScreenRatio, mNearClippingDistance, mFarClippingDistance);
-		mCameraMatrix = glm::lookAt(mPosition, mPosition + mLookAtPosition, glm::vec3(0.0f, 1.0f, 0.0f));
-		mModelMatrix = glm::mat4(1.0f);
+		mProjectionMatrix = perspective_matrix(mFieldOfView, mScreenRatio, mNearClippingDistance, mFarClippingDistance);
+		mCameraMatrix = look_at_view_matrix(mPosition, mPosition + mLookAtPosition, ovec3(0.0f, 1.0f, 0.0f));
+		mModelMatrix = omat4(1.0f);
 		mPerspectiveProjection = mProjectionMatrix * mCameraMatrix * mModelMatrix;
 	}
 
